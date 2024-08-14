@@ -4,26 +4,26 @@ import { RouteProp } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { TabNavigationState, ParamListBase } from '@react-navigation/native';
 import COLOR_PALLETE from '../utils/ColorConstant';
-import { SvgHome, SvgProfile, SvgWallet, SvgSearch } from '../assets/images';
+import { SvgHome, SvgProfile, SvgWallet, SvgSearch, SvgHomeActive, SvgProfileActive, SvgWalletActive, SvgSearchActive } from '../assets/images';
 
 
 type Icon = "home" | "search" | "wallet" | "profile"
 const ICON_MAPPER: Record<Icon, { icon: React.JSX.Element, activeIcon: React.JSX.Element }> = {
     'home': {
         icon: <SvgHome />,
-        activeIcon: <SvgHome stroke={"red"} />,
+        activeIcon: <SvgHomeActive />,
     },
     'search': {
         icon: <SvgSearch />,
-        activeIcon: <SvgSearch />
+        activeIcon: <SvgSearchActive />
     },
     'wallet': {
         icon: <SvgWallet />,
-        activeIcon: <SvgWallet />
+        activeIcon: <SvgWalletActive />
     },
     'profile': {
         icon: <SvgProfile />,
-        activeIcon: <SvgProfile />
+        activeIcon: <SvgProfileActive />
     },
 }; 
 
