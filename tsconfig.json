@@ -1,3 +1,12 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "*": ["src/*"],
+            "@components": ["src/components/*"],
+            // "@hooks": ["src/hooks/index"],
+            // "@images": ["src/assets/images/index"],
+        },
+    }
 }

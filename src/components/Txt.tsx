@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, TextStyle } from 'react-native';
 import { ms } from 'react-native-size-matters';
 import COLOR from '../utils/ColorConstant'
 
@@ -14,7 +14,8 @@ interface TxtProps {
     fontColor?: fontColor,
     fontWeight?: fontWeight
     textAlign?: textAlign
-    style?: object,
+    style?: TextStyle | TextStyle[],
+    className?: string
     numberOfLines?: number,
     children: React.ReactElement | string
 }
@@ -44,7 +45,7 @@ const FONT_SIZE_MAPPER: Record<fontSize, { size: number, lineHeight: number }> =
 const FONT_COLOR_MAPPER: Record<fontColor, string> = {
     'brand': COLOR.BRAND,
     'brandDark': COLOR.BRAND_DARK,
-    'brandLight': COLOR.BRAND_LIGHT,
+    'brandLight': COLOR.TEXT_BRAND_LIGHT,
     'textDefault': COLOR.TEXT_DEFAULT,
     'textSuccess': COLOR.TEXT_SUCCESS,
     'textDanger': COLOR.TEXT_DANGER,
@@ -62,9 +63,17 @@ const FONT_WEIGHT_MAPPER: Record<fontWeight, string> = {
     700: "Roboto-Bold",
 };
 
-export default function Txt({fontColor="textDefault", fontSize="base", fontWeight=400, textAlign= "left", numberOfLines, children}: TxtProps) {
+export default function Txt({fontColor="textDefault", fontSize="base", fontWeight=400, textAlign= "left", numberOfLines, children, style, className}: TxtProps) {
+    const styleProps = {
+        fontFamily: FONT_WEIGHT_MAPPER[fontWeight], 
+        fontSize: FONT_SIZE_MAPPER[fontSize].size,
+        color: FONT_COLOR_MAPPER[fontColor], 
+        fontWeight: fontWeight, 
+        textAlign: textAlign, 
+        lineHeight: FONT_SIZE_MAPPER[fontSize].lineHeight
+    }
     return (
-        <Text style={{fontFamily: FONT_WEIGHT_MAPPER[fontWeight], fontSize: FONT_SIZE_MAPPER[fontSize].size, color: FONT_COLOR_MAPPER[fontColor], fontWeight: fontWeight, textAlign: textAlign, lineHeight: FONT_SIZE_MAPPER[fontSize].lineHeight}}  numberOfLines={numberOfLines}>
+        <Text style={[styleProps, style]}  numberOfLines={numberOfLines} className={className}>
             {children}
         </Text>
     )
