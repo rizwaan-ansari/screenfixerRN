@@ -1,7 +1,6 @@
 import React from "react";
 import type { PropsWithChildren } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaView, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import BottomTabBar from "./src/components/BottomTabBar";
@@ -9,25 +8,56 @@ import FindLeadsScreen from "./src/screens/FindLeadsScreen";
 import MyLeadsScreen from "./src/screens/MyLeadsScreen";
 import WalletScreen from "./src/screens/WalletScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
-import Octicons from 'react-native-vector-icons/Octicons';
-import EvilIcons from "react-native-vector-icons/EvilIcons"
-import Entypo from "react-native-vector-icons/Entypo"
+import HomeScreen from "./src/screens/HomeScreen";
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-const RootStack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
+const LeadsStack = createNativeStackNavigator();
+const WalletStack = createNativeStackNavigator();
+const ProfileStack = createNativeStackNavigator();
 
 function NavigationTabs(): React.JSX.Element {
   return (
-    <Tab.Navigator  tabBar={(props) => <BottomTabBar {...props} />}>
-      <Tab.Screen initialParams={{ iconName: 'home' }} name="Find Leads" component={FindLeadsScreen} />
-      <Tab.Screen initialParams={{ iconName: 'search' }} name="My Leads" component={MyLeadsScreen} />
-      <Tab.Screen initialParams={{ iconName: 'wallet' }} name="Wallet" component={WalletScreen} />
-      <Tab.Screen initialParams={{ iconName: 'profile' }} name="Profile" component={ProfileScreen} />
+    <Tab.Navigator screenOptions={{ headerShown: false }}  tabBar={(props) => <BottomTabBar {...props} />}>
+      <Tab.Screen initialParams={{ iconName: 'home' }} name="FindLeads" component={HomeStackNavigator} />
+      <Tab.Screen initialParams={{ iconName: 'search' }} name="MyLeads" component={LeadsStackNavigator} />
+      <Tab.Screen initialParams={{ iconName: 'wallet' }} name="Wallet" component={WalletStackNavigator} />
+      <Tab.Screen initialParams={{ iconName: 'profile' }} name="Profile" component={ProfileStackNavigator} />
     </Tab.Navigator>
   );
 }
 
+const HomeStackNavigator = () => {
+  return (
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+    </HomeStack.Navigator>
+  )
+}
+
+const LeadsStackNavigator = () => {
+  return (
+    <LeadsStack.Navigator screenOptions={{ headerShown: false }}>
+      <LeadsStack.Screen name="LeadsScreen" component={MyLeadsScreen} />
+    </LeadsStack.Navigator>
+  )
+}
+
+const WalletStackNavigator = () => {
+  return (
+    <WalletStack.Navigator screenOptions={{headerShown: false }}>
+      <WalletStack.Screen name="WalletScreen" component={WalletScreen} />
+    </WalletStack.Navigator>
+  )
+}
+
+const ProfileStackNavigator = () => {
+  return (
+    <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
+      <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
+    </ProfileStack.Navigator>
+  )
+}
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
