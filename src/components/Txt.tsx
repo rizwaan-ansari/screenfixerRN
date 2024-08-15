@@ -4,8 +4,8 @@ import { ms } from 'react-native-size-matters';
 import COLOR from '../utils/ColorConstant'
 
 
-type fontSize =  "sm" | "base" | "lg" | "xl" | "2xl"
-type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textSuccess" | "textDanger" | "success16" | "white" | "neutral700" | "black" | "black40" | "black60" 
+type fontSize =  "sm" | "base" | "lg" | "xl" | "2xl" | "4xl"
+type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textSuccess" | "textDanger" | "success16" | "white" | "white60" | "white700" | "neutral700" | "black" | "black40" | "black60" 
 type fontWeight =  300 | 400 | 500 | 700;
 type textAlign = "left" | "center" | "right";
 
@@ -41,6 +41,10 @@ const FONT_SIZE_MAPPER: Record<fontSize, { size: number, lineHeight: number }> =
         size: ms(20, 0.25),
         lineHeight: ms(23.5, 0.25),
     },
+    '4xl' : {
+        size: ms(30, 0.25),
+        lineHeight: ms(35, 0.25)
+    }
 }; 
 const FONT_COLOR_MAPPER: Record<fontColor, string> = {
     'brand': COLOR.BRAND,
@@ -51,6 +55,8 @@ const FONT_COLOR_MAPPER: Record<fontColor, string> = {
     'textDanger': COLOR.TEXT_DANGER,
     'success16': COLOR.SUCCESS_16,
     'white': COLOR.WHITE,
+    'white60': COLOR.WHITE_60,
+    'white700': COLOR.WHITE_700,
     'neutral700': COLOR.NEUTRAL_700,
     'black': COLOR.BLACK,
     'black40': COLOR.BLACK_40,
