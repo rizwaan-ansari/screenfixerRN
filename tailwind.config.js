@@ -8,8 +8,10 @@ module.exports = {
         brandLight: {
           "100": "#63C7EC",
           "200": "#009ADF",
-        }
-        }
+        },
+        candyPink: "#FE7AA1",
+        white20: "#F5F5F5"
+      }
     },
   },
   plugins: [],

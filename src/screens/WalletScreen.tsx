@@ -5,6 +5,8 @@ import BalanceTab from '../components/BalanceTab'
 import COLOR_PALLETE from './../utils/ColorConstant'
 import FastImage from 'react-native-fast-image'
 import { HISTORY_DEPOSIT_ICON, HISTORY_WITHDRAW_ICON } from '../assets/images'
+import HeaderTabBar from '../components/HeaderTabBar'
+import { SheetManager } from 'react-native-actions-sheet'
 
 const DATA = [
     {
@@ -80,7 +82,8 @@ const renderItem = ({ item }: { item: Transaction }) => {
 };
 const WalletScreen = () => {
     return (
-        <SafeAreaView className='w-full flex-1 bg-slate-500'>
+        <SafeAreaView className='w-full flex-1 bg-brand'>
+            <HeaderTabBar />
             <FlatList
                 ListHeaderComponent={<WalletScreenHeader />}
                 data={DATA}
@@ -88,7 +91,7 @@ const WalletScreen = () => {
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={{ backgroundColor: COLOR_PALLETE.WHITE }}
                 renderItem={renderItem}
-                style={{ backgroundColor: COLOR_PALLETE.NEUTRAL_600, paddingHorizontal: 20, paddingTop: 20, borderTopRightRadius: 12, borderTopLeftRadius: 12 }}
+                style={{ backgroundColor: COLOR_PALLETE.NEUTRAL_600, paddingHorizontal: 20, paddingTop: 20, marginTop: -15 , borderTopRightRadius: 12, borderTopLeftRadius: 12 }}
             />
         </SafeAreaView>
     )
@@ -98,7 +101,7 @@ const WalletScreenHeader = () => {
     return (
         <View>
             <View className="mb-4">
-                <BalanceTab />
+                <BalanceTab onPressDeposit={() => SheetManager.show('add-balance-drawer')}/>
             </View>
             <View className='bg-white rounded-tr-lg rounded-tl-lg p-4'>
                 <Txt fontSize="lg" fontColor={'textDefault'} fontWeight={700} className=''>Payment History</Txt>

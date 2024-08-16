@@ -1,8 +1,9 @@
 export { default as SvgHome } from "./SvgHome";
-export { default as SvgHomeActive } from "./SvgHomeActive"
+export { default as SvgHomeActive } from "./SvgHomeActive";
 export { default as SvgProfile } from "./SvgProfile";
-export { default as SvgProfileActive } from "./SvgProfileActive"
+export { default as SvgProfileActive } from "./SvgProfileActive";
 export { default as SvgSearch } from "./SvgSearch";
-export { default as SvgSearchActive } from "./SvgSearchActive"
+export { default as SvgSearchActive } from "./SvgSearchActive";
 export { default as SvgWallet } from "./SvgWallet";
-export { default as SvgWalletActive } from "./SvgWalletActive"
+export { default as SvgWalletActive } from "./SvgWalletActive";
+export { default as SvgNotification } from "./SvgNotification";

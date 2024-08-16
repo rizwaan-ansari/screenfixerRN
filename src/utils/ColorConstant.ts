@@ -10,6 +10,7 @@ const COLOR_PALLETE = {
     WHITE: "#FFFFFF",
     WHITE_60: "rgba(255, 255, 255, 0.6)",
     WHITE_700: "#F9F9F9",
+    NEUTRAL_400: "#888888",
     NEUTRAL_500: "#808080",
     NEUTRAL_600: "#F2F2F2",
     NEUTRAL_700: "#F1F1F1",

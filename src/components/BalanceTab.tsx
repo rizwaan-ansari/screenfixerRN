@@ -1,12 +1,15 @@
-import { View, SafeAreaView, FlatList } from 'react-native'
+import { View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Txt from '../components/Txt'
 import FastImage from 'react-native-fast-image'
 import { WITHDRAW_ICON } from '../assets/images/index'
 import { DEPOSIT_ICON } from '../assets/images/index';
 
+interface BalanceTabProps {
+    onPressDeposit: () => void; 
+}
 
-const BalanceTab = () => {
+const BalanceTab = ({onPressDeposit}: BalanceTabProps) => {
     return (
         <SafeAreaView className='w-full'>
             <View className='bg-brand rounded-lg flex flex-row items-center justify-between px-[25px]'>
@@ -16,12 +19,16 @@ const BalanceTab = () => {
                 </View>
                 <View className='flex-row items-center gap-[15px]'>
                     <View className='items-center'>
-                        <FastImage source={WITHDRAW_ICON} className='w-[34px] h-[34px]' />
-                        <Txt fontSize={'sm'} fontColor={'white'} className='pt-[8px]' fontWeight={500}>Withdraw</Txt>
+                        <TouchableOpacity>
+                            <FastImage source={WITHDRAW_ICON} className='w-[34px] h-[34px]' />
+                            <Txt fontSize={'sm'} fontColor={'white'} className='pt-[8px]' fontWeight={500}>Withdraw</Txt>
+                        </TouchableOpacity>
                     </View>
                     <View className='items-center'>
-                        <FastImage source={DEPOSIT_ICON} className='w-[34px] h-[34px]' />
-                        <Txt fontSize={'sm'} fontColor={'white'} className='pt-[8px]' fontWeight={500}>Deposit</Txt>
+                        <TouchableOpacity onPress={onPressDeposit}>
+                            <FastImage source={DEPOSIT_ICON} className='w-[34px] h-[34px]' />
+                            <Txt fontSize={'sm'} fontColor={'white'} className='pt-[8px]' fontWeight={500}>Deposit</Txt>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
