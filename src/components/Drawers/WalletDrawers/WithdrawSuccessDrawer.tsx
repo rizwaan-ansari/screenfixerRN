@@ -8,6 +8,7 @@ import Button from '../../Button'
 
 const handlePress = async () => {
     await SheetManager.hide("withdraw-success-drawer");
+    await SheetManager.show("payment-success-drawer");
 }
 
 const WithdrawSuccessDrawer = () => {
