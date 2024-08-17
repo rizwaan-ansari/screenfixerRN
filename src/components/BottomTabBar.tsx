@@ -1,9 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { TabNavigationState, ParamListBase } from '@react-navigation/native';
-import COLOR_PALLETE from '../utils/ColorConstant';
+import { BottomTabBarProps, BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs';
+import { TabNavigationState, ParamListBase, NavigationHelpers } from '@react-navigation/native';
 import { SvgHome, SvgProfile, SvgWallet, SvgSearch, SvgHomeActive, SvgProfileActive, SvgWalletActive, SvgSearchActive } from '../assets/images';
 import  Txt  from './Txt';
 import FastImage from 'react-native-fast-image';
@@ -30,17 +28,19 @@ const ICON_MAPPER: Record<Icon, { icon: React.JSX.Element, activeIcon: React.JSX
     },
 };
 
-type BottomTabParamList = {
-    [key: string]: {
-        iconName: Icon;
-    };
+export type TabParamList = {
+    'Find Leads': { iconName: Icon };
+    'My Leads': { iconName: Icon };
+    'Wallet': { iconName: Icon };
+    'Profile': { iconName: Icon };
 };
 
-interface BottomBarProps extends BottomTabBarProps {
-    state: TabNavigationState<BottomTabParamList & ParamListBase>;
+export interface BottomBarProps extends Omit<BottomTabBarProps, 'state'> {
+    state: TabNavigationState<TabParamList>;
+    navigation: NavigationHelpers<TabParamList, BottomTabNavigationEventMap>;
 }
 
-const BottomTabBar: React.FC<BottomBarProps> = ({ state, descriptors, navigation }) => {
+  const BottomTabBar: React.FC<BottomBarProps> = ({ state, descriptors, navigation }) => {
     return (
         <>
             <View className='flex-row px-4 bg-brand'>
@@ -62,7 +62,11 @@ const BottomTabBar: React.FC<BottomBarProps> = ({ state, descriptors, navigation
                         });
 
                         if (!isFocused && !event.defaultPrevented) {
-                            navigation.navigate(route.name);
+                            navigation.navigate({
+                                name: route.name,
+                                params: route.params,
+                                merge: true,
+                              });
                         }
                     };
 

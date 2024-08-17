@@ -2,10 +2,11 @@ import React from "react";
 import type { PropsWithChildren } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { BottomTabBarProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SheetProvider } from 'react-native-actions-sheet';
 import './src/components/Drawers/sheets.tsx';
-import BottomTabBar from "./src/components/BottomTabBar";
+import BottomTabBar, { TabParamList, BottomBarProps }  from "./src/components/BottomTabBar";
+// import { TabParamList } from "./src/components/BottomTabBar";
 import FindLeadsScreen from "./src/screens/FindLeadsScreen";
 import MyLeadsScreen from "./src/screens/MyLeadsScreen";
 import WalletScreen from "./src/screens/WalletScreen";
@@ -13,7 +14,7 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import { PaperProvider } from 'react-native-paper';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabParamList>();
 const HomeStack = createNativeStackNavigator();
 const LeadsStack = createNativeStackNavigator();
 const WalletStack = createNativeStackNavigator();
@@ -21,9 +22,9 @@ const ProfileStack = createNativeStackNavigator();
 
 function NavigationTabs(): React.JSX.Element {
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props) => <BottomTabBar {...props} />}>
-            <Tab.Screen initialParams={{ iconName: 'home' }} name="FindLeads" component={HomeStackNavigator} />
-            <Tab.Screen initialParams={{ iconName: 'search' }} name="MyLeads" component={LeadsStackNavigator} />
+        <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props:any) => <BottomTabBar {...props} />}>
+            <Tab.Screen initialParams={{ iconName: 'home' }} name="Find Leads" component={HomeStackNavigator} />
+            <Tab.Screen initialParams={{ iconName: 'search' }} name="My Leads" component={LeadsStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'wallet' }} name="Wallet" component={WalletStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'profile' }} name="Profile" component={ProfileStackNavigator} />
         </Tab.Navigator>
