@@ -1,4 +1,4 @@
-import ActionSheet from 'react-native-actions-sheet';
+import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
 import { TextInput } from 'react-native-paper';
 import { View, Text, Alert, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
@@ -18,14 +18,19 @@ interface BalanceOptionsProps {
     balance: number
 }
 
-const BalancePills = ({item}: {item: BalanceOptionsProps}) => {
+const BalancePills = ({ item }: { item: BalanceOptionsProps }) => {
     return (
-            <TouchableOpacity className='px-5 py-[10px] bg-white20 rounded-lg mt-3 mr-3 flex-1 min-w-[50px] max-w-[120px]'>
-                <Txt textAlign='center'>
-                    {item.balance.toString()}
-                </Txt>
-            </TouchableOpacity>
+        <TouchableOpacity className='px-5 py-[10px] bg-white20 rounded-lg mt-3 mr-[10px] flex-1 min-w-[50px] max-w-[120px]'>
+            <Txt textAlign='center'>
+                ₹{item.balance.toString()}
+            </Txt>
+        </TouchableOpacity>
     )
+}
+
+const handlePress = async () => {
+    await SheetManager.hide("add-balance-drawer");
+    await SheetManager.show("balance-success-drawer");
 }
 
 const AddBalanceDrawer = () => {
@@ -43,14 +48,14 @@ const AddBalanceDrawer = () => {
                     className='mt-3'
                 />
                 <View className='w-full py-2 flex flex-row flex-wrap'>
-                    {BALANCE_OPTIONS.map((item)=> {
+                    {BALANCE_OPTIONS.map((item) => {
                         return (
-                            <BalancePills item={item} />
+                            <BalancePills key={item.id} item={item} />
                         );
                     })}
                 </View>
                 <View className='mt-3'>
-                <Button onPress={() => console.log("Hello")} label={"CONTINUE"}/>
+                    <Button onPress={handlePress} label={"CONTINUE"} />
                 </View>
             </View>
         </ActionSheet>
