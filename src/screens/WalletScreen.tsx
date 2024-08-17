@@ -101,7 +101,7 @@ const WalletScreenHeader = () => {
     return (
         <View>
             <View className="mb-4">
-                <BalanceTab onPressDeposit={() => SheetManager.show('add-balance-drawer')}/>
+                <BalanceTab onPressWithdraw={() => SheetManager.show('withdrawal-request-drawer')} onPressDeposit={() => SheetManager.show('add-balance-drawer')}/>
             </View>
             <View className='bg-white rounded-tr-lg rounded-tl-lg p-4'>
                 <Txt fontSize="lg" fontColor={'textDefault'} fontWeight={700} className=''>Payment History</Txt>

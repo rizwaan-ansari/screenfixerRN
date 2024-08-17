@@ -7,3 +7,4 @@ export const HISTORY_DEPOSIT_ICON = require("./history-deposit.png");
 export const BRAND_LOGO = require("./brand-logo.png");
 export const RUPEE = require("./rupee.png");
 export const BALANCE_SUCCESS_WALLET_IMG = require("./balance-success-wallet.png");
+export const WITHDRAW_REQUEST_SUCCESS_IMG = require("./withdraw-request-success.png");
