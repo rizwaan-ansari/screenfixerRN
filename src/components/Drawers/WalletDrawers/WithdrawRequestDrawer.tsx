@@ -17,7 +17,7 @@ const WithdrawalRequestDrawer = () => {
         <ActionSheet>
             <View className='px-4'>
                 <Txt className='mt-4' fontColor={'textDefault'} fontSize={'xl'} fontWeight={700}>Withdrawal Request</Txt>
-                <Txt className='pt-2' fontSize={'sm'} fontColor={'neutral400'}>Transfer your wallet money into your bank account</Txt>
+                <Txt className='pt-2' fontSize={'base'} fontColor={'neutral400'}>Transfer your wallet money into your bank account</Txt>
                 <TextInput
                     value={text}
                     left={<TextInput.Icon size={16} color={COLOR_PALLETE.BRAND_LIGHT} icon={require('./../../../assets/images/rupee.png')} />}
@@ -26,7 +26,7 @@ const WithdrawalRequestDrawer = () => {
                     className='mt-3'
                 />
                 <View className='mt-3'>
-                <Button onPress={handlePress} label={'SUBMIT REQUEST'} />
+                    <Button onPress={handlePress} label={'SUBMIT REQUEST'} />
                 </View>
             </View>
         </ActionSheet>

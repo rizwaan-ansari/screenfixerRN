@@ -39,7 +39,7 @@ const AddBalanceDrawer = () => {
         <ActionSheet>
             <View className='px-4 py-4'>
                 <Txt fontSize={'xl'} fontWeight={700}>Add Balance</Txt>
-                <Txt fontSize={'sm'} fontWeight={400} fontColor={'neutral400'} className='pt-2'>Enter the amount you want to add in your wallet</Txt>
+                <Txt fontSize={'base'} fontWeight={400} fontColor={'neutral400'} className='pt-2'>Enter the amount you want to add in your wallet</Txt>
                 <TextInput
                     value={text}
                     left={<TextInput.Icon size={16} color={COLOR_PALLETE.BRAND_LIGHT} icon={require('./../../../assets/images/rupee.png')} />}
