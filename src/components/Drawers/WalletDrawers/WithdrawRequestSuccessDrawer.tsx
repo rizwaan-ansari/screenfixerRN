@@ -7,8 +7,8 @@ import Txt from '../../Txt'
 import Button from '../../Button'
 
 const handlePress = async () => {
-    await SheetManager.hide("withdrawal-request-success-drawer")
-
+    await SheetManager.hide("withdraw-request-success-drawer")
+    
 }
 
 const WithdrawalRequestSuccessDrawer = () => {

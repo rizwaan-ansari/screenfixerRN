@@ -7,8 +7,8 @@ import COLOR_PALLETE from '../../../utils/ColorConstant'
 import Button from '../../Button'
 
 const handlePress = async () => {
-    await SheetManager.hide("withdrawal-request-drawer");
-    await SheetManager.show("withdrawal-request-success-drawer");
+    await SheetManager.hide("withdraw-request-drawer");
+    await SheetManager.show("withdraw-request-success-drawer");
 }
 
 const WithdrawalRequestDrawer = () => {
