@@ -11,6 +11,7 @@ import FindLeadsScreen from "./src/screens/FindLeadsScreen";
 import MyLeadsScreen from "./src/screens/MyLeadsScreen";
 import WalletScreen from "./src/screens/WalletScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import RequestsScreen from "./src/screens/RequestsScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import { PaperProvider } from 'react-native-paper';
 
@@ -23,8 +24,9 @@ const ProfileStack = createNativeStackNavigator();
 function NavigationTabs(): React.JSX.Element {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props:any) => <BottomTabBar {...props} />}>
-            <Tab.Screen initialParams={{ iconName: 'home' }} name="Find Leads" component={HomeStackNavigator} />
+            {/* <Tab.Screen initialParams={{ iconName: 'home' }} name="Find Leads" component={HomeStackNavigator} /> */}
             <Tab.Screen initialParams={{ iconName: 'search' }} name="My Leads" component={LeadsStackNavigator} />
+            <Tab.Screen initialParams={{ iconName: 'calender' }} name="Requests" component={RequestsScreen} />
             <Tab.Screen initialParams={{ iconName: 'wallet' }} name="Wallet" component={WalletStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'profile' }} name="Profile" component={ProfileStackNavigator} />
         </Tab.Navigator>

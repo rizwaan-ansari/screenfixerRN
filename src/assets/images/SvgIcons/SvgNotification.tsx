@@ -1,7 +1,7 @@
 import React from "react"
 import Svg, { SvgProps, G, Path, Defs } from "react-native-svg"
 
-export default function SvgHome(props: SvgProps) {
+export default function SvgNotification(props: SvgProps) {
     return (
         <Svg
         width={props?.width ?? 32}

@@ -51,7 +51,7 @@ const DATA = [
         credited: false,
         amount: 5000,
     },
-]
+];
 
 type Transaction = {
     id: number;
@@ -80,6 +80,18 @@ const renderItem = ({ item }: { item: Transaction }) => {
         </TouchableOpacity>
     );
 };
+const WalletScreenHeader = () => {
+    return (
+        <View>
+            <View className="mb-4">
+                <BalanceTab onPressWithdraw={() => SheetManager.show('withdraw-request-drawer')} onPressDeposit={() => SheetManager.show('add-balance-drawer')}/>
+            </View>
+            <View className='bg-white rounded-tr-lg rounded-tl-lg p-4'>
+                <Txt fontSize="lg" fontColor={'textDefault'} fontWeight={700} className=''>Payment History</Txt>
+            </View>
+        </View>
+    )
+}
 const WalletScreen = () => {
     return (
         <SafeAreaView className='w-full flex-1 bg-brand'>
@@ -96,18 +108,4 @@ const WalletScreen = () => {
         </SafeAreaView>
     )
 }
-
-const WalletScreenHeader = () => {
-    return (
-        <View>
-            <View className="mb-4">
-                <BalanceTab onPressWithdraw={() => SheetManager.show('withdraw-request-drawer')} onPressDeposit={() => SheetManager.show('add-balance-drawer')}/>
-            </View>
-            <View className='bg-white rounded-tr-lg rounded-tl-lg p-4'>
-                <Txt fontSize="lg" fontColor={'textDefault'} fontWeight={700} className=''>Payment History</Txt>
-            </View>
-        </View>
-    )
-}
-
 export default WalletScreen

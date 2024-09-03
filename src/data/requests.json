@@ -1,0 +1,97 @@
+[
+    {
+        "id": "21",
+        "device": {
+            "uuid": "ff12fc70-30b8-41b1-8abd-7827ca9a15bc",
+            "name": "Redmi Note 6 Pro",
+            "picture": {
+                "base_url": "https://cosko.nyc3.cdn.digitaloceanspaces.com",
+                "files": {
+                    "file": "/dev/2023/09/nyL6vbRuQ3O0mNx4XxVEywiqnhXAqHDCjIhUE5KhstaybIprg7OfgC.png"
+                }
+            },
+            "series": null
+        },
+        "device_type" :{
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        }
+    },
+    {
+        "id": "22",
+        "device": {
+            "uuid": "ff12fc70-30b8-41b1-8abd-7827ca9a15be",
+            "name": "OnePlus 10T 56",
+            "picture": {
+                "base_url": "https://cosko.nyc3.cdn.digitaloceanspaces.com",
+                "files": {
+                    "file": "/dev/2023/08/2eTKfKXfpsSjXbmYnlrsnJITUAhytBiwmXQelja1CbzqPemoZX6BADxcakDfcl3.png"
+                }
+            },
+            "series": null
+        },
+        "device_type" :{
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "issues": [
+            {
+                "default": {
+                    "uuid": "2086c51c-92aa-4d5f-ab6b-5ae62795a3e6",
+                    "onsite": false,
+                    "offsite": true,
+                    "description": "Front Glass Broken",
+                    "price": "0.00",
+                    "icon": "https://cosko.nyc3.cdn.digitaloceanspaces.com/assets/issue-icons/mobile_front_glass_broken.svg",
+                    "entity": "app:issue",
+                    "prices": [
+                        {
+                            "uuid": "5a0bb053-22f1-4b83-8a41-c7a930abd53e",
+                            "quality": "premium",
+                            "warranty_in_months": 1,
+                            "price": "3499.00",
+                            "price_template_slug": "G EDGE",
+                            "entity": "app:issue_price"
+                        }
+                    ]
+                },
+                "issue": {
+                    "uuid": "12a9c349-dbf1-4358-a342-b3e883b98571",
+                    "warranty_in_months": 1,
+                    "quantity": 1,
+                    "quality": "premium",
+                    "part_name": null,
+                    "price": 3499,
+                    "price_after_discount": 3499,
+                    "has_discount": false,
+                    "discount_code": null,
+                    "discount_amount": 0,
+                    "price_including_quantity": 3499,
+                    "discounted_price_including_quantity": 3499,
+                    "price_excluding_gst": 2965.25,
+                    "price_excluding_gst_including_quantity": 2965.25,
+                    "total_price": 3499,
+                    "entity": "app:repair_request_issue"
+                }
+            }
+        ]
+    },
+    {
+        "id": "23",
+        "device": {
+            "uuid": "ff12fc70-30b8-41b1-8abd-7827ca9a15bd",
+            "name": "Galaxy Z Fold3 5G",
+            "picture": {
+                "base_url": "https://cosko.nyc3.cdn.digitaloceanspaces.com",
+                "files": {
+                    "file": "/dev/2023/09/aXHOwNmqMe1TWRJMnIvymOKEflyIEPb7gLdYHzeHCQhu201cLLBovep.png"
+                }
+            },
+            "series": null
+        },
+        "device_type" :{
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        }
+    }
+]

@@ -2,17 +2,31 @@ import React from 'react';
 import { View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
 import { BottomTabBarProps, BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs';
 import { TabNavigationState, ParamListBase, NavigationHelpers } from '@react-navigation/native';
-import { SvgHome, SvgProfile, SvgWallet, SvgSearch, SvgHomeActive, SvgProfileActive, SvgWalletActive, SvgSearchActive } from '../assets/images';
+import { 
+    SvgHome, 
+    SvgProfile, 
+    SvgWallet, 
+    SvgSearch, 
+    SvgHomeActive, 
+    SvgProfileActive, 
+    SvgWalletActive, 
+    SvgSearchActive,
+    SvgCalender
+} from '../assets/images';
 import  Txt  from './Txt';
 import FastImage from 'react-native-fast-image';
 import { BLUR } from './../assets/images/index';
 
 
-type Icon = "home" | "search" | "wallet" | "profile"
+type Icon = "home" | "search" | "wallet" | "profile" | "calender"
 const ICON_MAPPER: Record<Icon, { icon: React.JSX.Element, activeIcon: React.JSX.Element }> = {
     'home': {
         icon: <SvgHome />,
         activeIcon: <SvgHomeActive />,
+    },
+    'calender': {
+        icon: <SvgCalender />,
+        activeIcon: <SvgCalender />
     },
     'search': {
         icon: <SvgSearch />,
@@ -28,11 +42,17 @@ const ICON_MAPPER: Record<Icon, { icon: React.JSX.Element, activeIcon: React.JSX
     },
 };
 
+// export type TabParamList = {
+//     'Find Leads': { iconName: Icon };
+//     'Request': { iconName: Icon };
+//     'Wallet': { iconName: Icon };
+//     'Profile': { iconName: Icon };
+// };
+
 export type TabParamList = {
-    'Find Leads': { iconName: Icon };
-    'My Leads': { iconName: Icon };
-    'Wallet': { iconName: Icon };
-    'Profile': { iconName: Icon };
+    [key: string]: {
+        iconName: Icon;
+    };
 };
 
 export interface BottomBarProps extends Omit<BottomTabBarProps, 'state'> {
