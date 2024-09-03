@@ -32,6 +32,7 @@ const LogInScreen = ({ navigation }:Props) => {
             </Txt>
                 <TextInput 
                     value={text}
+                    label={"Mobile Number"}
                     left={<TextInput.Affix textStyle={{color: "black"}} text='+91' />}
                     mode='outlined'
                     onChangeText={(value) => setText(value)}
