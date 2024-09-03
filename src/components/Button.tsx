@@ -1,20 +1,44 @@
-import { TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Txt from './Txt'
+import { twMerge } from 'tailwind-merge'
+import { ms } from 'react-native-size-matters'
+import COLOR_PALLETE from '../utils/ColorConstant'
+
 
 interface ButtonProps {
     onPress?: () => void,
     label: string | string[],
+    variant?: 'primary' | 'secondary',
+    size?: 'regular' | 'sm' | 'lg',
+    className?: string
 }
 
-const Button = ({ onPress, label, ...props}: ButtonProps) => {
-  return (
-    <TouchableOpacity onPress={onPress} className={`py-4 bg-brand rounded-lg`}>
-        <Txt fontSize='sm' fontWeight={700} textAlign='center' fontColor={'white'}>
-            {label}
-        </Txt>
-    </TouchableOpacity>
-  )
+const Button = ({ onPress, label, className, variant = 'primary' }: ButtonProps) => {
+
+    const getVariant = () => {
+        if(variant === 'primary') {
+            return COLOR_PALLETE.BRAND
+        } else if(variant === 'secondary') {
+            return COLOR_PALLETE.BLACK
+        }
+    }
+
+    const getTextColor = () => {
+        if(variant === 'primary') {
+            return 'white'
+        }
+    }
+
+
+    return (
+
+        <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: ms(14, .25), paddingHorizontal: ms(16, .25), borderRadius: ms(4, .25)}} className={className}>
+            <Txt fontSize='sm' fontWeight={700} textAlign='center' fontColor={getTextColor()}>
+                {label}
+            </Txt>
+        </TouchableOpacity>
+    )
 }
 
 export default Button

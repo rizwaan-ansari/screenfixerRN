@@ -16,6 +16,9 @@ module.exports = {
           "600": "#F2F2F2",
           "700": "#F1F1F1",
         },
+        black: {
+          "10": "rgba(0, 0, 0, 0.1)",
+        },
         candyPink: "#FE7AA1",
         white20: "#F5F5F5"
       }

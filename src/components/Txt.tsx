@@ -5,7 +5,7 @@ import COLOR from '../utils/ColorConstant'
 
 
 type fontSize =  "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl"
-type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textDark" | "textSuccess" | "textDanger" | "success16" | "white" | "white60" | "white700" | "neutral400" | "neutral500" | "neutral700" | "neutral800" | "black" | "black40" | "black60" 
+type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textDark" | "textSuccess" | "textDanger" | "textGreen" | "success16" | "white" | "white60" | "white700" | "neutral400" | "neutral500" | "neutral700" | "neutral800" | "black" | "black40" | "black60" 
 type fontWeight =  300 | 400 | 500 | 700;
 type textAlign = "left" | "center" | "right";
 
@@ -58,6 +58,7 @@ const FONT_COLOR_MAPPER: Record<fontColor, string> = {
     'textDark': COLOR.TEXT_DARK,
     'textSuccess': COLOR.TEXT_SUCCESS,
     'textDanger': COLOR.TEXT_DANGER,
+    'textGreen': COLOR.TEXT_GREEN,
     'success16': COLOR.SUCCESS_16,
     'white': COLOR.WHITE,
     'white60': COLOR.WHITE_60,

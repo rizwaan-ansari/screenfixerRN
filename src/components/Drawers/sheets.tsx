@@ -5,6 +5,7 @@ import WithdrawRequestDrawer from './WalletDrawers/WithdrawRequestDrawer';
 import WithdrawRequestSuccessDrawer from './WalletDrawers/WithdrawRequestSuccessDrawer'
 import WithdrawSuccessDrawer from './WalletDrawers/WithdrawSuccessDrawer';
 import PaymentSuccess from './WalletDrawers/PaymentSuccess';
+import PurchaseLeadDrawer from './LeadsDrawers/PurchaseLeadDrawer';
  
 registerSheet('add-balance-drawer', AddBalanceDrawer);
 registerSheet('balance-success-drawer', BalanceSuccessDrawer);
@@ -12,6 +13,7 @@ registerSheet('withdraw-request-drawer', WithdrawRequestDrawer);
 registerSheet('withdraw-request-success-drawer', WithdrawRequestSuccessDrawer);
 registerSheet('withdraw-success-drawer', WithdrawSuccessDrawer);
 registerSheet('payment-success-drawer', PaymentSuccess);
+registerSheet('purchase-lead-drawer', PurchaseLeadDrawer);
  
 // We extend some of the types here to give us great intellisense
 // across the app for all registered sheets.
@@ -23,6 +25,7 @@ declare module 'react-native-actions-sheet' {
     'withdraw-request-success-drawer': SheetDefinition;
     'withdraw-success-drawer': SheetDefinition;
     'payment-success-drawer': SheetDefinition;
+    'purchase-lead-drawer': SheetDefinition;
   }
 }
  

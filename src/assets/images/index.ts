@@ -14,3 +14,6 @@ export const MOBILE_1_IMG = require("./mobile-1.png");
 export const MOBILE_2_IMG = require("./mobile-2.png");
 export const MOBILE_3_IMG = require("./mobile-3.png");
 export const LOGIN_BANNER_IMG = require("./login-screen-banner.png")
+export const REDMI_NOTE_6_PRO_IMG = require("./redmi-note-6-pro.png")
+export const ONE_PLUS_10T_IMG = require("./one-plus-10T.png")
+export const GALAXY_ZFOLD_IMG = require("./galaxy-zfold.png")
