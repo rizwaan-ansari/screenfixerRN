@@ -4,8 +4,8 @@ import { ms } from 'react-native-size-matters';
 import COLOR from '../utils/ColorConstant'
 
 
-type fontSize =  "sm" | "base" | "lg" | "xl" | "2xl" | "4xl"
-type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textSuccess" | "textDanger" | "success16" | "white" | "white60" | "white700" | "neutral400" | "neutral500" | "neutral700" | "black" | "black40" | "black60" 
+type fontSize =  "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl"
+type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textDark" | "textSuccess" | "textDanger" | "success16" | "white" | "white60" | "white700" | "neutral400" | "neutral500" | "neutral700" | "neutral800" | "black" | "black40" | "black60" 
 type fontWeight =  300 | 400 | 500 | 700;
 type textAlign = "left" | "center" | "right";
 
@@ -41,6 +41,10 @@ const FONT_SIZE_MAPPER: Record<fontSize, { size: number, lineHeight: number }> =
         size: ms(20, 0.25),
         lineHeight: ms(23.5, 0.25),
     },
+    '3xl': {
+        size: ms(25, 0.25),
+        lineHeight: ms(33.3, 0.25)
+    },
     '4xl' : {
         size: ms(30, 0.25),
         lineHeight: ms(35, 0.25)
@@ -51,6 +55,7 @@ const FONT_COLOR_MAPPER: Record<fontColor, string> = {
     'brandDark': COLOR.BRAND_DARK,
     'brandLight': COLOR.TEXT_BRAND_LIGHT,
     'textDefault': COLOR.TEXT_DEFAULT,
+    'textDark': COLOR.TEXT_DARK,
     'textSuccess': COLOR.TEXT_SUCCESS,
     'textDanger': COLOR.TEXT_DANGER,
     'success16': COLOR.SUCCESS_16,
@@ -60,6 +65,7 @@ const FONT_COLOR_MAPPER: Record<fontColor, string> = {
     'neutral400': COLOR.NEUTRAL_400,
     'neutral500': COLOR.NEUTRAL_500,
     'neutral700': COLOR.NEUTRAL_700,
+    'neutral800': COLOR.NEUTRAL_800,
     'black': COLOR.BLACK,
     'black40': COLOR.BLACK_40,
     'black60': COLOR.BLACK_60,

@@ -13,3 +13,4 @@ export const PAYMENT_SUCCESS_IMG = require("./payment-success.png");
 export const MOBILE_1_IMG = require("./mobile-1.png");
 export const MOBILE_2_IMG = require("./mobile-2.png");
 export const MOBILE_3_IMG = require("./mobile-3.png");
+export const LOGIN_BANNER_IMG = require("./login-screen-banner.png")

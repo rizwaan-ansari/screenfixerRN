@@ -14,12 +14,14 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import RequestsScreen from "./src/screens/RequestsScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import { PaperProvider } from 'react-native-paper';
+import LogInScreen from "./src/screens/LogInScreen.tsx";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 const HomeStack = createNativeStackNavigator();
 const LeadsStack = createNativeStackNavigator();
 const WalletStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator();
 
 function NavigationTabs(): React.JSX.Element {
     return (
@@ -33,6 +35,15 @@ function NavigationTabs(): React.JSX.Element {
     );
 }
 
+const RootStactNavigator = () => {
+    return (
+        <RootStack.Navigator screenOptions={{ headerShown: false }}>
+            <RootStack.Screen name="LogInScreen" component={LogInScreen} />
+            <RootStack.Screen name="NavigationTabs" component={NavigationTabs} />
+        </RootStack.Navigator>
+    )
+}
+
 const HomeStackNavigator = () => {
     return (
         <HomeStack.Navigator screenOptions={{ headerShown: false }}>
@@ -44,7 +55,7 @@ const HomeStackNavigator = () => {
 const LeadsStackNavigator = () => {
     return (
         <LeadsStack.Navigator screenOptions={{ headerShown: false }}>
-            <LeadsStack.Screen name="LeadsScreen" component={MyLeadsScreen} />
+            <LeadsStack.Screen name="LeadsScreen" component={FindLeadsScreen} />
         </LeadsStack.Navigator>
     )
 }
@@ -69,7 +80,7 @@ function App(): React.JSX.Element {
         <SheetProvider>
             <PaperProvider>
                 <NavigationContainer>
-                    <NavigationTabs />
+                    <RootStactNavigator />
                 </NavigationContainer>
             </PaperProvider>
         </SheetProvider>

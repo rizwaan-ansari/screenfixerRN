@@ -7,7 +7,7 @@ interface ButtonProps {
     label: string | string[],
 }
 
-const Button = ({ onPress, label}: ButtonProps) => {
+const Button = ({ onPress, label, ...props}: ButtonProps) => {
   return (
     <TouchableOpacity onPress={onPress} className={`py-4 bg-brand rounded-lg`}>
         <Txt fontSize='sm' fontWeight={700} textAlign='center' fontColor={'white'}>
