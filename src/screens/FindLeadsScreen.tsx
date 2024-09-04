@@ -166,6 +166,7 @@ const FindLeads = () => {
                         ListHeaderComponent={<LeadScreenHeader />}
                         data={DATA}
                         renderItem={renderItem}
+                        keyExtractor={(item) => item.id.toString()}
                     />
                 </View>
             </SafeAreaView>
