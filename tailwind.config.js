@@ -19,8 +19,13 @@ module.exports = {
         black: {
           "10": "rgba(0, 0, 0, 0.1)",
         },
+        red: {
+          "15": "rgba(235, 92, 84, 0.15)"
+        },
         candyPink: "#FE7AA1",
-        white20: "#F5F5F5"
+        white20: "#F5F5F5",
+        paleMint: "#D5E7E8",
+
       }
     },
   },

@@ -17,12 +17,12 @@ const DATA = [
         deviceName: "Redmi Note 6 Pro",
         issues: [
             {
-                type: "Screen Replacement",
-                color: COLOR_PALLETE.RED_15
+                type: "screen_replacement",
+                label: "Screen Replacement"
             },
             {
-                type: "Speaker",
-                color: COLOR_PALLETE.PALE_MINT,
+                type: "speaker",
+                label: "Speaker"
             }
         ], 
         repairValue: "8500",
@@ -36,8 +36,8 @@ const DATA = [
         deviceName: "OnePlus 10T 56",
         issues: [
             {
-                type: "Speaker",
-                color: COLOR_PALLETE.PALE_MINT,
+                type: "speaker",
+                label: "speaker",
             }
         ],
         repairValue: "8500",
@@ -51,8 +51,8 @@ const DATA = [
         deviceName: "Galaxy Z Fold3 5G",
         issues: [
             {
-                type: "Screen Replacement",
-                color: COLOR_PALLETE.RED_15
+                type: 'screen_replacement',
+                label: "Screen Replacement",
             },
         ],
         repairValue: "8500",
@@ -66,12 +66,12 @@ const DATA = [
         deviceName: "Redmi Note 6 Pro",
         issues: [
             {
-                type: "Screen Replacement",
-                color: COLOR_PALLETE.RED_15
+                type: "screen_replacement",
+                label: "Screen Replacement",
             },
             {
-                type: "Speaker",
-                color: COLOR_PALLETE.PALE_MINT,
+                type: "speaker",
+                label: "Speaker",
             }
         ],
         repairValue: "8500",
@@ -82,7 +82,7 @@ const DATA = [
 
 interface Issues {
     type: string,
-    color: string,
+    label: string
 }
 
 export type Lead = {
@@ -131,8 +131,8 @@ const renderItem = ({ item }: { item: Lead }) => {
                     </Txt>
                     <View className="flex-row gap-x-1 pt-[2px]">
                         {item.issues.map((issue) => (
-                            <View style={{backgroundColor: issue.color}} className="rounded-[4px]">
-                                <Txt fontWeight={400} fontSize={'sm'} className="px-2 py-1" fontColor={'neutral300'}>{issue.type}</Txt>
+                            <View className={`rounded-[4px] ${issue.type === "screen_replacement" ? 'bg-red-15' : 'bg-paleMint'}`}>
+                                <Txt fontWeight={400} fontSize={'sm'} className="px-2 py-1" fontColor={'neutral300'}>{issue.label}</Txt>
                             </View>
                         ))}
                     </View>
