@@ -7,7 +7,7 @@ const COLOR_PALLETE = {
     TEXT_DARK: "272633",
     TEXT_SUCCESS: "#2E7D32",
     TEXT_DANGER: "#D9534F",
-    TEXT_GREEN: "##3D8F3D",
+    TEXT_GREEN: "#3D8F3D",
     SUCCESS_16: "rgba(92, 184, 92, 0.16)",
     WHITE: "#FFFFFF",
     WHITE_60: "rgba(255, 255, 255, 0.6)",

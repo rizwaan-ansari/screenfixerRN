@@ -130,8 +130,8 @@ const renderItem = ({ item }: { item: Lead }) => {
                         {item.deviceName}
                     </Txt>
                     <View className="flex-row gap-x-1 pt-[2px]">
-                        {item.issues.map((issue) => (
-                            <View className={`rounded-[4px] ${issue.type === "screen_replacement" ? 'bg-red-15' : 'bg-paleMint'}`}>
+                        {item.issues.map((issue, index) => (
+                            <View key={index} className={`rounded-[4px] ${issue.type === "screen_replacement" ? 'bg-red-15' : 'bg-paleMint'}`}>
                                 <Txt fontWeight={400} fontSize={'sm'} className="px-2 py-1" fontColor={'neutral300'}>{issue.label}</Txt>
                             </View>
                         ))}
