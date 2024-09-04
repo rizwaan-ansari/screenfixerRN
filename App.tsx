@@ -27,7 +27,7 @@ function NavigationTabs(): React.JSX.Element {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props:any) => <BottomTabBar {...props} />}>
             {/* <Tab.Screen initialParams={{ iconName: 'home' }} name="Find Leads" component={HomeStackNavigator} /> */}
-            <Tab.Screen initialParams={{ iconName: 'search' }} name="My Leads" component={LeadsStackNavigator} />
+            <Tab.Screen initialParams={{ iconName: 'search' }} name="Find Leads" component={LeadsStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'calender' }} name="Requests" component={RequestsScreen} />
             <Tab.Screen initialParams={{ iconName: 'wallet' }} name="Wallet" component={WalletStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'profile' }} name="Profile" component={ProfileStackNavigator} />

@@ -12,10 +12,21 @@ interface ButtonProps {
     variant?: 'primary' | 'secondary',
     size?: 'base' | 'sm' | 'lg' | 'xl',
     weight?: 300 | 400 | 500 | 700,
+    paddingVertical?: number,
+    paddingHorizontal?: number,
     className?: string
 }
 
-const Button = ({ onPress, label, className, variant = 'primary', size = 'sm', weight = 700 }: ButtonProps) => {
+const Button = ({ 
+    onPress, 
+    label, 
+    className, 
+    variant = 'primary', 
+    size = 'sm', 
+    weight = 700, 
+    paddingVertical= ms(14, .25), 
+    paddingHorizontal= ms(16, .25)
+    }: ButtonProps) => {
 
     const getVariant = () => {
         if(variant === 'primary') {
@@ -56,7 +67,7 @@ const Button = ({ onPress, label, className, variant = 'primary', size = 'sm', w
 
     return (
 
-        <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: ms(14, .25), paddingHorizontal: ms(16, .25), borderRadius: ms(4, .25)}} className={className}>
+        <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25)}} className={className}>
             <Txt fontSize={getFontSize()} fontWeight={getFontWeight()} textAlign='center' fontColor={getTextColor()}>
                 {label}
             </Txt>

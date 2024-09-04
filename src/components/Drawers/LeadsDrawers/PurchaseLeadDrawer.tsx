@@ -9,14 +9,17 @@ import FastImage from 'react-native-fast-image'
 const PurchaseLeadDrawer = ({ payload }: {payload: Lead}) => {
   return (
     <ActionSheet>
+      <View>
         <View className='p-4 flex-row'>
             <View className='w-[90px] h-[100px] flex items-center justify-center bg-white20'>
                 <FastImage source={payload.image} className='w-[68px] h-[82px]' resizeMode='contain'/>
             </View>
-            <View>
-                <Txt>{payload.deviceName}</Txt>
+            <View className='pl-3'>
+                <Txt fontWeight={700} fontSize={'lg'} fontColor={'textDefault'}>{payload.deviceName}</Txt>
+                <Txt fontWeight={500} fontSize={'sm'} fontColor={'neutral500'} className='pt-6'>{payload.timeStamp}</Txt>
             </View>
         </View>
+      </View>
     </ActionSheet>
   )
 }

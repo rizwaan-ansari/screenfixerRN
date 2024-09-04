@@ -12,6 +12,7 @@ const COLOR_PALLETE = {
     WHITE: "#FFFFFF",
     WHITE_60: "rgba(255, 255, 255, 0.6)",
     WHITE_700: "#F9F9F9",
+    NEUTRAL_300: "#7F7F7F",
     NEUTRAL_400: "#888888",
     NEUTRAL_500: "#808080",
     NEUTRAL_600: "#F2F2F2",
@@ -21,6 +22,8 @@ const COLOR_PALLETE = {
     BLACK: "#000000",
     BLACK_40: "rgba(0, 0, 0, 0.4)",
     BLACK_60: "rgba(0, 0, 0, 0.6)",
+    RED_15: "rgba(235, 92, 84, 0.15)",
+    PALE_MINT: "#D5E7E8",
 }
 
 export default COLOR_PALLETE
