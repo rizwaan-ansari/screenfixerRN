@@ -10,11 +10,12 @@ interface ButtonProps {
     onPress?: () => void,
     label: string | string[],
     variant?: 'primary' | 'secondary',
-    size?: 'regular' | 'sm' | 'lg',
+    size?: 'base' | 'sm' | 'lg' | 'xl',
+    weight?: 300 | 400 | 500 | 700,
     className?: string
 }
 
-const Button = ({ onPress, label, className, variant = 'primary' }: ButtonProps) => {
+const Button = ({ onPress, label, className, variant = 'primary', size = 'sm', weight = 700 }: ButtonProps) => {
 
     const getVariant = () => {
         if(variant === 'primary') {
@@ -30,11 +31,33 @@ const Button = ({ onPress, label, className, variant = 'primary' }: ButtonProps)
         }
     }
 
+    const getFontSize = () => {
+        if (size === 'xl') {
+            return 'xl';
+        } else if (size === 'lg') {
+            return 'lg';
+        } else if (size === 'base') {
+            return 'base';
+        }
+    }
+
+    const getFontWeight = () => {
+        if (weight === 300) {
+            return 300;
+        } else if (weight === 400) {
+            return 400;
+        } else if (weight === 500) {
+            return 500;
+        } else if (weight === 700) {
+            return 700;
+        }
+    } 
+
 
     return (
 
         <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: ms(14, .25), paddingHorizontal: ms(16, .25), borderRadius: ms(4, .25)}} className={className}>
-            <Txt fontSize='sm' fontWeight={700} textAlign='center' fontColor={getTextColor()}>
+            <Txt fontSize={getFontSize()} fontWeight={getFontWeight()} textAlign='center' fontColor={getTextColor()}>
                 {label}
             </Txt>
         </TouchableOpacity>
