@@ -1,7 +1,6 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Txt from './Txt'
-import { twMerge } from 'tailwind-merge'
 import { ms } from 'react-native-size-matters'
 import COLOR_PALLETE from '../utils/ColorConstant'
 
@@ -9,7 +8,7 @@ import COLOR_PALLETE from '../utils/ColorConstant'
 interface ButtonProps {
     onPress?: () => void,
     label: string | string[],
-    variant?: 'primary' | 'secondary',
+    variant?: 'primary' | 'secondary' | 'info',
     size?: 'base' | 'sm' | 'lg' | 'xl',
     weight?: 300 | 400 | 500 | 700,
     paddingVertical?: number,
@@ -33,12 +32,16 @@ const Button = ({
             return COLOR_PALLETE.BRAND
         } else if(variant === 'secondary') {
             return COLOR_PALLETE.BLACK
+        } else if(variant === 'info') {
+            return COLOR_PALLETE.OFF_WHITE
         }
     }
 
     const getTextColor = () => {
         if(variant === 'primary') {
             return 'white'
+        } else if (variant === 'info') {
+            return 'black60'
         }
     }
 
@@ -66,7 +69,6 @@ const Button = ({
 
 
     return (
-
         <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25)}} className={className}>
             <Txt fontSize={getFontSize()} fontWeight={getFontWeight()} textAlign='center' fontColor={getTextColor()}>
                 {label}

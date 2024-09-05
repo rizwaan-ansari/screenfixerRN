@@ -9,3 +9,4 @@ export { default as SvgWalletActive } from "./SvgWalletActive";
 export { default as SvgNotification } from "./SvgNotification";
 export { default as SvgCalender } from "./SvgCalender";
 export { default as SvgSuccess } from "./SvgSuccess";
+export { default as SvgCall } from "./SvgCall";
