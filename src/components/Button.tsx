@@ -8,7 +8,7 @@ import COLOR_PALLETE from '../utils/ColorConstant'
 interface ButtonProps {
     onPress?: () => void,
     label: string | string[],
-    variant?: 'primary' | 'secondary' | 'info',
+    variant?: 'primary' | 'secondary' | 'info' | 'call',
     size?: 'base' | 'sm' | 'lg' | 'xl',
     weight?: 300 | 400 | 500 | 700,
     paddingVertical?: number,
@@ -28,12 +28,15 @@ const Button = ({
     }: ButtonProps) => {
 
     const getVariant = () => {
-        if(variant === 'primary') {
-            return COLOR_PALLETE.BRAND
-        } else if(variant === 'secondary') {
-            return COLOR_PALLETE.BLACK
-        } else if(variant === 'info') {
-            return COLOR_PALLETE.OFF_WHITE
+        switch (variant) {
+            case "primary":
+                return COLOR_PALLETE.BRAND;
+            case "secondary":
+                return COLOR_PALLETE.BLACK
+            case "call":
+                return COLOR_PALLETE.SUCCESS_16;
+            case "info":
+                return COLOR_PALLETE.OFF_WHITE;
         }
     }
 
@@ -42,6 +45,8 @@ const Button = ({
             return 'white'
         } else if (variant === 'info') {
             return 'black60'
+        } else if (variant === 'call') {
+            return 'textSuccess'
         }
     }
 

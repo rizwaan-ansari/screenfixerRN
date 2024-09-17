@@ -20,3 +20,4 @@ export const GALAXY_ZFOLD_IMG = require("./galaxy-zfold.png");
 export const CLOCK_IMG = require("./clock.png");
 export const HOUR_GLASS_IMG = require("./hour-glass.png");
 export const REPAIR_IMG = require("./repair-img.png");
+export const PROFILE_PICTURE_IMG = require("./profilepicture.png");

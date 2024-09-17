@@ -4,11 +4,12 @@ import HeaderTabBar from '../components/HeaderTabBar'
 import { Txt } from '../components'
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FastImage from 'react-native-fast-image';
-import { CLOCK_IMG, HOUR_GLASS_IMG, REPAIR_IMG } from '../assets/images';
+import { CLOCK_IMG, HOUR_GLASS_IMG, PROFILE_PICTURE_IMG, REPAIR_IMG } from '../assets/images';
 import InfoCard from '../components/InfoCard';
 import RepairTypeCard from '../components/RepairType';
 import { NavigationProp } from '@react-navigation/native';
 import RepairDeviceDetails from '../components/RepairDeviceDetails';
+import CustomerInfo from '../components/CustomerInfo';
 
 const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const DetailsHeader = () => {
@@ -27,7 +28,7 @@ const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     return (
         <SafeAreaView className='w-full flex-1 bg-brand'>
             <HeaderTabBar />
-            <ScrollView className='w-full flex-1 bg-neutral-600 -mt-[15px]'>
+            <ScrollView className='w-full rounded-tl-xl rounded-tr-xl flex-1 bg-neutral-600 -mt-[15px]'>
                 <View className='flex-1 px-4 rounded-tl-xl rounded-tr-xl pt-[20px]'>
                     <DetailsHeader />
                     <View className='flex-row justify-between'>
@@ -55,6 +56,11 @@ const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                     />
                 </View>    
                 <RepairDeviceDetails />
+                <CustomerInfo 
+                    name='Jonathan David'
+                    profilePicture={PROFILE_PICTURE_IMG}
+                    address='Office - 202, Anshi Avenue, B/h Ketav Petrol Pump, Ambawadi, Bengaluru, Karnataka, 581320.'
+                />
             </ScrollView>
         </SafeAreaView>
     )
