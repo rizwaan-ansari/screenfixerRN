@@ -1,23 +1,20 @@
-import React from "react";
-import type { PropsWithChildren } from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { BottomTabBarProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
 import { SheetProvider } from 'react-native-actions-sheet';
+import BottomTabBar, { TabParamList } from "./src/components/BottomTabBar";
 import './src/components/Drawers/sheets.tsx';
-import BottomTabBar, { TabParamList, BottomBarProps }  from "./src/components/BottomTabBar";
-// import { TabParamList } from "./src/components/BottomTabBar";
+import { PaperProvider } from 'react-native-paper';
+import DetailsScreen from "./src/screens/DetailsScreen.tsx";
 import FindLeadsScreen from "./src/screens/FindLeadsScreen";
-import MyLeadsScreen from "./src/screens/MyLeadsScreen";
-import WalletScreen from "./src/screens/WalletScreen";
+import LogInScreen from "./src/screens/LogInScreen.tsx";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import RequestsScreen from "./src/screens/RequestsScreen";
-import HomeScreen from "./src/screens/HomeScreen";
-import { PaperProvider } from 'react-native-paper';
-import LogInScreen from "./src/screens/LogInScreen.tsx";
+import WalletScreen from "./src/screens/WalletScreen";
 
 const Tab = createBottomTabNavigator<TabParamList>();
-const HomeStack = createNativeStackNavigator();
+const RequestStack = createNativeStackNavigator();
 const LeadsStack = createNativeStackNavigator();
 const WalletStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
@@ -26,9 +23,8 @@ const RootStack = createNativeStackNavigator();
 function NavigationTabs(): React.JSX.Element {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props:any) => <BottomTabBar {...props} />}>
-            {/* <Tab.Screen initialParams={{ iconName: 'home' }} name="Find Leads" component={HomeStackNavigator} /> */}
             <Tab.Screen initialParams={{ iconName: 'search' }} name="Find Leads" component={LeadsStackNavigator} />
-            <Tab.Screen initialParams={{ iconName: 'calender' }} name="Requests" component={RequestsScreen} />
+            <Tab.Screen initialParams={{ iconName: 'calender' }} name="Requests" component={RequestStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'wallet' }} name="Wallet" component={WalletStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'profile' }} name="Profile" component={ProfileStackNavigator} />
         </Tab.Navigator>
@@ -44,18 +40,19 @@ const RootStactNavigator = () => {
     )
 }
 
-const HomeStackNavigator = () => {
+const RequestStackNavigator = () => {
     return (
-        <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-            <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-        </HomeStack.Navigator>
+        <RequestStack.Navigator screenOptions={{ headerShown: false }}>
+            <RequestStack.Screen name="RequestScreen" component={RequestsScreen} />
+            <RequestStack.Screen name="DetailsScreen" component={DetailsScreen} />
+        </RequestStack.Navigator>
     )
 }
 
 const LeadsStackNavigator = () => {
     return (
         <LeadsStack.Navigator screenOptions={{ headerShown: false }}>
-            <LeadsStack.Screen name="LeadsScreen" component={FindLeadsScreen} />
+            <LeadsStack.Screen name="FindLeadsScreen" component={FindLeadsScreen} />
         </LeadsStack.Navigator>
     )
 }

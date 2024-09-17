@@ -17,3 +17,6 @@ export const LOGIN_BANNER_IMG = require("./login-screen-banner.png");
 export const REDMI_NOTE_6_PRO_IMG = require("./redmi-note-6-pro.png");
 export const ONE_PLUS_10T_IMG = require("./one-plus-10T.png");
 export const GALAXY_ZFOLD_IMG = require("./galaxy-zfold.png");
+export const CLOCK_IMG = require("./clock.png");
+export const HOUR_GLASS_IMG = require("./hour-glass.png");
+export const REPAIR_IMG = require("./repair-img.png");

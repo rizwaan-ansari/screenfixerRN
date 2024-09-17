@@ -1,12 +1,18 @@
-import React from 'react'
-import { View, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
-import FastImage, { FastImageProps } from 'react-native-fast-image'
-import HeaderTabBar from '../components/HeaderTabBar'
-import REQUEST_LIST from '../data/requests.json'
-import { Txt } from '../components'
-import COLOR_PALLETE from '../utils/ColorConstant'
-import { GALAXY_ZFOLD_IMG, ONE_PLUS_10T_IMG, REDMI_NOTE_6_PRO_IMG, SvgCall } from '../assets/images'
-import Button from '../components/Button'
+import React from 'react';
+import { FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import FastImage, { FastImageProps } from 'react-native-fast-image';
+
+import { Txt } from '../components';
+import Button from '../components/Button';
+import HeaderTabBar from '../components/HeaderTabBar';
+import { NavigationProp } from '@react-navigation/native';
+
+import { 
+    GALAXY_ZFOLD_IMG, 
+    ONE_PLUS_10T_IMG, 
+    REDMI_NOTE_6_PRO_IMG, 
+    SvgCall 
+} from '../assets/images';
 
 const DATA = [
     {
@@ -91,61 +97,11 @@ export type Request = {
     requestId: string,
     timeStamp: string
 }
-// const renderItem = ({ item }: { item: any }) => {
-//     return (
-//         <TouchableOpacity className="px-4 py-4 flex-row bg-white rounded-lg">
-//             <View className='w-[72px] h-20 rounded-[3px] px-2 py-2 mr-4 bg-neutral-550'>
-//                 <FastImage
-//                     className="w-full h-full"
-//                     source={{uri: `${item.device.picture.base_url}${item.device.picture.files.file}`}}
-//                     resizeMode={FastImage.resizeMode.contain}
-//                 />
-//             </View>
-//             <View className="pt-1">
-//                 <Txt fontWeight={700} fontSize={"sm"} fontColor={'black40'} className="mb-[2]">{item.device_type.name}</Txt>
-//                 <Txt fontWeight={700} fontSize={"xl"} fontColor={'textDefault'}>{item.device.name}</Txt>
-//             </View>
-//         </TouchableOpacity>
-//     );
-// }
 
-const renderItem = (({item}: { item: Request}) => {
-    return (
-        <TouchableOpacity className="px-4 py-4 flex-row bg-white rounded-lg">
-             <View className='w-[72px] h-20 rounded-[3px] px-2 py-2 mr-4 bg-neutral-550'>
-                 <FastImage
-                     className="w-full h-full"
-                     source={item.image}
-                     resizeMode={FastImage.resizeMode.contain}
-                 />
-             </View>
-             <View className="pt-1">
-                 <Txt fontWeight={700} fontSize={"sm"} fontColor={'black40'} className="mb-[2]">{item.deviceType}</Txt>
-                 <Txt fontWeight={700} fontSize={"xl"} fontColor={'textDefault'}>{item.deviceName}</Txt>
-                 <View className='flex flex-row gap-x-1 mt-[2px]'>
-                 {item.issues.map((issue, index) => (
-                    <View key={index} className={`rounded-[4px] ${issue.type === 'screen_replacement' ? 'bg-red-15' : 'bg-paleMint'}`}>
-                        <Txt className={`px-2 py-1`} fontWeight={400} fontSize={'sm'} fontColor={'neutral300'}>{issue.label}</Txt>
-                    </View>
-                 ))}
-                 </View>
-                 <View className='flex-row pt-2'>
-                    <Txt fontSize={'sm'} fontColor={'neutral300'} fontWeight={500}>Status: </Txt>
-                    <Txt fontSize={'sm'} fontWeight={500} fontColor={'textGreen'}>{item.status}</Txt>
-                 </View>
-                 <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>{item.timeStamp}</Txt>
-                 <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>ID: {item.requestId}</Txt>
-                 <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>Repair value: ₹{item.repairValue}</Txt>
-                 <View className='flex-row gap-x-[10px] pt-4'>
-                    <Button paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
-                    <TouchableOpacity>
-                        <SvgCall />
-                    </TouchableOpacity>
-                 </View>
-             </View>
-         </TouchableOpacity>
-    )
-})
+type DetailsScreenRouteParams = {
+    requestData: Request;
+};
+
 const RequestScreenHeader = () => {
     return (
         <View className='pb-4'>
@@ -153,7 +109,48 @@ const RequestScreenHeader = () => {
         </View>
     )
 }
-const RequestsScreen = () => {
+
+const handlePress = () => {
+    
+}
+const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
+    const renderItem = (({item}: { item: Request}) => {
+        return (
+            <TouchableOpacity className="px-4 py-4 flex-row bg-white rounded-lg">
+                 <View className='w-[72px] h-20 rounded-[3px] px-2 py-2 mr-4 bg-neutral-550'>
+                     <FastImage
+                         className="w-full h-full"
+                         source={item.image}
+                         resizeMode={FastImage.resizeMode.contain}
+                     />
+                 </View>
+                 <View className="pt-1">
+                     <Txt fontWeight={700} fontSize={"sm"} fontColor={'black40'} className="mb-[2]">{item.deviceType}</Txt>
+                     <Txt fontWeight={700} fontSize={"xl"} fontColor={'textDefault'}>{item.deviceName}</Txt>
+                     <View className='flex flex-row gap-x-1 mt-[2px]'>
+                     {item.issues.map((issue, index) => (
+                        <View key={index} className={`rounded-[4px] ${issue.type === 'screen_replacement' ? 'bg-red-15' : 'bg-paleMint'}`}>
+                            <Txt className={`px-2 py-1`} fontWeight={400} fontSize={'sm'} fontColor={'neutral300'}>{issue.label}</Txt>
+                        </View>
+                     ))}
+                     </View>
+                     <View className='flex-row pt-2'>
+                        <Txt fontSize={'sm'} fontColor={'neutral300'} fontWeight={500}>Status: </Txt>
+                        <Txt fontSize={'sm'} fontWeight={500} fontColor={'textGreen'}>{item.status}</Txt>
+                     </View>
+                     <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>{item.timeStamp}</Txt>
+                     <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>ID: {item.requestId}</Txt>
+                     <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>Repair value: ₹{item.repairValue}</Txt>
+                     <View className='flex-row gap-x-[10px] pt-4'>
+                        <Button onPress={() => navigation.navigate("DetailsScreen", { requestData: item })} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
+                        <TouchableOpacity>
+                            <SvgCall />
+                        </TouchableOpacity>
+                     </View>
+                 </View>
+             </TouchableOpacity>
+        )
+    })
     return (
         <>
             <SafeAreaView className='w-full flex-1 bg-brand'>
