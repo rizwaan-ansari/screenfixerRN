@@ -32,7 +32,7 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ name, address, profilePictu
             <Txt className='pt-2' fontSize={"base"} fontWeight={400} fontColor={'black'}>{address}</Txt>
         </View>
         <View className='mt-5'>
-            <Button variant={"call"} size={"base"} label={"Call Customer"} paddingVertical={18} paddingHorizontal={110} />
+            <Button icon={"call"} variant={"call"} size={"base"} label={"Call Customer"} paddingVertical={18} paddingHorizontal={110} />
         </View>
     </View>
   )

@@ -1,19 +1,21 @@
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
-import Txt from './Txt'
+import React, { FC, SVGProps } from 'react'
+import { TouchableOpacity } from 'react-native'
 import { ms } from 'react-native-size-matters'
+import { SvgCallIcon } from '../assets/images'
 import COLOR_PALLETE from '../utils/ColorConstant'
+import Txt from './Txt'
 
 
 interface ButtonProps {
-    onPress?: () => void,
-    label: string | string[],
-    variant?: 'primary' | 'secondary' | 'info' | 'call',
-    size?: 'base' | 'sm' | 'lg' | 'xl',
-    weight?: 300 | 400 | 500 | 700,
-    paddingVertical?: number,
-    paddingHorizontal?: number,
-    className?: string
+    onPress?: () => void;
+    label: string | string[];
+    variant?: 'primary' | 'secondary' | 'info' | 'call';
+    size?: 'base' | 'sm' | 'lg' | 'xl';
+    weight?: 300 | 400 | 500 | 700;
+    paddingVertical?: number;
+    paddingHorizontal?: number;
+    className?: string;
+    icon?: 'call' | '';
 }
 
 const Button = ({ 
@@ -24,7 +26,8 @@ const Button = ({
     size = 'sm', 
     weight = 700, 
     paddingVertical= ms(14, .25), 
-    paddingHorizontal= ms(16, .25)
+    paddingHorizontal= ms(16, .25),
+    icon
     }: ButtonProps) => {
 
     const getVariant = () => {
@@ -40,6 +43,12 @@ const Button = ({
         }
     }
 
+    const getIcon = () => {
+        switch (icon){
+            case "call":
+                return <SvgCallIcon />
+        }
+    }
     const getTextColor = () => {
         if(variant === 'primary') {
             return 'white'
@@ -74,7 +83,10 @@ const Button = ({
 
 
     return (
-        <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25)}} className={className}>
+        <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25)}} className={`flex-row items-center gap-x-2 ${className}`}>
+            { icon ? 
+                getIcon() : ''    
+        }
             <Txt fontSize={getFontSize()} fontWeight={getFontWeight()} textAlign='center' fontColor={getTextColor()}>
                 {label}
             </Txt>
