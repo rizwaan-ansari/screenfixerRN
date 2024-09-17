@@ -20,6 +20,7 @@ const DATA = [
         image: REDMI_NOTE_6_PRO_IMG,
         deviceType: "Mobile Phone",
         deviceName: "Redmi Note 6 Pro",
+        brand: "Redmi",
         issues: [
             {
                 type: "screen_replacement",
@@ -41,6 +42,7 @@ const DATA = [
         image: ONE_PLUS_10T_IMG,
         deviceType: "Mobile Phone",
         deviceName: "OnePlus 10T 56",
+        brand: "One Plus",
         issues: [
             {
                 type: "screen_replacement",
@@ -62,6 +64,7 @@ const DATA = [
         image: GALAXY_ZFOLD_IMG,
         deviceType: "Mobile Phone",
         deviceName: "Galaxy Z Fold3 5G",
+        brand: "Samsung",
         issues: [
             {
                 type: "screen_replacement",
@@ -90,6 +93,7 @@ export type Request = {
     image: FastImageProps['source'],
     deviceType: string,
     deviceName: string,
+    brand: string,
     repairValue: string,
     leadPrice: string,
     issues: Issues[],
