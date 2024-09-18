@@ -46,7 +46,7 @@ const LogInScreen = ({ navigation }: Props) => {
                             className='mt-[25px] bg-[#F5F5F5]'
                         />
                         <View className='mt-auto'>
-                            <Button size='xl' weight={400} label={"Login"} onPress={handlePress} />
+                            <Button size={'xl'} weight={400} label={"Login"} onPress={handlePress} />
                         </View>
                     </View>
                 </ScrollView>

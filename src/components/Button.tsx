@@ -83,7 +83,7 @@ const Button = ({
 
 
     return (
-        <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25)}} className={`flex-row items-center gap-x-2 ${className}`}>
+        <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25)}} className={`flex-row justify-center items-center gap-x-2 ${className}`}>
             { icon ? 
                 getIcon() : ''    
         }

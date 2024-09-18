@@ -23,6 +23,7 @@ const COLOR_PALLETE = {
     BLACK: "#000000",
     BLACK_40: "rgba(0, 0, 0, 0.4)",
     BLACK_60: "rgba(0, 0, 0, 0.6)",
+    DARK_SLATE: "#1F1F1F",
     RED_15: "rgba(235, 92, 84, 0.15)",
     PALE_MINT: "#D5E7E8",
 }

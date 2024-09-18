@@ -1,0 +1,246 @@
+{
+    "response_code": "fetch_success",
+    "http_status_code": 200,
+    "timestamp": "2024-09-18T11:36:57+00:00",
+    "payload": {
+        "id": 6996,
+        "uuid": "da263381-cb61-4189-9353-a7ea3bcacf22",
+        "technician": {
+            "uuid": "f54a1e87-0665-4a64-b35f-91c35fd56bba",
+            "name": "Oro Media Lab",
+            "contact_number": "9916876761",
+            "email_address": "tech1@screenfixer.in",
+            "assigned_at": "2024-09-17T06:40:13+00:00"
+        },
+        "can_assign_technician": true,
+        "missing_details": [],
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max",
+            "picture": {
+                "files_base_url": "https://cosko.nyc3.cdn.digitaloceanspaces.com",
+                "files": {
+                    "file": "/dev/2023/09/yliV1adpsjDQMruBraIifpLPlLW4p28Wo5LAnfGcfc.png"
+                }
+            },
+            "series": null
+        },
+        "city": {
+            "uuid": "aad108d2-ea02-43fa-89f3-59b9a1b93b35",
+            "slug": "bangalore",
+            "name": "Bangalore"
+        },
+        "before_repair_comment": null,
+        "after_repair_comment": null,
+        "issues": [
+            {
+                "default": {
+                    "uuid": "7f0577bd-8047-4d46-b0e5-899deb6b4c59",
+                    "onsite": false,
+                    "offsite": true,
+                    "description": "Battery",
+                    "price": "0.00",
+                    "icon": "https://cosko.nyc3.cdn.digitaloceanspaces.com/assets/issue-icons/common_battery.svg",
+                    "entity": "app:issue",
+                    "prices": [
+                        {
+                            "uuid": "34e67583-0469-4d84-bbb0-f7d884fa162d",
+                            "quality": "original",
+                            "warranty_in_months": 3,
+                            "price": "4499.00",
+                            "price_template_slug": "iH BATTERY",
+                            "entity": "app:issue_price"
+                        }
+                    ]
+                },
+                "issue": {
+                    "uuid": "8e89d946-dae0-4d2b-9690-90c57c83d514",
+                    "warranty_in_months": 3,
+                    "quantity": 1,
+                    "quality": "original",
+                    "part_name": null,
+                    "price": 4499,
+                    "price_after_discount": 4499,
+                    "has_discount": false,
+                    "discount_code": null,
+                    "discount_amount": 0,
+                    "price_including_quantity": 4499,
+                    "discounted_price_including_quantity": 4499,
+                    "price_excluding_gst": 3812.71,
+                    "price_excluding_gst_including_quantity": 3812.71,
+                    "total_price": 4499,
+                    "entity": "app:repair_request_issue"
+                }
+            },
+            {
+                "default": {
+                    "uuid": "92775207-4cdf-4de2-8e55-db580dbf7440",
+                    "onsite": true,
+                    "offsite": true,
+                    "description": "Screen/Display",
+                    "price": "0.00",
+                    "icon": "https://cosko.nyc3.cdn.digitaloceanspaces.com/assets/issue-icons/mobile_screen_or_display.svg",
+                    "entity": "app:issue",
+                    "prices": [
+                        {
+                            "uuid": "da6ba182-3b87-4635-8228-e724148f493c",
+                            "quality": "original",
+                            "warranty_in_months": 3,
+                            "price": "35999.00",
+                            "price_template_slug": null,
+                            "entity": "app:issue_price"
+                        }
+                    ]
+                },
+                "issue": {
+                    "uuid": "180b932d-a2b6-4274-88a6-a84fbdd502e1",
+                    "warranty_in_months": 3,
+                    "quantity": 1,
+                    "quality": "original",
+                    "part_name": null,
+                    "price": 35999,
+                    "price_after_discount": 35999,
+                    "has_discount": false,
+                    "discount_code": null,
+                    "discount_amount": 0,
+                    "price_including_quantity": 35999,
+                    "discounted_price_including_quantity": 35999,
+                    "price_excluding_gst": 30507.63,
+                    "price_excluding_gst_including_quantity": 30507.63,
+                    "total_price": 35999,
+                    "entity": "app:repair_request_issue"
+                }
+            },
+            {
+                "default": {
+                    "uuid": "ca15b760-2599-426d-a4d3-29e0c61e8271",
+                    "onsite": false,
+                    "offsite": true,
+                    "description": "Front Glass Broken",
+                    "price": "0.00",
+                    "icon": "https://cosko.nyc3.cdn.digitaloceanspaces.com/assets/issue-icons/mobile_front_glass_broken.svg",
+                    "entity": "app:issue",
+                    "prices": [
+                        {
+                            "uuid": "494dff15-e153-4e88-8a2a-88f951b706e2",
+                            "quality": "premium",
+                            "warranty_in_months": 1,
+                            "price": "4199.00",
+                            "price_template_slug": "GH EDGE",
+                            "entity": "app:issue_price"
+                        }
+                    ]
+                },
+                "issue": {
+                    "uuid": "aff263fc-0b66-446b-a1af-f740f40ef472",
+                    "warranty_in_months": 1,
+                    "quantity": 1,
+                    "quality": "premium",
+                    "part_name": null,
+                    "price": 4199,
+                    "price_after_discount": 4199,
+                    "has_discount": false,
+                    "discount_code": null,
+                    "discount_amount": 0,
+                    "price_including_quantity": 4199,
+                    "discounted_price_including_quantity": 4199,
+                    "price_excluding_gst": 3558.47,
+                    "price_excluding_gst_including_quantity": 3558.47,
+                    "total_price": 4199,
+                    "entity": "app:repair_request_issue"
+                }
+            }
+        ],
+        "issue_price": 44697,
+        "total_discounted_price": 0,
+        "discount_price": 0,
+        "discount_code": null,
+        "has_discount": false,
+        "subtotal_including_gst": 44697,
+        "subtotal_excluding_gst": 37878.81,
+        "discounted_subtotal_including_gst": 44697,
+        "additional_price": 670.46,
+        "total_price": 45367.46,
+        "total_price_after_discount": 45367.46,
+        "price_summary": {
+            "subtotal": {
+                "label": "Subtotal",
+                "price": 37878.81
+            },
+            "gst": {
+                "cgst": {
+                    "label": "CGST 9%",
+                    "price": "3409.09"
+                },
+                "sgst": {
+                    "label": "SGST 9%",
+                    "price": "3409.09"
+                }
+            },
+            "additional_charges": [
+                {
+                    "label": "Convenience Charges",
+                    "price": 670.46
+                }
+            ],
+            "total": {
+                "label": "Total",
+                "price": 45367.46,
+                "price_after_discount": 45367.46
+            }
+        },
+        "additional_charges": [
+            {
+                "uuid": "84070461-cd4a-46a3-a64a-fefcc7b77664",
+                "name": "Convenience Charges",
+                "price": 670.46,
+                "ref": {
+                    "uuid": "50991f9b-be8d-4973-bd15-551b06e017db",
+                    "applicable_for": "all-bookings",
+                    "sort_order": 3
+                }
+            }
+        ],
+        "other_issue": "",
+        "has_other_issue": false,
+        "submitted": false,
+        "custom_charges": false,
+        "has_onsite": false,
+        "has_offsite": true,
+        "customer_booking_count": 20,
+        "customer_completed_booking_count": 1,
+        "customer_name": "Ibrahim Azhar",
+        "customer_contact_number": "9916876761",
+        "customer_email_address": null,
+        "customer_address": null,
+        "imei_number": null,
+        "gst_number": null,
+        "status": "technician-assigned",
+        "service_date": null,
+        "service_timeslot": null,
+        "service_date_assigned": "2024-09-19T13:00:32+00:00",
+        "address_uuid": "910a8292-616c-4fc1-9671-941336b7ad6c",
+        "address_house_number": "dadasd",
+        "address_area": "asdasdas",
+        "address_landmark": "dasdas",
+        "address_pincode": "560064",
+        "address_type": "home",
+        "address_formatted": "dadasd, asdasdas, dasdas, Bangalore, 560064",
+        "repair_location": "office-visit",
+        "remarks": null,
+        "created": "2024-06-24T12:36:03+00:00",
+        "technician_assigned_at": "2024-09-17T06:40:13+00:00",
+        "technician_assigned_in": "23 days",
+        "technician_completed_in": null,
+        "completed_at": null,
+        "completed_in": null
+    }
+}

@@ -1,0 +1,59 @@
+[
+    {
+        "default": {
+            "uuid": "7f0577bd-8047-4d46-b0e5-899deb6b4c59",
+            "description": "Battery",
+            "price": "0.00",
+            "icon": "https://cosko.nyc3.cdn.digitaloceanspaces.com/assets/issue-icons/common_battery.svg",
+            "entity": "app:issue",
+            "prices": [
+                {
+                    "uuid": "34e67583-0469-4d84-bbb0-f7d884fa162d",
+                    "quality": "original",
+                    "warranty_in_months": 3,
+                    "price": "4499.00",
+                    "price_template_slug": "iH BATTERY",
+                    "entity": "app:issue_price"
+                }
+            ]
+        }
+    },
+    {
+        "default": {
+            "uuid": "92775207-4cdf-4de2-8e55-db580dbf7440",
+            "description": "Screen/Display",
+            "price": "0.00",
+            "icon": "https://cosko.nyc3.cdn.digitaloceanspaces.com/assets/issue-icons/mobile_screen_or_display.svg",
+            "entity": "app:issue",
+            "prices": [
+                {
+                    "uuid": "da6ba182-3b87-4635-8228-e724148f493c",
+                    "quality": "original",
+                    "warranty_in_months": 3,
+                    "price": "35999.00",
+                    "price_template_slug": null,
+                    "entity": "app:issue_price"
+                }
+            ]
+        }
+    },
+    {
+        "default": {
+            "uuid": "ca15b760-2599-426d-a4d3-29e0c61e8271",
+            "description": "Front Glass Broken",
+            "price": "0.00",
+            "icon": "https://cosko.nyc3.cdn.digitaloceanspaces.com/assets/issue-icons/mobile_front_glass_broken.svg",
+            "entity": "app:issue",
+            "prices": [
+                {
+                    "uuid": "494dff15-e153-4e88-8a2a-88f951b706e2",
+                    "quality": "premium",
+                    "warranty_in_months": 1,
+                    "price": "4199.00",
+                    "price_template_slug": "GH EDGE",
+                    "entity": "app:issue_price"
+                }
+            ]
+        }
+    }
+]

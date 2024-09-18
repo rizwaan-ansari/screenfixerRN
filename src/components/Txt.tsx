@@ -5,7 +5,7 @@ import COLOR from '../utils/ColorConstant'
 
 
 type fontSize =  "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl"
-type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textDark" | "textSuccess" | "offWhite" | "textDanger" | "textGreen" | "success16" | "white" | "white60" | "white700" | "neutral300" | "neutral400" | "neutral500" | "neutral700" | "neutral800" | "black" | "black40" | "black60" 
+type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textDark" | "textSuccess" | "offWhite" | "textDanger" | "textGreen" | "success16" | "white" | "white60" | "white700" | "neutral300" | "neutral400" | "neutral500" | "neutral700" | "neutral800" | "black" | "black40" | "black60" | "darkSlate"
 type fontWeight =  300 | 400 | 500 | 700;
 type textAlign = "left" | "center" | "right";
 
@@ -72,6 +72,7 @@ const FONT_COLOR_MAPPER: Record<fontColor, string> = {
     'black': COLOR.BLACK,
     'black40': COLOR.BLACK_40,
     'black60': COLOR.BLACK_60,
+    'darkSlate': COLOR.DARK_SLATE,
 }; 
 const FONT_WEIGHT_MAPPER: Record<fontWeight, string> = {
     300: "Roboto-Light",

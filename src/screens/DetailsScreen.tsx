@@ -10,6 +10,16 @@ import RepairTypeCard from '../components/RepairType';
 import { NavigationProp } from '@react-navigation/native';
 import RepairDeviceDetails from '../components/RepairDeviceDetails';
 import CustomerInfo from '../components/CustomerInfo';
+import REPAIR_REQUEST from '../data/repair-request.json'
+import IssuePrices from '../components/IssuePrices';
+
+const repair_request = REPAIR_REQUEST.payload;
+
+const REPAIR_TYPE:any = {
+    'onsite':  'On-site Repair',
+    'offsite': 'Off-site Repair',
+    'office-visit': 'Off-site Repair',
+};
 
 const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const DetailsHeader = () => {
@@ -50,7 +60,7 @@ const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                         />
                     </View>
                     <RepairTypeCard
-                        title="On Site Repair"
+                        title={REPAIR_TYPE[repair_request.repair_location]}
                         subtitle="Repair Type"
                         image={REPAIR_IMG}
                     />
@@ -61,6 +71,7 @@ const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                     profilePicture={PROFILE_PICTURE_IMG}
                     address='Office - 202, Anshi Avenue, B/h Ketav Petrol Pump, Ambawadi, Bengaluru, Karnataka, 581320.'
                 />
+                <IssuePrices />
             </ScrollView>
         </SafeAreaView>
     )
