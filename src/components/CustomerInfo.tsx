@@ -12,7 +12,7 @@ interface CustomerInfoProps {
 
 const CustomerInfo: React.FC<CustomerInfoProps> = ({ name, address, profilePicture }) => {
   return (
-    <View className='p-4 bg-white mx-4 rounded-[10px]'>
+    <View className='p-4 bg-white mx-4 mt-4 rounded-[10px]'>
       <View className='flex-row gap-x-[15px] items-center'>
         <View className='w-[38px] h-[38px]'>
             <FastImage 

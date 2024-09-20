@@ -66,12 +66,12 @@ const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                     />
                 </View>    
                 <RepairDeviceDetails />
+                <IssuePrices />
                 <CustomerInfo 
                     name='Jonathan David'
                     profilePicture={PROFILE_PICTURE_IMG}
                     address='Office - 202, Anshi Avenue, B/h Ketav Petrol Pump, Ambawadi, Bengaluru, Karnataka, 581320.'
                 />
-                <IssuePrices />
             </ScrollView>
         </SafeAreaView>
     )

@@ -21,3 +21,4 @@ export const CLOCK_IMG = require("./clock.png");
 export const HOUR_GLASS_IMG = require("./hour-glass.png");
 export const REPAIR_IMG = require("./on-site-repair.png");
 export const PROFILE_PICTURE_IMG = require("./profilepicture.png");
+export const BATTERY_IMG = require("./battery.png");
