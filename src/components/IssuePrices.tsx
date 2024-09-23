@@ -7,7 +7,10 @@ import ISSUES from '../data/issues.json';
 import { BATTERY_IMG } from '../assets/images';
 import Button from './Button';
 
-const IssuePrices = () => {
+interface Props {
+    onPressUpdate: () => void;
+}
+const IssuePrices = ({ onPressUpdate }: Props) => {
     return (
         <View className='p-5 bg-white mx-4 rounded-[10px] justify-center'>
             <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"}>Issue and Prices</Txt>
@@ -40,7 +43,7 @@ const IssuePrices = () => {
                     </View>
                 ))}
                 <View className='mt-[15px] mb-5' style={{height: 1, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)'}}></View>
-                <Button variant={"info"} label={"Update"} />
+                    <Button onPress={onPressUpdate} variant={"info"} label={"Update"} />
             </View>
         </View>
     )

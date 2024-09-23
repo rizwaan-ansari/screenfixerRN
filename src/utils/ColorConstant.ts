@@ -10,6 +10,7 @@ const COLOR_PALLETE = {
     TEXT_GREEN: "#3D8F3D",
     SUCCESS_16: "rgba(92, 184, 92, 0.16)",
     OFF_WHITE: "#EEEEEE",
+    OFF_WHITE_200: "#EBEBEB",
     WHITE: "#FFFFFF",
     WHITE_60: "rgba(255, 255, 255, 0.6)",
     WHITE_700: "#F9F9F9",

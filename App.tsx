@@ -6,7 +6,7 @@ import { SheetProvider } from 'react-native-actions-sheet';
 import BottomTabBar, { TabParamList } from "./src/components/BottomTabBar";
 import './src/components/Drawers/sheets.tsx';
 import { PaperProvider } from 'react-native-paper';
-import DetailsScreen from "./src/screens/DetailsScreen.tsx";
+import DetailsScreen from "./src/screens/RequestDetailsScreen.tsx";
 import FindLeadsScreen from "./src/screens/FindLeadsScreen";
 import LogInScreen from "./src/screens/LogInScreen.tsx";
 import ProfileScreen from "./src/screens/ProfileScreen";

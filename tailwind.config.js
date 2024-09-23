@@ -26,7 +26,7 @@ module.exports = {
         candyPink: "#FE7AA1",
         white20: "#F5F5F5",
         paleMint: "#D5E7E8",
-
+        gray65: "#A5A5A5",
       }
     },
   },

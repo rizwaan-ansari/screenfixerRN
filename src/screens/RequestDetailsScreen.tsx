@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import HeaderTabBar from '../components/HeaderTabBar'
 import { Txt } from '../components'
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -12,6 +12,7 @@ import RepairDeviceDetails from '../components/RepairDeviceDetails';
 import CustomerInfo from '../components/CustomerInfo';
 import REPAIR_REQUEST from '../data/repair-request.json'
 import IssuePrices from '../components/IssuePrices';
+import IssuePricesForm from '../components/IssuePricesForm';
 
 const repair_request = REPAIR_REQUEST.payload;
 
@@ -21,7 +22,8 @@ const REPAIR_TYPE:any = {
     'office-visit': 'Off-site Repair',
 };
 
-const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
+const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
+    const [issuePriceEdit, setIssuePriceEdit] = useState<boolean>(false);
     const DetailsHeader = () => {
         return (
             <View className='pb-4 flex-row items-center gap-[15px]'>
@@ -66,7 +68,11 @@ const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
                     />
                 </View>    
                 <RepairDeviceDetails />
-                <IssuePrices />
+                {issuePriceEdit ? 
+                    <IssuePricesForm />
+                : 
+                    <IssuePrices onPressUpdate={() => setIssuePriceEdit(true)} />
+                }
                 <CustomerInfo 
                     name='Jonathan David'
                     profilePicture={PROFILE_PICTURE_IMG}
@@ -77,4 +83,4 @@ const DetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     )
 }
 
-export default DetailsScreen
+export default RequestDetailsScreen

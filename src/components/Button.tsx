@@ -1,5 +1,5 @@
 import React, { FC, SVGProps } from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { ms } from 'react-native-size-matters'
 import { SvgCallIcon } from '../assets/images'
 import COLOR_PALLETE from '../utils/ColorConstant'
@@ -18,17 +18,17 @@ interface ButtonProps {
     icon?: 'call' | '';
 }
 
-const Button = ({ 
-    onPress, 
-    label, 
-    className, 
-    variant = 'primary', 
-    size = 'sm', 
-    weight = 700, 
-    paddingVertical= ms(14, .25), 
-    paddingHorizontal= ms(16, .25),
+const Button = ({
+    onPress,
+    label,
+    className,
+    variant = 'primary',
+    size = 'sm',
+    weight = 700,
+    paddingVertical = ms(14, .25),
+    paddingHorizontal = ms(16, .25),
     icon
-    }: ButtonProps) => {
+}: ButtonProps) => {
 
     const getVariant = () => {
         switch (variant) {
@@ -44,13 +44,13 @@ const Button = ({
     }
 
     const getIcon = () => {
-        switch (icon){
+        switch (icon) {
             case "call":
                 return <SvgCallIcon />
         }
     }
     const getTextColor = () => {
-        if(variant === 'primary') {
+        if (variant === 'primary') {
             return 'white'
         } else if (variant === 'info') {
             return 'black60'
@@ -79,14 +79,18 @@ const Button = ({
         } else if (weight === 700) {
             return 700;
         }
-    } 
+    }
 
 
     return (
-        <TouchableOpacity onPress={onPress} style={{backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25)}} className={`flex-row justify-center items-center gap-x-2 ${className}`}>
-            { icon ? 
-                getIcon() : ''    
-        }
+        <TouchableOpacity onPress={onPress} style={{ backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25) }} className={`flex-row justify-center items-center ${className}`}>
+            {
+                icon ? (
+                    <View className='pr-2 flex justify-center items-center'>
+                        {getIcon()}
+                    </View>
+                ) : null
+            }
             <Txt fontSize={getFontSize()} fontWeight={getFontWeight()} textAlign='center' fontColor={getTextColor()}>
                 {label}
             </Txt>

@@ -145,9 +145,9 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
                      <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>{item.timeStamp}</Txt>
                      <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>ID: {item.requestId}</Txt>
                      <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>Repair value: ₹{item.repairValue}</Txt>
-                     <View className='flex-row gap-x-[10px] pt-4'>
+                     <View className='flex-row pt-4'>
                         <Button onPress={() => navigation.navigate("DetailsScreen", { requestData: item })} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
-                        <TouchableOpacity>
+                        <TouchableOpacity className='pl-[10px]'>
                             <SvgCall />
                         </TouchableOpacity>
                      </View>
