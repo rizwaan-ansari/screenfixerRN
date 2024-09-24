@@ -6,16 +6,30 @@ import { TextInput } from 'react-native-paper'
 import COLOR_PALLETE from '../utils/ColorConstant'
 import Button from '../components/Button'
 import { NavigationProp } from '@react-navigation/native'
+import { z } from "zod";
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const formSchema = z.object({
+    mobileNumber: z.string().min(1, "Mobile Number is required").regex(/^\d{10}$/, "Mobile Number must be 10 digits long")
+})
 
 type Props = {
     navigation: NavigationProp<any>;
 };
 
 const LogInScreen = ({ navigation }: Props) => {
-    const [text, setText] = useState("");
+
+    const { control, handleSubmit, formState: {errors} } = useForm({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            mobileNumber: ''
+        }
+    })
     
-    const handlePress = () => {
+    const handlePress = (data: any) => {
         navigation.navigate("NavigationTabs");
+        console.log(data)
     };
 
     return (
@@ -35,18 +49,27 @@ const LogInScreen = ({ navigation }: Props) => {
                         <Txt fontSize={'lg'} fontWeight={400} textAlign={'center'} fontColor={'neutral800'} className='mt-2'>
                             Please enter your registered mobile number
                         </Txt>
-                        <TextInput 
-                            value={text}
-                            label={"Mobile Number"}
-                            left={<TextInput.Affix textStyle={{color: "black"}} text='+91' />}
-                            mode='outlined'
-                            onChangeText={(value) => setText(value)}
-                            placeholder='Mobile Number'
-                            activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
-                            className='mt-[25px] bg-[#F5F5F5]'
+                        <Controller 
+                            control={control}
+                            name='mobileNumber'
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <TextInput 
+                                    value={value}
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
+                                    label={"Mobile Number"}
+                                    left={<TextInput.Affix textStyle={{color: "black"}} text='+91' />}
+                                    mode='outlined'
+                                    placeholder='Mobile Number'
+                                    activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                                    className='mt-[25px] bg-[#F5F5F5]'
+                                    error={!!errors.mobileNumber}
+                                />
+                            )}
                         />
+                        {errors.mobileNumber && <Txt fontColor={"textDanger"}>{errors.mobileNumber?.message}</Txt>}
                         <View className='mt-auto'>
-                            <Button size={'xl'} weight={400} label={"Login"} onPress={handlePress} />
+                            <Button size={'xl'} weight={400} label={"Login"} onPress={handleSubmit(handlePress)} />
                         </View>
                     </View>
                 </ScrollView>
