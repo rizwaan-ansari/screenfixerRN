@@ -5,7 +5,7 @@ import COLOR from '../utils/ColorConstant';
 
 
 interface Option {
-    label: string;
+    label: string | null;
     value: string | number;
 }
 
@@ -36,7 +36,7 @@ export default function HorizontalSelect(props: HorizontalSelectProps) {
     }
     const renderItem = useCallback(({ item }: { item: Option}) => {
         return (
-            <TouchableOpacity onPress={() => onItemPress(item)} className='bg-neutral-400 mr-[10px] py-[10px] px-[25px] rounded-[4px]' style={[{backgroundColor: selectedItems.includes(item?.value) ? props.color || COLOR.BRAND_LIGHT : COLOR.NEUTRAL_800}]}>
+            <TouchableOpacity onPress={() => onItemPress(item)} className='bg-neutral-400 mr-[10px] py-[10px] px-[25px] rounded-[4px]' style={[{backgroundColor: selectedItems.includes(item?.value) ? props.color || COLOR.GRAY_65 : COLOR.NEUTRAL_900}]}>
                 <Txt numberOfLines={1} fontWeight={selectedItems.includes(item?.value)? 700 : 400} fontColor={selectedItems.includes(item?.value)? "brandLight" : "brandDark"} style={styles.itemLabel}>{item?.label}</Txt>
             </TouchableOpacity>
         );
@@ -52,10 +52,11 @@ export default function HorizontalSelect(props: HorizontalSelectProps) {
     return (
         <View>
             <FlatList
-                contentContainerStyle={[styles.contentContainerStyle, props.contentContainerStyle]}
+                contentContainerStyle={[props.contentContainerStyle]}
                 horizontal={true}
                 data={options}
                 renderItem={renderItem}
+                showsHorizontalScrollIndicator={false}
                 keyExtractor={(_, index) => "input_hs_"+index.toString()}
             />
         </View>
@@ -63,9 +64,6 @@ export default function HorizontalSelect(props: HorizontalSelectProps) {
 }
 
 const styles = StyleSheet.create({
-    contentContainerStyle: {
-        paddingLeft: 15,
-    },
     itemLabel: {
         color: COLOR.BLACK_60
     }

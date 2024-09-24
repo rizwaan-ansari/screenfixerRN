@@ -10,6 +10,8 @@ import { z } from 'zod';
 import COLOR_PALLETE from '../utils/ColorConstant';
 import Button from './Button';
 import Txt from './Txt';
+import HorizontalSelect from './HorizontalSelect';
+import ISSUES from "../data/issues-list.json"
 
 
 const formSchema = z.object({
@@ -59,7 +61,7 @@ const IssuePricesForm = () => {
             }}
           />
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleQualityPress}>
+      {/* <TouchableOpacity onPress={handleQualityPress}>
           <TextInput 
             label={"Quality"}
             mode={"outlined"}
@@ -73,7 +75,14 @@ const IssuePricesForm = () => {
               roundness: 8,
             }}
           />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      <Txt fontSize={"sm"} className='mt-[15px] mb-2 pl-4'>Quality</Txt>
+      <HorizontalSelect 
+        contentContainerStyle={{flexDirection:'row'}}
+        multiple={false}
+        options={ISSUES.map((issue) => { return { label: issue.price, value: issue.id } })}
+        // onSelect={(items) => ()}
+      />
       <Controller 
         control={control}
         name="price"
