@@ -14,6 +14,7 @@ interface ButtonProps {
     weight?: 300 | 400 | 500 | 700;
     paddingVertical?: number;
     paddingHorizontal?: number;
+    marginTop?: number;
     className?: string;
     icon?: 'call' | '';
 }
@@ -25,6 +26,7 @@ const Button = ({
     variant = 'primary',
     size = 'sm',
     weight = 700,
+    marginTop,
     paddingVertical = ms(14, .25),
     paddingHorizontal = ms(16, .25),
     icon
@@ -83,7 +85,7 @@ const Button = ({
 
 
     return (
-        <TouchableOpacity onPress={onPress} style={{ backgroundColor: getVariant(), paddingVertical: paddingVertical, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25) }} className={`flex-row justify-center items-center ${className}`}>
+        <TouchableOpacity onPress={onPress} style={{ backgroundColor: getVariant(), paddingVertical: paddingVertical, marginTop: marginTop, paddingHorizontal: paddingHorizontal, borderRadius: ms(4, .25) }} className={`flex-row justify-center items-center ${className}`}>
             {
                 icon ? (
                     <View className='pr-2 flex justify-center items-center'>
