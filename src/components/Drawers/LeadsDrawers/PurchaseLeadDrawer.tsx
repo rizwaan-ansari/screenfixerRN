@@ -1,11 +1,12 @@
-import { View, Text, Image } from 'react-native'
-import React from 'react'
-import ActionSheet, { SheetManager } from 'react-native-actions-sheet'
-import { REDMI_NOTE_6_PRO_IMG } from '../../../assets/images'
-import Txt from '../../Txt'
-import { Lead } from '../../../screens/FindLeadsScreen'
-import FastImage from 'react-native-fast-image'
-import Button from '../../Button'
+import React from 'react';
+import { View } from 'react-native';
+
+import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
+import FastImage from 'react-native-fast-image';
+
+import Button from '../../Button';
+import Txt from '../../Txt';
+import { Lead } from '../../../screens/FindLeadsScreen';
 
 const handlePress = async () => {
   await SheetManager.hide('purchase-lead-drawer');

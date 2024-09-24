@@ -1,0 +1,325 @@
+[
+    {
+        "id": 387,
+        "uuid": "ca15b760-2599-426d-a4d3-29e0c61e8271",
+        "description": "Front Glass Broken",
+        "price": "0.00",
+        "icon": "https://i.ibb.co/G5bpFhZ/mobile-front-glass-broken.png",
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "494dff15-e153-4e88-8a2a-88f951b706e2",
+                "quality": "premium",
+                "warranty_in_months": 1,
+                "price": 4199,
+                "price_template": "GH EDGE",
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": false,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 1,
+        "created": "2023-03-25T21:05:33+00:00"
+    },
+    {
+        "id": 388,
+        "uuid": "92775207-4cdf-4de2-8e55-db580dbf7440",
+        "description": "Screen/Display",
+        "price": "0.00",
+        "icon": "https://i.ibb.co/jykB24K/mobile-screen-or-display.png",
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "da6ba182-3b87-4635-8228-e724148f493c",
+                "quality": "original",
+                "warranty_in_months": 3,
+                "price": "35999.00",
+                "price_template": null,
+                "enabled": true
+            },
+            {
+                "uuid": "d4ec8278-3de4-4fa4-9a40-635c4f0600a9",
+                "quality": "premium",
+                "warranty_in_months": 2,
+                "price": "19500.00",
+                "price_template": null,
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": true,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 2,
+        "created": "2023-03-25T21:05:33+00:00"
+    },
+    {
+        "id": 389,
+        "uuid": "7f0577bd-8047-4d46-b0e5-899deb6b4c59",
+        "description": "Battery",
+        "price": "0.00",
+        "icon": "https://i.ibb.co/ynP1hqy/common-battery.png",
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "6bcf8522-217d-40ab-a8ca-b5042093c33c",
+                "quality": "premium",
+                "warranty_in_months": 2,
+                "price": 4499,
+                "price_template": "iH BATTERY",
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": false,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 3,
+        "created": "2023-03-25T21:05:33+00:00"
+    },
+    {
+        "id": 390,
+        "uuid": "805d14f2-c602-4d15-a3c6-15bd41b598ba",
+        "description": "Back Glass Broken",
+        "price": "0.00",
+        "icon": "https://i.ibb.co/wgYdpbd/mobile-back-glass-broken.png",
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "c1e26c50-1e39-458a-8b9c-390100155e49",
+                "quality": "premium",
+                "warranty_in_months": 2,
+                "price": 4499,
+                "price_template": "iH BG",
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": false,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 4,
+        "created": "2023-03-25T21:05:33+00:00"
+    },
+    {
+        "id": 393,
+        "uuid": "f8e1725e-923b-4b7f-8cd0-717846fefadb",
+        "description": "Charging Port",
+        "price": "0.00",
+        "icon": "https://i.ibb.co/rHCvx4g/issue-placeholder.png",
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "b61d80a7-04a0-40e1-861d-fa16329af462",
+                "quality": "premium",
+                "warranty_in_months": 2,
+                "price": 4299,
+                "price_template": "iH CP",
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": false,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 5,
+        "created": "2023-03-25T21:05:33+00:00"
+    },
+    {
+        "id": 398,
+        "uuid": "0da5b1df-d855-4eae-bcef-efeefc240820",
+        "description": "Back Camera Glass",
+        "price": "0.00",
+        "icon": "https://i.ibb.co/7bG2HNw/mobile-back-camera-glass.png",
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "1f526047-10a7-4521-aeb1-60ca82bcbea7",
+                "quality": "premium",
+                "warranty_in_months": 2,
+                "price": "1200.00",
+                "price_template": null,
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": true,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 6,
+        "created": "2023-03-25T21:05:33+00:00"
+    },
+    {
+        "id": 394,
+        "uuid": "8b92678f-1b79-4811-8c6d-8550170e08e0",
+        "description": "Ear Piece",
+        "price": "0.00",
+        "icon": null,
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "46063ebb-def0-4556-b519-96ddf45a7c7e",
+                "quality": "premium",
+                "warranty_in_months": 2,
+                "price": "4999.00",
+                "price_template": null,
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": false,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 7,
+        "created": "2023-03-25T21:05:33+00:00"
+    },
+    {
+        "id": 20381,
+        "uuid": "f307c112-d5b5-497f-9a17-c4deb495df79",
+        "description": "Flex Bonding",
+        "price": null,
+        "icon": null,
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "5bf6e82f-aecd-42c1-a700-6b423369c170",
+                "quality": "original",
+                "warranty_in_months": 3,
+                "price": "12500.00",
+                "price_template": null,
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": false,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 8,
+        "created": "2024-06-27T15:49:07+00:00"
+    },
+    {
+        "id": 20434,
+        "uuid": "b0d783b4-4641-4071-9209-c3a3fd3c675e",
+        "description": "Board Repair",
+        "price": null,
+        "icon": null,
+        "other": false,
+        "brand": {
+            "uuid": "3facd37d-e1e4-4042-a4e4-1cec19e7b102",
+            "name": "Apple"
+        },
+        "device_type": {
+            "uuid": "438b602f-ef3f-448b-be22-f69ad233b45e",
+            "name": "Mobile"
+        },
+        "prices": [
+            {
+                "uuid": "345a27dc-db91-4f52-b9b9-40f712103e08",
+                "quality": "premium",
+                "warranty_in_months": 2,
+                "price": "6500.00",
+                "price_template": null,
+                "enabled": true
+            }
+        ],
+        "device": {
+            "uuid": "808d4c01-4d4b-465e-92fe-146b9418ba65",
+            "name": "iPhone 14 Pro Max"
+        },
+        "onsite": false,
+        "offsite": true,
+        "enabled": true,
+        "sort_order": 9,
+        "created": "2024-08-03T16:27:53+00:00"
+    }
+]

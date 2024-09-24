@@ -1,14 +1,15 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { TouchableOpacity, View } from 'react-native'
-import { TextInput } from 'react-native-paper'
-import { z } from "zod"
-import COLOR_PALLETE from '../utils/ColorConstant'
-import Button from './Button'
-import Txt from './Txt'
+import React from 'react';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
+import { TouchableOpacity, View } from 'react-native';
+import { SheetManager } from 'react-native-actions-sheet';
+import { TextInput } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { SheetManager } from 'react-native-actions-sheet'
+import { z } from 'zod';
+import COLOR_PALLETE from '../utils/ColorConstant';
+import Button from './Button';
+import Txt from './Txt';
 
 
 const formSchema = z.object({
