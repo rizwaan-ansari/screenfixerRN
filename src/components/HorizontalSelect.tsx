@@ -34,15 +34,6 @@ export default function HorizontalSelect(props: HorizontalSelectProps) {
             }
         }
     }
-    const renderItem = useCallback(({ item }: { item: Option}) => {
-        return (
-            <TouchableOpacity onPress={() => onItemPress(item)} className='bg-neutral-400 mr-[10px] py-[10px] px-[25px] rounded-[4px]' style={[{backgroundColor: selectedItems.includes(item?.value) ? props.color || COLOR.GRAY_65 : COLOR.NEUTRAL_900}]}>
-                <Txt numberOfLines={1} fontWeight={selectedItems.includes(item?.value)? 700 : 400} fontColor={selectedItems.includes(item?.value)? "brandLight" : "brandDark"} style={styles.itemLabel}>{item?.label}</Txt>
-            </TouchableOpacity>
-        );
-    },
-    [selectedItems, props.color]
-);
     useEffect(() => {
         props?.onSelect && props?.onSelect(false === isMultiple && selectedItems.length > 0 ? selectedItems[0] : selectedItems);
     }, [selectedItems]);
@@ -50,15 +41,26 @@ export default function HorizontalSelect(props: HorizontalSelectProps) {
         setOptions(props?.options);
     }, [props?.options]);
     return (
-        <View>
-            <FlatList
-                contentContainerStyle={[props.contentContainerStyle]}
-                horizontal={true}
-                data={options}
-                renderItem={renderItem}
-                showsHorizontalScrollIndicator={false}
-                keyExtractor={(_, index) => "input_hs_"+index.toString()}
-            />
+        <View className='flex-row items-center flex-wrap gap-x-2 gap-y-2' style={[props.contentContainerStyle]}>
+            {options.map((item, index) => (
+                <TouchableOpacity
+                    className='px-5 py-2 rounded-lg'
+                    key={`input_hs_${index}`}
+                    onPress={() => onItemPress(item)}
+                    style={[
+                        { backgroundColor: selectedItems.includes(item?.value) ? props.color || COLOR.GRAY_65 : COLOR.NEUTRAL_900 }
+                    ]}
+                >
+                    <Txt
+                        numberOfLines={1}
+                        fontWeight={selectedItems.includes(item?.value) ? 700 : 400}
+                        fontColor={selectedItems.includes(item?.value) ? "brandLight" : "brandDark"}
+                        style={styles.itemLabel}
+                    >
+                        {item?.label}
+                    </Txt>
+                </TouchableOpacity>
+            ))}
         </View>
     )
 }

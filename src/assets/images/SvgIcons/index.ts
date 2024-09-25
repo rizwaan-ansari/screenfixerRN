@@ -12,3 +12,5 @@ export { default as SvgSuccess } from "./SvgSuccess";
 export { default as SvgCall } from "./SvgCall";
 export { default as SvgMobileShadow } from "./SvgMobileShadow";
 export { default as SvgCallIcon } from "./SvgCallIcon";
+export { default as SvgAdd } from "./SvgAdd";
+export { default as SvgDelete } from "./SvgDelete";

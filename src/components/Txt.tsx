@@ -17,7 +17,7 @@ interface TxtProps {
     style?: TextStyle | TextStyle[],
     className?: string
     numberOfLines?: number,
-    children: React.ReactElement | string | string[] | undefined | null;
+    children: React.ReactElement | string | string[] | number | undefined | null;
 }
 
 const FONT_SIZE_MAPPER: Record<fontSize, { size: number, lineHeight: number }> = {
