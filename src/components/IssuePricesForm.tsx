@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
@@ -12,6 +12,8 @@ import COLOR_PALLETE from '../utils/ColorConstant';
 import Button from './Button';
 import HorizontalSelect from './HorizontalSelect';
 import Txt from './Txt';
+import { ContextData } from '../providers/ContextProvider';
+import { useDataContext } from '../hooks/useDataContext';
 
 
 interface Quality {
@@ -47,6 +49,7 @@ const handleQualityPress = () => {
   console.log("Hello")
 }
 const IssuePricesForm = () => {
+  const {contextData, setContextData} = useDataContext();
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -81,8 +84,12 @@ const IssuePricesForm = () => {
 
   const onSubmit = (data: any) => {
     console.log(data)
-
+    setContextData({editIssueDetails: false})
   }
+  const onPressCancel = () => {
+    setContextData({editIssueDetails: false})
+  }
+
   return (
     <View className='p-5 bg-white mx-4 rounded-[10px] justify-center'>
       <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"}>Issue and Prices</Txt>
@@ -221,7 +228,7 @@ const IssuePricesForm = () => {
           )}
         </View>
       ))}
-        <Button label={"Cancel"} marginTop={20} variant={"info"} />
+        <Button label={"Cancel"} marginTop={20} onPress={onPressCancel} variant={"info"} />
         <Button label={"Save"} marginTop={15} onPress={handleSubmit(onSubmit)} />
     </View>
   )

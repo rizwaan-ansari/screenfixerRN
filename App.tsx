@@ -12,6 +12,7 @@ import LogInScreen from "./src/screens/LogInScreen.tsx";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import RequestsScreen from "./src/screens/RequestsScreen";
 import WalletScreen from "./src/screens/WalletScreen";
+import DataContextProvider from "./src/providers/ContextProvider.tsx";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 const RequestStack = createNativeStackNavigator();
@@ -76,9 +77,11 @@ function App(): React.JSX.Element {
     return (
         <SheetProvider>
             <PaperProvider>
-                <NavigationContainer>
-                    <RootStactNavigator />
-                </NavigationContainer>
+                <DataContextProvider>
+                    <NavigationContainer>
+                        <RootStactNavigator />
+                    </NavigationContainer>
+                </DataContextProvider>
             </PaperProvider>
         </SheetProvider>
     );
