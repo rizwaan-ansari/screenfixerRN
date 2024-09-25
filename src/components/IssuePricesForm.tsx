@@ -210,10 +210,15 @@ const IssuePricesForm = () => {
               ''
           }
           </View>
-          <TouchableOpacity className='flex-row items-center mt-5 pl-[5px]' onPress={addNewIssue}>
-            <SvgAdd />
-            <Txt fontSize={"base"} fontColor={"textDefault"} fontWeight={500} className='pl-[10px]'>Add Issue</Txt>
-          </TouchableOpacity>
+          {index !== fields.length - 1 && (
+            <View style={{ marginTop: 20, height: 1, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)'}} />
+          )}
+          {index === fields.length - 1 && (
+              <TouchableOpacity className='flex-row items-center mt-5 pl-[5px]' onPress={addNewIssue}>
+                <SvgAdd />
+                <Txt fontSize={"base"} fontColor={"textDefault"} fontWeight={500} className='pl-[10px]'>Add Issue</Txt>
+              </TouchableOpacity>
+          )}
         </View>
       ))}
         <Button label={"Cancel"} marginTop={20} variant={"info"} />
