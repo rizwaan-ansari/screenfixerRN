@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { FlatList, FlatListProps, StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatListProps, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Txt from '../components/Txt';
 import COLOR from '../utils/ColorConstant';
 
@@ -44,7 +44,7 @@ export default function HorizontalSelect(props: HorizontalSelectProps) {
         <View className='flex-row items-center flex-wrap gap-x-2 gap-y-2' style={[props.contentContainerStyle]}>
             {options.map((item, index) => (
                 <TouchableOpacity
-                    className='px-5 py-2 rounded-lg'
+                    className='px-5 py-3 rounded-lg'
                     key={`input_hs_${index}`}
                     onPress={() => onItemPress(item)}
                     style={[

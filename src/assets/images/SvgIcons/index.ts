@@ -14,3 +14,4 @@ export { default as SvgMobileShadow } from "./SvgMobileShadow";
 export { default as SvgCallIcon } from "./SvgCallIcon";
 export { default as SvgAdd } from "./SvgAdd";
 export { default as SvgDelete } from "./SvgDelete";
+export { default as SvgUpload } from "./SvgUpload";

@@ -1,30 +1,30 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useContext, useState } from 'react'
-import HeaderTabBar from '../components/HeaderTabBar'
-import { Txt } from '../components'
-import FeatherIcon from 'react-native-vector-icons/Feather';
-import FastImage from 'react-native-fast-image';
-import { CLOCK_IMG, HOUR_GLASS_IMG, PROFILE_PICTURE_IMG, REPAIR_IMG } from '../assets/images';
-import InfoCard from '../components/InfoCard';
-import RepairTypeCard from '../components/RepairType';
 import { NavigationProp } from '@react-navigation/native';
-import RepairDeviceDetails from '../components/RepairDeviceDetails';
+import React, { useContext } from 'react';
+import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import { CLOCK_IMG, HOUR_GLASS_IMG, PROFILE_PICTURE_IMG, REPAIR_IMG } from '../assets/images';
+import { Txt } from '../components';
 import CustomerInfo from '../components/CustomerInfo';
-import REPAIR_REQUEST from '../data/repair-request.json'
+import HeaderTabBar from '../components/HeaderTabBar';
+import InfoCard from '../components/InfoCard';
 import IssuePrices from '../components/IssuePrices';
 import IssuePricesForm from '../components/IssuePricesForm';
+import RepairAction from '../components/RepairAction';
+import RepairDeviceDetails from '../components/RepairDeviceDetails';
+import RepairTypeCard from '../components/RepairType';
+import REPAIR_REQUEST from '../data/repair-request.json';
 import { ContextData } from '../providers/ContextProvider';
 
 const repair_request = REPAIR_REQUEST.payload;
 
-const REPAIR_TYPE:any = {
-    'onsite':  'On-site Repair',
+const REPAIR_TYPE: any = {
+    'onsite': 'On-site Repair',
     'offsite': 'Off-site Repair',
     'office-visit': 'Off-site Repair',
 };
 
 const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
-    const {contextData, setContextData} = useContext(ContextData);
+    const { contextData, setContextData } = useContext(ContextData);
     const DetailsHeader = () => {
         return (
             <View className='pb-4 flex-row items-center gap-[15px]'>
@@ -67,18 +67,19 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                         subtitle="Repair Type"
                         image={REPAIR_IMG}
                     />
-                </View>    
+                </View>
                 <RepairDeviceDetails />
-                {contextData.editIssueDetails ? 
+                {contextData.editIssueDetails ?
                     <IssuePricesForm />
-                : 
-                    <IssuePrices onPressUpdate={() => setContextData({editIssueDetails: true})} />
+                    :
+                    <IssuePrices onPressUpdate={() => setContextData({ editIssueDetails: true })} />
                 }
-                <CustomerInfo 
+                <CustomerInfo
                     name='Jonathan David'
                     profilePicture={PROFILE_PICTURE_IMG}
                     address='Office - 202, Anshi Avenue, B/h Ketav Petrol Pump, Ambawadi, Bengaluru, Karnataka, 581320.'
                 />
+                <RepairAction />
             </ScrollView>
         </SafeAreaView>
     )
