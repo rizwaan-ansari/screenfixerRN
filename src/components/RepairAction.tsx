@@ -8,6 +8,7 @@ import COLOR_PALLETE from '../utils/ColorConstant'
 import Button from './Button'
 import HorizontalSelect from './HorizontalSelect'
 import Txt from './Txt'
+import REPAIR_REQUEST from "../data/repair-request.json"
 
 const REPAIR_STATUS = [
     {
@@ -24,6 +25,7 @@ const REPAIR_STATUS = [
     },
 ]
 
+const status = REPAIR_REQUEST.payload.status;
 const RepairAction = () => {
 
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
@@ -69,7 +71,7 @@ const RepairAction = () => {
                     .map((asset: Asset) => asset.uri)
                     .filter((uri): uri is string => uri !== undefined)
 
-                    setSelectedImages(prevImages => [...prevImages, ...newImages])
+                setSelectedImages(prevImages => [...prevImages, ...newImages])
             }
         })
     }
@@ -116,7 +118,9 @@ const RepairAction = () => {
             <HorizontalSelect
                 contentContainerStyle={{ flexDirection: 'row', marginTop: 15 }}
                 multiple={false}
-                options={REPAIR_STATUS.map((item) => { return { label: item.status, value: item.id } })}
+                options={REPAIR_STATUS
+                    .filter(item => status === 'technician-assigned' && item.status !== "Completed")
+                    .map(item => ({ label: item.status, value: item.id }))}
             />
             <TouchableOpacity onPress={showImagePickerOption}>
                 <View className='h-[210px] justify-center items-center bg-white20' style={{ borderRadius: 10, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)', marginTop: 15, }}>
