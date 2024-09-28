@@ -38,8 +38,32 @@
             "slug": "bangalore",
             "name": "Bangalore"
         },
-        "before_repair_comment": null,
-        "after_repair_comment": null,
+        "before_repair_comment": {
+            "comment": "Hello",
+            "files_base_url": "https://cosko.nyc3.cdn.digitaloceanspaces.com",
+            "files": [
+                {
+                    "files": {
+                        "file": "/dev/2024/09/eHnwVvEpk1VHzKWUTKpa9tiBE4ghYeNJ4Swu8VlFY55ZTiSkH.png"
+                    },
+                    "type": "image",
+                    "mime_type": "image/png"
+                }
+            ]
+        },
+        "after_repair_comment": {
+            "comment": "completed",
+            "files_base_url": "https://cosko.nyc3.cdn.digitaloceanspaces.com",
+            "files": [
+                {
+                    "files": {
+                        "file": "/dev/2024/09/8T1I7LuCESALahTORG7vFLxJHdlZwm3jkW9J1K4f4XDB.png"
+                    },
+                    "type": "image",
+                    "mime_type": "image/png"
+                }
+            ]
+        },
         "issues": [
             {
                 "default": {
