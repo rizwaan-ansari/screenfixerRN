@@ -4,12 +4,14 @@ interface ContextData {
   editIssueDetails?: boolean;
   repairRequestItem?: any;
   addImages?: string[] | null;
+  editBeforeRepair?: boolean;
 }
 
 const ContextDataDefaultValues = {
   editIssueDetails: false,
   repairRequestItem: null,
   addImages: [],
+  editBeforeRepair: false,
 }
 
 export interface ContextValue {

@@ -17,3 +17,4 @@ export { default as SvgDelete } from "./SvgDelete";
 export { default as SvgUpload } from "./SvgUpload";
 export { default as SvgCross } from "./SvgCross";
 export { default as SvgEdit } from "./SvgEdit";
+export { default as SvgCamera } from "./SvgCamera";
