@@ -60,7 +60,7 @@ const CommentForm = ({ type, title }: CommentFormProps) => {
         />
         <View className='border border-[#E2E2E2] mt-[15px]' />
         <View className='flex-row mt-[15px]'>
-            <Button label={"Cancel"} flex={1} width={1/2} variant={'info'} />
+            <Button label={"Cancel"} flex={1} width={1/2} variant={'info'} onPress={() => setContextData({editBeforeRepair: false})} />
             <Button label={"Update"} marginLeft={15} flex={1} width={1/2} />
         </View>
     </View>

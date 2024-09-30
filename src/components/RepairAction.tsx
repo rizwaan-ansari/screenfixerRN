@@ -44,11 +44,6 @@ const RepairAction = () => {
 
     return (
         <>
-            <TechnicianCommentBox
-                title={"Before Repair"}
-                hasEditIcon={true}
-                description={"The following was your device condition before repair"}
-            />
             <View className='p-5 bg-white mx-4 rounded-[10px] justify-center mt-5'>
                 <Txt fontWeight={700} fontSize={'xl'} className=''>Repair Action</Txt>
                 <View className='border border-[#E2E2E2] mt-[15px]' />

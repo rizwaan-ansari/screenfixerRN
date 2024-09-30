@@ -15,6 +15,8 @@ import RepairTypeCard from '../components/RepairType';
 import REPAIR_REQUEST from '../data/repair-request.json';
 import { ContextData } from '../providers/ContextProvider';
 import EditRepairDetailsForm from '../components/EditRepairDetailsForm';
+import TechnicianCommentBox from '../components/TechnicianCommentBox';
+import CommentForm from '../components/CommentForm';
 
 const repair_request = REPAIR_REQUEST.payload;
 
@@ -29,6 +31,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
     const scrollViewRef = useRef<ScrollView>(null);
     const editRepairDetailsFormRef = useRef<View>(null);
     const issuePriceFormRef = useRef<View>(null);
+    const technicianCommentBoxRef = useRef<View>(null);
 
     useEffect(() => {
         if (contextData.editIMEINumber) {
@@ -41,6 +44,12 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
             scrollToForm(issuePriceFormRef);
         }
     }, [contextData.editIssueDetails]);
+
+    useEffect(() => {
+        if (contextData.editBeforeRepair) {
+            scrollToForm(technicianCommentBoxRef);
+        }
+    }, [contextData.editBeforeRepair]);
     
     const DetailsHeader = () => {
         return (
@@ -115,6 +124,18 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                     profilePicture={PROFILE_PICTURE_IMG}
                     address='Office - 202, Anshi Avenue, B/h Ketav Petrol Pump, Ambawadi, Bengaluru, Karnataka, 581320.'
                 />
+                <View ref={technicianCommentBoxRef}>
+                    {
+                        contextData.editBeforeRepair ?
+                        <CommentForm title={'Edit Technician Comment Before'} />
+                        :
+                        <TechnicianCommentBox
+                            title={"Before Repair"}
+                            hasEditIcon={true}
+                            description={"The following was your device condition before repair"}
+                        />
+                    }
+                </View>
                 <RepairAction />
             </ScrollView>
         </SafeAreaView>
