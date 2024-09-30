@@ -3,6 +3,7 @@ import React, { useReducer } from 'react';
 interface ContextData {
   editIssueDetails?: boolean;
   repairRequestItem?: any;
+  editIMEINumber?: boolean;
   addImages?: string[] | null;
   editBeforeRepair?: boolean;
 }
@@ -10,6 +11,7 @@ interface ContextData {
 const ContextDataDefaultValues = {
   editIssueDetails: false,
   repairRequestItem: null,
+  editIMEINumber: false,
   addImages: [],
   editBeforeRepair: false,
 }

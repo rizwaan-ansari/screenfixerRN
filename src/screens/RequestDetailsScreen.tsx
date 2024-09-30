@@ -1,5 +1,5 @@
 import { NavigationProp } from '@react-navigation/native';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { CLOCK_IMG, HOUR_GLASS_IMG, PROFILE_PICTURE_IMG, REPAIR_IMG } from '../assets/images';
@@ -14,6 +14,7 @@ import RepairDeviceDetails from '../components/RepairDeviceDetails';
 import RepairTypeCard from '../components/RepairType';
 import REPAIR_REQUEST from '../data/repair-request.json';
 import { ContextData } from '../providers/ContextProvider';
+import EditRepairDetailsForm from '../components/EditRepairDetailsForm';
 
 const repair_request = REPAIR_REQUEST.payload;
 
@@ -25,6 +26,22 @@ const REPAIR_TYPE: any = {
 
 const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const { contextData, setContextData } = useContext(ContextData);
+    const scrollViewRef = useRef<ScrollView>(null);
+    const editRepairDetailsFormRef = useRef<View>(null);
+    const issuePriceFormRef = useRef<View>(null);
+
+    useEffect(() => {
+        if (contextData.editIMEINumber) {
+            scrollToForm(editRepairDetailsFormRef);
+        }
+    }, [contextData.editIMEINumber]);
+
+    useEffect(() => {
+        if (contextData.editIssueDetails) {
+            scrollToForm(issuePriceFormRef);
+        }
+    }, [contextData.editIssueDetails]);
+    
     const DetailsHeader = () => {
         return (
             <View className='pb-4 flex-row items-center gap-[15px]'>
@@ -38,10 +55,21 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
         )
     }
 
+    const scrollToForm = (formRef: React.RefObject<View>) => {
+        if (formRef.current && scrollViewRef.current) {
+            formRef.current?.measureLayout(
+                scrollViewRef.current?.getScrollableNode() as any,
+                (x, y) => {
+                    scrollViewRef.current?.scrollTo({ y: y, animated: true });
+                }
+            )
+        }
+    }
+
     return (
         <SafeAreaView className='w-full flex-1 bg-brand'>
             <HeaderTabBar />
-            <ScrollView className='w-full rounded-tl-xl rounded-tr-xl flex-1 bg-neutral-600 -mt-[15px]'>
+            <ScrollView ref={scrollViewRef} className='w-full rounded-tl-xl rounded-tr-xl flex-1 bg-neutral-600 -mt-[15px]'>
                 <View className='flex-1 px-4 rounded-tl-xl rounded-tr-xl pt-[20px]'>
                     <DetailsHeader />
                     <View className='flex-row justify-between'>
@@ -68,12 +96,20 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                         image={REPAIR_IMG}
                     />
                 </View>
-                <RepairDeviceDetails />
-                {contextData.editIssueDetails ?
-                    <IssuePricesForm />
-                    :
-                    <IssuePrices onPressUpdate={() => setContextData({ editIssueDetails: true })} />
-                }
+                <View ref={editRepairDetailsFormRef}>
+                    {contextData.editIMEINumber ?
+                        <EditRepairDetailsForm />
+                        :
+                        <RepairDeviceDetails />
+                    }
+                </View>
+                <View ref={issuePriceFormRef}>
+                    {contextData.editIssueDetails ?
+                        <IssuePricesForm />
+                        :
+                        <IssuePrices onPressUpdate={() => setContextData({ editIssueDetails: true })} />
+                    }
+                </View>
                 <CustomerInfo
                     name='Jonathan David'
                     profilePicture={PROFILE_PICTURE_IMG}

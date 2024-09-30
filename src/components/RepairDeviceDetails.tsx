@@ -1,10 +1,12 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useContext, useRef } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { Request } from '../screens/RequestsScreen';
 import FastImage from 'react-native-fast-image';
 import { SvgMobileShadow } from '../assets/images';
 import Txt from './Txt';
+import { ContextData } from '../providers/ContextProvider';
+import EditRepairDetailsForm from './EditRepairDetailsForm';
 
 type RootStackParamList = {
     RequestsScreen: undefined;
@@ -16,6 +18,8 @@ type RootStackParamList = {
 type RepairDeviceDetailsRouteProp = RouteProp<RootStackParamList, 'DetailsScreen'>;
 
 const RepairDeviceDetails = () => {
+
+    const { contextData, setContextData } = useContext(ContextData);
     const route = useRoute<RepairDeviceDetailsRouteProp>();
     const { requestData } = route.params;
 
@@ -24,7 +28,7 @@ const RepairDeviceDetails = () => {
     return (
         <View className='p-5 bg-white m-4 rounded-[10px]'>
             <View className='relative mx-auto overflow-hidden w-[100px] rounded-[30px] h-[100px] bg-offWhite flex justify-center items-center'>
-                <FastImage 
+                <FastImage
                     source={requestData.image}
                     className='w-[52px] h-[67px] z-10'
                     resizeMode={FastImage.resizeMode.contain}
@@ -75,7 +79,10 @@ const RepairDeviceDetails = () => {
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
                     IMEI number
                 </Txt>
-                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>---</Txt>
+                {/* <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>---</Txt> */}
+                <TouchableOpacity className='mt-2' onPress={() => { setContextData({ editIMEINumber: true }) }}>
+                    <Txt fontSize={"base"} fontWeight-={500} fontColor={"textDanger"}>Add+</Txt>
+                </TouchableOpacity>
             </View>
         </View>
     );

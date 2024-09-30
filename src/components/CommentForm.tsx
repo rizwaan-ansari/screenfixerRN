@@ -1,13 +1,13 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useContext } from 'react'
-import Txt from './Txt';
-import MediaUploader from './MediaUploader';
-import { SvgCamera, SvgCross } from '../assets/images';
-import { ContextData } from '../providers/ContextProvider';
+import React, { useContext } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { TextInput } from 'react-native-paper';
+import { SvgCamera, SvgCross } from '../assets/images';
+import { ContextData } from '../providers/ContextProvider';
 import COLOR_PALLETE from '../utils/ColorConstant';
 import Button from './Button';
+import MediaUploader from './MediaUploader';
+import Txt from './Txt';
 
 interface CommentFormProps {
     type?: string;
@@ -54,6 +54,9 @@ const CommentForm = ({ type, title }: CommentFormProps) => {
             activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
             multiline={true}
             className='bg-white20 mt-[15px] text-sm text-gray65 h-[80px]'
+            theme={{
+                roundness: 8,
+            }}
         />
         <View className='border border-[#E2E2E2] mt-[15px]' />
         <View className='flex-row mt-[15px]'>
