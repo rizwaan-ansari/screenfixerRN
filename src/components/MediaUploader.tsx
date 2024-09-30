@@ -5,7 +5,11 @@ import { SvgUpload } from '../assets/images'
 import { Asset, CameraOptions, ImageLibraryOptions, launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import { ContextData } from '../providers/ContextProvider'
 
-const MediaUploader = () => {
+interface MediaUploaderProps {
+    children?: React.ReactNode
+}
+
+const MediaUploader = ({ children }: MediaUploaderProps) => {
     const { contextData, setContextData } = useContext(ContextData);
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -86,10 +90,7 @@ const MediaUploader = () => {
     };
     return (
         <TouchableOpacity onPress={showImagePickerOption}>
-            <View className='h-[210px] justify-center items-center bg-white20' style={{ borderRadius: 10, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)', marginTop: 15, }}>
-                <SvgUpload />
-                <Txt fontSize={'sm'} textAlign={'center'} className='mt-[10px]'>Upload Image or Video</Txt>
-            </View>
+            {children}
         </TouchableOpacity>
     )
 }

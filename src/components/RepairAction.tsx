@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { TextInput } from 'react-native-paper';
 
-import { SvgCross } from '../assets/images';
+import { SvgCross, SvgUpload } from '../assets/images';
 import REPAIR_REQUEST from '../data/repair-request.json';
 import COLOR_PALLETE from '../utils/ColorConstant';
 import { useDataContext } from '../hooks/useDataContext';
@@ -62,7 +62,12 @@ const RepairAction = () => {
                         .filter(item => status === 'technician-assigned' && item.status !== "Completed")
                         .map(item => ({ label: item.status, value: item.id }))}
                 />
-                <MediaUploader />
+                <MediaUploader>
+                    <View className='h-[210px] justify-center items-center bg-white20' style={{ borderRadius: 10, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)', marginTop: 15, }}>
+                        <SvgUpload />
+                        <Txt fontSize={'sm'} textAlign={'center'} className='mt-[10px]'>Upload Image or Video</Txt>
+                    </View>
+                </MediaUploader>
                 <View className='w-full flex-row gap-x-2 flex-wrap'>
                     {(contextData.addImages || []).map((uri, index) => (
                         <View className='h-16 w-16 mt-[15px] relative' key={`${index}-uri`}>
