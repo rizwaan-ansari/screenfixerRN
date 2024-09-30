@@ -3,11 +3,13 @@ import React, { useReducer } from 'react';
 interface ContextData {
   editIssueDetails?: boolean;
   repairRequestItem?: any;
+  addImages?: string[] | null;
 }
 
 const ContextDataDefaultValues = {
   editIssueDetails: false,
   repairRequestItem: null,
+  addImages: [],
 }
 
 export interface ContextValue {
