@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React, { useContext } from 'react'
 import Txt from './Txt'
 import { TextInput } from 'react-native-paper'
-import COLOR_PALLETE from '../utils/ColorConstant'
+import COLOR_PALETTE from '../utils/ColorConstant'
 import Button from './Button'
 import { ContextData } from '../providers/ContextProvider'
 
@@ -16,8 +16,8 @@ const EditRepairDetailsForm = () => {
       <TextInput  
         label={"IMEI number"}
         mode={"outlined"}
-        outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-        activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+        outlineColor={COLOR_PALETTE.OFF_WHITE_200}
+        activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
         className='bg-white20 mt-[15px] text-sm text-gray65'
         theme={{
             roundness: 8,

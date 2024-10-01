@@ -2,7 +2,7 @@ import React, { FC, SVGProps } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { ms } from 'react-native-size-matters'
 import { SvgCallIcon } from '../assets/images'
-import COLOR_PALLETE from '../utils/ColorConstant'
+import COLOR_PALETTE from '../utils/ColorConstant'
 import Txt from './Txt'
 
 
@@ -41,13 +41,13 @@ const Button = ({
     const getVariant = () => {
         switch (variant) {
             case "primary":
-                return COLOR_PALLETE.BRAND;
+                return COLOR_PALETTE.BRAND;
             case "secondary":
-                return COLOR_PALLETE.BLACK
+                return COLOR_PALETTE.BLACK
             case "call":
-                return COLOR_PALLETE.SUCCESS_16;
+                return COLOR_PALETTE.SUCCESS_16;
             case "info":
-                return COLOR_PALLETE.OFF_WHITE;
+                return COLOR_PALETTE.OFF_WHITE;
         }
     }
 

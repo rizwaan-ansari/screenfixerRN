@@ -5,7 +5,7 @@ import { TextInput } from 'react-native-paper';
 
 import { SvgCross, SvgUpload } from '../assets/images';
 import REPAIR_REQUEST from '../data/repair-request.json';
-import COLOR_PALLETE from '../utils/ColorConstant';
+import COLOR_PALETTE from '../utils/ColorConstant';
 import { useDataContext } from '../hooks/useDataContext';
 
 import Button from './Button';
@@ -111,8 +111,8 @@ const RepairAction = () => {
                             onChangeText={onChange}
                             onBlur={onBlur}
                             value={value}
-                            outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-                            activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                            outlineColor={COLOR_PALETTE.OFF_WHITE_200}
+                            activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
                             className='mt-[15px] bg-white20 text-sm text-gray65'
                             error={!!errors.comment}
                         />

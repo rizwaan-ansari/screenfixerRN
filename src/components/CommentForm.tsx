@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import { TextInput } from 'react-native-paper';
 import { SvgCamera, SvgCross } from '../assets/images';
 import { ContextData } from '../providers/ContextProvider';
-import COLOR_PALLETE from '../utils/ColorConstant';
+import COLOR_PALETTE from '../utils/ColorConstant';
 import Button from './Button';
 import MediaUploader from './MediaUploader';
 import Txt from './Txt';
@@ -74,8 +74,8 @@ const CommentForm = ({ type, title }: CommentFormProps) => {
                     onChangeText={onChange}
                     onBlur={onBlur}
                     value={value}
-                    outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-                    activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                    outlineColor={COLOR_PALETTE.OFF_WHITE_200}
+                    activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
                     multiline={true}
                     className='bg-white20 mt-[15px] text-sm text-gray65 h-[80px]'
                     theme={{

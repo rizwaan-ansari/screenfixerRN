@@ -3,7 +3,7 @@ import { TextInput } from 'react-native-paper';
 import { View, Text, Alert, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { RUPEE } from './../../../assets/images/index'
-import COLOR_PALLETE from '../../../utils/ColorConstant';
+import COLOR_PALETTE from '../../../utils/ColorConstant';
 import Txt from '../../Txt';
 import Button from '../../Button';
 
@@ -42,7 +42,7 @@ const AddBalanceDrawer = () => {
                 <Txt fontSize={'base'} fontWeight={400} fontColor={'neutral400'} className='pt-2'>Enter the amount you want to add in your wallet</Txt>
                 <TextInput
                     value={text}
-                    left={<TextInput.Icon size={16} color={COLOR_PALLETE.BRAND_LIGHT} icon={require('./../../../assets/images/rupee.png')} />}
+                    left={<TextInput.Icon size={16} color={COLOR_PALETTE.BRAND_LIGHT} icon={require('./../../../assets/images/rupee.png')} />}
                     mode="outlined"
                     onChangeText={text => setText(text)}
                     className='mt-3'

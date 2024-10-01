@@ -1,12 +1,13 @@
-import { View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native'
-import React from 'react'
-import Txt from '../components/Txt'
-import BalanceTab from '../components/BalanceTab'
-import COLOR_PALLETE from './../utils/ColorConstant'
-import FastImage from 'react-native-fast-image'
-import { HISTORY_DEPOSIT_ICON, HISTORY_WITHDRAW_ICON } from '../assets/images'
-import HeaderTabBar from '../components/HeaderTabBar'
-import { SheetManager } from 'react-native-actions-sheet'
+import React from 'react';
+import { FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { SheetManager } from 'react-native-actions-sheet';
+import FastImage from 'react-native-fast-image';
+
+import { HISTORY_DEPOSIT_ICON, HISTORY_WITHDRAW_ICON } from '../assets/images';
+import BalanceTab from '../components/BalanceTab';
+import HeaderTabBar from '../components/HeaderTabBar';
+import Txt from '../components/Txt';
+import COLOR_PALETTE from '../utils/ColorConstant';
 
 const DATA = [
     {
@@ -84,7 +85,7 @@ const WalletScreenHeader = () => {
     return (
         <View>
             <View className="mb-4">
-                <BalanceTab onPressWithdraw={() => SheetManager.show('withdraw-request-drawer')} onPressDeposit={() => SheetManager.show('add-balance-drawer')}/>
+                <BalanceTab onPressWithdraw={() => SheetManager.show('withdraw-request-drawer')} onPressDeposit={() => SheetManager.show('add-balance-drawer')} />
             </View>
             <View className='bg-white rounded-tr-lg rounded-tl-lg p-4'>
                 <Txt fontSize="lg" fontColor={'textDefault'} fontWeight={700} className=''>Payment History</Txt>
@@ -99,11 +100,11 @@ const WalletScreen = () => {
             <FlatList
                 ListHeaderComponent={<WalletScreenHeader />}
                 data={DATA}
-                ListHeaderComponentStyle={{ backgroundColor: COLOR_PALLETE.NEUTRAL_600 }}
+                ListHeaderComponentStyle={{ backgroundColor: COLOR_PALETTE.NEUTRAL_600 }}
                 keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={{ backgroundColor: COLOR_PALLETE.WHITE }}
+                contentContainerStyle={{ backgroundColor: COLOR_PALETTE.WHITE }}
                 renderItem={renderItem}
-                style={{ backgroundColor: COLOR_PALLETE.NEUTRAL_600, paddingHorizontal: 20, paddingTop: 20, marginTop: -15 , borderTopRightRadius: 12, borderTopLeftRadius: 12 }}
+                style={{ backgroundColor: COLOR_PALETTE.NEUTRAL_600, paddingHorizontal: 20, paddingTop: 20, marginTop: -15, borderTopRightRadius: 12, borderTopLeftRadius: 12 }}
             />
         </SafeAreaView>
     )

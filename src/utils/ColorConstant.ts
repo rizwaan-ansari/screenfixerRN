@@ -1,4 +1,4 @@
-const COLOR_PALLETE = {
+const COLOR_PALETTE = {
     BRAND: "#002E86",
     BRAND_DARK: "#202C50",
     BRAND_LIGHT: "#61CCF2",
@@ -30,4 +30,4 @@ const COLOR_PALLETE = {
     PALE_MINT: "#D5E7E8",
 }
 
-export default COLOR_PALLETE
+export default COLOR_PALETTE

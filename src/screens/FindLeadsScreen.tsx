@@ -1,13 +1,17 @@
-import { View, Text, SafeAreaView, StyleSheet, ScrollView, FlatList, TouchableOpacity, Image, ImageSourcePropType } from "react-native";
 import React from "react";
-import HeaderTabBar from "../components/HeaderTabBar";
-import { Txt } from "../components";
-import { GALAXY_ZFOLD_IMG, ONE_PLUS_10T_IMG, REDMI_NOTE_6_PRO_IMG } from "../assets/images";
-import Button from "../components/Button";
+import { FlatList, SafeAreaView, TouchableOpacity, View } from "react-native";
 import { SheetManager } from "react-native-actions-sheet";
 import FastImage, { FastImageProps } from "react-native-fast-image";
 import { ms } from "react-native-size-matters";
-import COLOR_PALLETE from "../utils/ColorConstant";
+
+import {
+    GALAXY_ZFOLD_IMG,
+    ONE_PLUS_10T_IMG,
+    REDMI_NOTE_6_PRO_IMG
+} from "../assets/images";
+import { Txt } from "../components";
+import Button from "../components/Button";
+import HeaderTabBar from "../components/HeaderTabBar";
 
 const DATA = [
     {
@@ -24,7 +28,7 @@ const DATA = [
                 type: "speaker",
                 label: "Speaker"
             }
-        ], 
+        ],
         repairValue: "8500",
         leadPrice: "800",
         timeStamp: "Aug 12, 2024, 12:40 PM",
@@ -144,13 +148,13 @@ const renderItem = ({ item }: { item: Lead }) => {
                     </Txt>
                 </View>
             </View>
-            <View style={{height: 1, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)'}}>
+            <View style={{ height: 1, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
             </View>
             <View className="flex-row justify-between items-center pt-3">
                 <Txt fontWeight={700} fontColor={'textSuccess'} fontSize={'xl'}>
                     ₹{item.leadPrice}
                 </Txt>
-                <Button paddingHorizontal={ms(40, 0.25)} paddingVertical={ms(10, 0.25)} weight={700} className="px-[40px] py-[10px]" size="base" label={"PURCHASE"} onPress={() => handlePress(item)}  />
+                <Button paddingHorizontal={ms(40, 0.25)} paddingVertical={ms(10, 0.25)} weight={700} className="px-[40px] py-[10px]" size="base" label={"PURCHASE"} onPress={() => handlePress(item)} />
             </View>
         </TouchableOpacity>
     )

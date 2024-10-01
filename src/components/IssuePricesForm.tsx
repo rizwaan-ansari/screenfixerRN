@@ -9,7 +9,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { z } from 'zod';
 import { SvgAdd, SvgDelete } from '../assets/images';
 import { useDataContext } from '../hooks/useDataContext';
-import COLOR_PALLETE from '../utils/ColorConstant';
+import COLOR_PALETTE from '../utils/ColorConstant';
 import Button from './Button';
 import HorizontalSelect, { Option } from './HorizontalSelect';
 import Txt from './Txt';
@@ -95,10 +95,10 @@ const IssuePricesForm = () => {
                         <TextInput
                             label={"Issue"}
                             mode={"outlined"}
-                            right={<TextInput.Icon icon={() => <AntDesign name="caretdown" size={10} color={COLOR_PALLETE.GRAY_65} />} />}
+                            right={<TextInput.Icon icon={() => <AntDesign name="caretdown" size={10} color={COLOR_PALETTE.GRAY_65} />} />}
                             editable={false}
-                            outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-                            activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                            outlineColor={COLOR_PALETTE.OFF_WHITE_200}
+                            activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
                             className='bg-white20 mt-[15px] text-sm text-gray65'
                             pointerEvents={'none'}
                             theme={{
@@ -127,8 +127,8 @@ const IssuePricesForm = () => {
                                 label={"Price"}
                                 right={<TextInput.Affix textStyle={{ color: "#A5A5A5" }} text='₹' />}
                                 mode={'outlined'}
-                                outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-                                activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                                outlineColor={COLOR_PALETTE.OFF_WHITE_200}
+                                activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
                                 className='bg-white20 mt-[8px] text-sm text-gray65'
                                 theme={{
                                     roundness: 8,
@@ -149,8 +149,8 @@ const IssuePricesForm = () => {
                                 label={"Warranty"}
                                 right={<TextInput.Affix textStyle={{ color: "#A5A5A5" }} text='months' />}
                                 mode={'outlined'}
-                                outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-                                activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                                outlineColor={COLOR_PALETTE.OFF_WHITE_200}
+                                activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
                                 className='bg-white20 mt-[15px] text-sm'
                                 theme={{
                                     roundness: 8,
@@ -170,8 +170,8 @@ const IssuePricesForm = () => {
                                 onBlur={onBlur}
                                 label={"Part Used"}
                                 mode={'outlined'}
-                                outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-                                activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                                outlineColor={COLOR_PALETTE.OFF_WHITE_200}
+                                activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
                                 className='bg-white20 mt-[15px] text-sm'
                                 theme={{
                                     roundness: 8,
@@ -193,8 +193,8 @@ const IssuePricesForm = () => {
                                         onBlur={onBlur}
                                         label={"Quantity"}
                                         mode={'outlined'}
-                                        outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-                                        activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                                        outlineColor={COLOR_PALETTE.OFF_WHITE_200}
+                                        activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
                                         className='bg-white20 text-sm'
                                         theme={{
                                             roundness: 8,

@@ -3,7 +3,7 @@ import React from 'react'
 import ActionSheet, { SheetManager } from 'react-native-actions-sheet'
 import Txt from '../../Txt'
 import { TextInput } from 'react-native-paper'
-import COLOR_PALLETE from '../../../utils/ColorConstant'
+import COLOR_PALETTE from '../../../utils/ColorConstant'
 import Button from '../../Button'
 
 const handlePress = async () => {
@@ -20,7 +20,7 @@ const WithdrawalRequestDrawer = () => {
                 <Txt className='pt-2' fontSize={'base'} fontColor={'neutral400'}>Transfer your wallet money into your bank account</Txt>
                 <TextInput
                     value={text}
-                    left={<TextInput.Icon size={16} color={COLOR_PALLETE.BRAND_LIGHT} icon={require('./../../../assets/images/rupee.png')} />}
+                    left={<TextInput.Icon size={16} color={COLOR_PALETTE.BRAND_LIGHT} icon={require('./../../../assets/images/rupee.png')} />}
                     mode="outlined"
                     onChangeText={text => setText(text)}
                     className='mt-3'
