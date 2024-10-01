@@ -112,7 +112,7 @@ const IssuePricesForm = () => {
                             contentContainerStyle={{ flexDirection: 'row' }}
                             multiple={false}
                             options={QUALITY}
-                            onSelect={(item) => setValue(`issues.${index}.quality`, item)}
+                            onSelect={(selectedItem) => setValue(`issues.${index}.quality`, String(selectedItem))}
                         />
                         {errors.issues?.[index]?.quality && <Txt className='pt-1 pl-1' fontColor={'textDanger'}>{errors.issues[index].quality.message}</Txt>}
                     </View>

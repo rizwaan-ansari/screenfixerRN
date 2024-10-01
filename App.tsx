@@ -14,6 +14,7 @@ import LogInScreen from "./src/screens/LogInScreen.tsx";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import RequestsScreen from "./src/screens/RequestsScreen";
 import WalletScreen from "./src/screens/WalletScreen";
+import NotificationScreen from "./src/screens/NotificationScreen.tsx";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 const RequestStack = createNativeStackNavigator();
@@ -38,6 +39,7 @@ const RootStactNavigator = () => {
         <RootStack.Navigator screenOptions={{ headerShown: false }}>
             {/* <RootStack.Screen name="LogInScreen" component={LogInScreen} /> */}
             <RootStack.Screen name="NavigationTabs" component={NavigationTabs} />
+            <RootStack.Screen name="NotificationScreen" component={NotificationScreen} />
         </RootStack.Navigator>
     )
 }
