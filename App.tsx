@@ -1,18 +1,19 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SheetProvider } from 'react-native-actions-sheet';
+import { PaperProvider } from 'react-native-paper';
+
 import BottomTabBar, { TabParamList } from "./src/components/BottomTabBar";
 import './src/components/Drawers/sheets.tsx';
-import { PaperProvider } from 'react-native-paper';
+import DataContextProvider from "./src/providers/ContextProvider.tsx";
 import DetailsScreen from "./src/screens/RequestDetailsScreen.tsx";
 import FindLeadsScreen from "./src/screens/FindLeadsScreen";
 import LogInScreen from "./src/screens/LogInScreen.tsx";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import RequestsScreen from "./src/screens/RequestsScreen";
 import WalletScreen from "./src/screens/WalletScreen";
-import DataContextProvider from "./src/providers/ContextProvider.tsx";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 const RequestStack = createNativeStackNavigator();

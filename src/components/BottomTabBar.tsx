@@ -16,6 +16,7 @@ import {
 import  Txt  from './Txt';
 import FastImage from 'react-native-fast-image';
 import { BLUR } from './../assets/images/index';
+import SvgCalenderActive from '../assets/images/SvgIcons/SvgCalenderActive';
 
 
 type Icon = "home" | "search" | "wallet" | "profile" | "calender"
@@ -26,7 +27,7 @@ const ICON_MAPPER: Record<Icon, { icon: React.JSX.Element, activeIcon: React.JSX
     },
     'calender': {
         icon: <SvgCalender />,
-        activeIcon: <SvgCalender />
+        activeIcon: <SvgCalenderActive />
     },
     'search': {
         icon: <SvgSearch />,
