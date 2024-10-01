@@ -1,6 +1,6 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { useContext, useEffect, useRef } from 'react';
-import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { CLOCK_IMG, HOUR_GLASS_IMG, PROFILE_PICTURE_IMG, REPAIR_IMG } from '../assets/images';
 import { Txt } from '../components';
@@ -78,66 +78,70 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
     return (
         <SafeAreaView className='w-full flex-1 bg-brand'>
             <HeaderTabBar />
-            <ScrollView ref={scrollViewRef} className='w-full rounded-tl-xl rounded-tr-xl flex-1 bg-neutral-600 -mt-[15px]'>
-                <View className='flex-1 px-4 rounded-tl-xl rounded-tr-xl pt-[20px]'>
-                    <DetailsHeader />
-                    <View className='flex-row justify-between'>
-                        <InfoCard
-                            title="Wed, 28 July 2023"
-                            subtitle="09:00 AM"
-                            backgroundColor="#D0EEF9"
-                            borderColor="#63C7EC1A"
-                            image={CLOCK_IMG}
-                            imageStyle={{ width: 78, height: 75, right: '-15%', top: '125%' }}
-                        />
-                        <InfoCard
-                            title="4 Hours Ago"
-                            subtitle="Requested"
-                            backgroundColor="#F5E1E1"
-                            borderColor="#CC757214"
-                            image={HOUR_GLASS_IMG}
-                            imageStyle={{ width: 64, height: 68, right: '-8%', top: '115%' }}
+            <KeyboardAvoidingView className='flex-1'
+                behavior={Platform.OS === "ios" ? 'padding' : 'height'}
+            >
+                <ScrollView ref={scrollViewRef} className='w-full rounded-tl-xl rounded-tr-xl flex-1 bg-neutral-600 -mt-[15px]'>
+                    <View className='flex-1 px-4 rounded-tl-xl rounded-tr-xl pt-[20px]'>
+                        <DetailsHeader />
+                        <View className='flex-row justify-between'>
+                            <InfoCard
+                                title="Wed, 28 July 2023"
+                                subtitle="09:00 AM"
+                                backgroundColor="#D0EEF9"
+                                borderColor="#63C7EC1A"
+                                image={CLOCK_IMG}
+                                imageStyle={{ width: 78, height: 75, right: '-15%', top: '125%' }}
+                            />
+                            <InfoCard
+                                title="4 Hours Ago"
+                                subtitle="Requested"
+                                backgroundColor="#F5E1E1"
+                                borderColor="#CC757214"
+                                image={HOUR_GLASS_IMG}
+                                imageStyle={{ width: 64, height: 68, right: '-8%', top: '115%' }}
+                            />
+                        </View>
+                        <RepairTypeCard
+                            title={REPAIR_TYPE[repair_request.repair_location]}
+                            subtitle="Repair Type"
+                            image={REPAIR_IMG}
                         />
                     </View>
-                    <RepairTypeCard
-                        title={REPAIR_TYPE[repair_request.repair_location]}
-                        subtitle="Repair Type"
-                        image={REPAIR_IMG}
+                    <View ref={editRepairDetailsFormRef}>
+                        {contextData.editIMEINumber ?
+                            <EditRepairDetailsForm />
+                            :
+                            <RepairDeviceDetails />
+                        }
+                    </View>
+                    <View ref={issuePriceFormRef}>
+                        {contextData.editIssueDetails ?
+                            <IssuePricesForm />
+                            :
+                            <IssuePrices onPressUpdate={() => setContextData({ editIssueDetails: true })} />
+                        }
+                    </View>
+                    <CustomerInfo
+                        name='Jonathan David'
+                        profilePicture={PROFILE_PICTURE_IMG}
+                        address='Office - 202, Anshi Avenue, B/h Ketav Petrol Pump, Ambawadi, Bengaluru, Karnataka, 581320.'
                     />
-                </View>
-                <View ref={editRepairDetailsFormRef}>
-                    {contextData.editIMEINumber ?
-                        <EditRepairDetailsForm />
-                        :
-                        <RepairDeviceDetails />
-                    }
-                </View>
-                <View ref={issuePriceFormRef}>
-                    {contextData.editIssueDetails ?
-                        <IssuePricesForm />
-                        :
-                        <IssuePrices onPressUpdate={() => setContextData({ editIssueDetails: true })} />
-                    }
-                </View>
-                <CustomerInfo
-                    name='Jonathan David'
-                    profilePicture={PROFILE_PICTURE_IMG}
-                    address='Office - 202, Anshi Avenue, B/h Ketav Petrol Pump, Ambawadi, Bengaluru, Karnataka, 581320.'
-                />
-                <View ref={technicianCommentBoxRef}>
-                    {
-                        contextData.editBeforeRepair ?
-                        <CommentForm title={'Edit Technician Comment Before'} />
-                        :
-                        <TechnicianCommentBox
-                            title={"Before Repair"}
-                            hasEditIcon={true}
-                            description={"The following was your device condition before repair"}
-                        />
-                    }
-                </View>
-                <RepairAction />
-            </ScrollView>
+                    <View ref={technicianCommentBoxRef}>
+                        {
+                            contextData.editBeforeRepair ?
+                            <CommentForm title={'Edit Technician Comment Before'} />
+                            :
+                            <TechnicianCommentBox
+                                title={"Before Repair"}
+                                hasEditIcon={true}
+                                description={"The following was your device condition before repair"}
+                            />
+                        }
+                    </View>
+                    <RepairAction />
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }
