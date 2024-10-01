@@ -24,8 +24,8 @@ const RootStack = createNativeStackNavigator();
 function NavigationTabs(): React.JSX.Element {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props:any) => <BottomTabBar {...props} />}>
-            <Tab.Screen initialParams={{ iconName: 'search' }} name="Find Leads" component={LeadsStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'calender' }} name="Requests" component={RequestStackNavigator} />
+            <Tab.Screen initialParams={{ iconName: 'search' }} name="Find Leads" component={LeadsStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'wallet' }} name="Wallet" component={WalletStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'profile' }} name="Profile" component={ProfileStackNavigator} />
         </Tab.Navigator>
@@ -35,7 +35,7 @@ function NavigationTabs(): React.JSX.Element {
 const RootStactNavigator = () => {
     return (
         <RootStack.Navigator screenOptions={{ headerShown: false }}>
-            <RootStack.Screen name="LogInScreen" component={LogInScreen} />
+            {/* <RootStack.Screen name="LogInScreen" component={LogInScreen} /> */}
             <RootStack.Screen name="NavigationTabs" component={NavigationTabs} />
         </RootStack.Navigator>
     )

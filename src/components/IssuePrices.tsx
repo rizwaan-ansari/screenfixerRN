@@ -7,17 +7,18 @@ import ISSUES from '../data/issues.json';
 import { BATTERY_IMG } from '../assets/images';
 import Button from './Button';
 
-interface Props {
+interface IssuePricesProps {
     onPressUpdate: () => void;
 }
-const IssuePrices = ({ onPressUpdate }: Props) => {
+
+const IssuePrices = ({ onPressUpdate }: IssuePricesProps) => {
     return (
         <View className='p-5 bg-white mx-4 rounded-[10px] justify-center'>
             <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"}>Issue and Prices</Txt>
             <View className='w-full border border-[#E2E2E2] mt-[15px]' />
             <View className='-mt-[5px]'>
-                {ISSUES.map((issue, index) => (
-                    <View  key={index} className='flex-row items-center gap-x-[15px] mt-5'>
+                {ISSUES.map((issue, issueIndex) => (
+                    <View key={`issuePrice-${issueIndex}`} className='flex-row items-center gap-x-[15px] mt-5'>
                         <View className='w-[38px] h-[38px]'>
                             <FastImage
                                 source={BATTERY_IMG}
@@ -27,26 +28,24 @@ const IssuePrices = ({ onPressUpdate }: Props) => {
                         <View className='flex-row justify-between flex-1'>
                             <View>
                                 <Txt fontWeight={700} fontSize={"base"} fontColor={"darkSlate"}>{issue.default.description}</Txt>
-                                {issue?.default.prices.map((price, index) => (
-                                    <View key={index} className='flex-row pt-[5px] flex-wrap'>
+                                {issue?.default.prices.map((price, priceIndex) => (
+                                    <View key={`quality-${priceIndex}`} className='flex-row pt-[5px] flex-wrap'>
                                         <Txt fontSize={"sm"} fontColor={"neutral300"}>{price.quality}, </Txt>
                                         <Txt fontSize={"sm"} fontColor={"neutral300"}>{price.warranty_in_months.toLocaleString()} months warranty</Txt>
                                     </View>
                                 ))}
                             </View>
-                        {issue?.default.prices.map((price, index) => (
-                            <>
-                                <Txt key={index} fontSize={"base"}>₹{price.price}</Txt>
-                            </>
-                        ))}
+                            {issue?.default.prices.map((price, priceIndex) => (
+                                <Txt key={`price-${priceIndex}-${issueIndex}`} fontSize={"base"}>₹{price.price}</Txt>
+                            ))}
                         </View>
                     </View>
                 ))}
-                <View className='mt-[15px] mb-5' style={{height: 1, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)'}}></View>
-                    <Button onPress={onPressUpdate} variant={"info"} label={"Update"} />
+                <View className='mt-[15px] mb-5' style={{ height: 1, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}></View>
+                <Button onPress={onPressUpdate} variant={"info"} label={"Update"} />
             </View>
         </View>
     )
 }
 
-export default IssuePrices
+export default IssuePrices;

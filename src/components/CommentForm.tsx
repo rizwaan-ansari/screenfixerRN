@@ -8,14 +8,31 @@ import COLOR_PALLETE from '../utils/ColorConstant';
 import Button from './Button';
 import MediaUploader from './MediaUploader';
 import Txt from './Txt';
+import { z } from 'zod';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface CommentFormProps {
     type?: string;
     title?: string;
 }
 
+const formSchema = z.object({
+    comment: z.string().min(1, "Comment is required").max(200, "Comment cannot exceed 200 characters")
+})
+
+const onSubmit = (data: any) => {
+    console.log(data)
+}
+
 const CommentForm = ({ type, title }: CommentFormProps) => {
     const { contextData, setContextData } = useContext(ContextData);
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            comment: '',
+        }
+    })
 
     const removeImage = (index: number) => {
         const updatedImages = (contextData.addImages || []).filter((_, i) => i != index)
@@ -35,7 +52,7 @@ const CommentForm = ({ type, title }: CommentFormProps) => {
             </MediaUploader>
             <View className='flex-row gap-x-2 ml-2'>
                 {contextData.addImages?.map((uri, index) => (
-                    <View className=''>
+                    <View key={`commentform-${index}`} className=''>
                         <FastImage 
                             source={{uri: uri}}
                             className='w-[60px] h-[60px] object-contain rounded-lg relative'
@@ -47,21 +64,32 @@ const CommentForm = ({ type, title }: CommentFormProps) => {
                 ))}
             </View>
         </View>
-        <TextInput 
-            label={"Comment"}
-            mode={'outlined'}
-            outlineColor={COLOR_PALLETE.OFF_WHITE_200}
-            activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
-            multiline={true}
-            className='bg-white20 mt-[15px] text-sm text-gray65 h-[80px]'
-            theme={{
-                roundness: 8,
-            }}
+        <Controller 
+            control={control}
+            name={'comment'}
+            render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput 
+                    label={"Comment"}
+                    mode={'outlined'}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    outlineColor={COLOR_PALLETE.OFF_WHITE_200}
+                    activeOutlineColor={COLOR_PALLETE.TEXT_DEFAULT}
+                    multiline={true}
+                    className='bg-white20 mt-[15px] text-sm text-gray65 h-[80px]'
+                    theme={{
+                        roundness: 8,
+                    }}
+                    error={!!errors.comment}
+                />     
+            )}
         />
+        {errors.comment && <Txt className='pt-1 pl-1' fontColor={'textDanger'}>{errors.comment.message}</Txt>}
         <View className='border border-[#E2E2E2] mt-[15px]' />
         <View className='flex-row mt-[15px]'>
             <Button label={"Cancel"} flex={1} width={1/2} variant={'info'} onPress={() => setContextData({editBeforeRepair: false})} />
-            <Button label={"Update"} marginLeft={15} flex={1} width={1/2} />
+            <Button label={"Update"} marginLeft={15} flex={1} width={1/2} onPress={handleSubmit(onSubmit)} />
         </View>
     </View>
   )

@@ -1,7 +1,5 @@
-import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import React, { useContext, useState } from 'react'
-import Txt from './Txt'
-import { SvgUpload } from '../assets/images'
+import { Alert, TouchableOpacity } from 'react-native'
 import { Asset, CameraOptions, ImageLibraryOptions, launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import { ContextData } from '../providers/ContextProvider'
 

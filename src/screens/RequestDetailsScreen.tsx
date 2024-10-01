@@ -1,8 +1,22 @@
-import { NavigationProp } from '@react-navigation/native';
 import React, { useContext, useEffect, useRef } from 'react';
-import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+    KeyboardAvoidingView,
+    Platform,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { CLOCK_IMG, HOUR_GLASS_IMG, PROFILE_PICTURE_IMG, REPAIR_IMG } from '../assets/images';
+
+import {
+    CLOCK_IMG,
+    HOUR_GLASS_IMG,
+    PROFILE_PICTURE_IMG,
+    REPAIR_IMG
+} from '../assets/images';
 import { Txt } from '../components';
 import CustomerInfo from '../components/CustomerInfo';
 import HeaderTabBar from '../components/HeaderTabBar';
@@ -12,11 +26,12 @@ import IssuePricesForm from '../components/IssuePricesForm';
 import RepairAction from '../components/RepairAction';
 import RepairDeviceDetails from '../components/RepairDeviceDetails';
 import RepairTypeCard from '../components/RepairType';
-import REPAIR_REQUEST from '../data/repair-request.json';
 import { ContextData } from '../providers/ContextProvider';
 import EditRepairDetailsForm from '../components/EditRepairDetailsForm';
 import TechnicianCommentBox from '../components/TechnicianCommentBox';
 import CommentForm from '../components/CommentForm';
+import REPAIR_REQUEST from '../data/repair-request.json';
+
 
 const repair_request = REPAIR_REQUEST.payload;
 

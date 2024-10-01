@@ -37,7 +37,7 @@ const IssueListDrawer = () => {
             <ScrollView className='h-full' showsVerticalScrollIndicator={false}>
                 <View className='flex-row flex-wrap'>
                     {ISSUESLIST.map((issue, index) => (
-                        <TouchableOpacity key={index} className='mt-1 w-1/3 items-center' onPress={() => handlePress(index)}>
+                        <TouchableOpacity key={`issueDrawer-${index}`} className='mt-1 w-1/3 items-center' onPress={() => handlePress(index)}>
                                 <View className={`relative w-[90px] rounded-[10px] h-[90px] mt-2 ${selectedIndex === index ? 'border border-black' : ''}`} style={{backgroundColor: shuffledColors[index % shuffledColors.length]}}>
                                     {selectedIndex === index ? 
                                         <View className='absolute -right-1 -top-1 rounded-full' style={{backgroundColor: shuffledColors[index % shuffledColors.length]}}>

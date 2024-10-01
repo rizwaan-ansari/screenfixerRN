@@ -4,16 +4,16 @@ import Txt from '../components/Txt';
 import COLOR from '../utils/ColorConstant';
 
 
-interface Option {
+export interface Option {
     label: string | null;
-    value: string | number;
+    slug: string | number;
 }
 
 interface HorizontalSelectProps {
     options: Option[];
     value?: string | number;
     multiple?: boolean;
-    onSelect?: (selectedItems: string | number | (string | number)[]) => void;
+    onSelect?: (selectedItems: any | any[]) => void;
     color?: string;
     contentContainerStyle?: FlatListProps<Option>['contentContainerStyle'];
   }
@@ -24,13 +24,13 @@ export default function HorizontalSelect(props: HorizontalSelectProps) {
     const isMultiple = true === props?.multiple;
     const onItemPress = (item: Option) => {
         if (true !== isMultiple) {
-            setSelectedItems([item?.value]);
+            setSelectedItems([item?.slug]);
         }
         if (true === isMultiple) {
-            if (!selectedItems.includes(item?.value)) {
-                setSelectedItems(items => [...items, item.value]);
+            if (!selectedItems.includes(item?.slug)) {
+                setSelectedItems(items => [...items, item.slug]);
             } else {
-                setSelectedItems(items => [...items].filter(filterItem => filterItem !== item?.value));
+                setSelectedItems(items => [...items].filter(filterItem => filterItem !== item?.slug));
             }
         }
     }
@@ -48,13 +48,13 @@ export default function HorizontalSelect(props: HorizontalSelectProps) {
                     key={`input_hs_${index}`}
                     onPress={() => onItemPress(item)}
                     style={[
-                        { backgroundColor: selectedItems.includes(item?.value) ? props.color || COLOR.GRAY_65 : COLOR.NEUTRAL_900 }
+                        { backgroundColor: selectedItems.includes(item?.slug) ? props.color || COLOR.GRAY_65 : COLOR.NEUTRAL_900 }
                     ]}
                 >
                     <Txt
                         numberOfLines={1}
-                        fontWeight={selectedItems.includes(item?.value) ? 700 : 400}
-                        fontColor={selectedItems.includes(item?.value) ? "brandLight" : "brandDark"}
+                        fontWeight={selectedItems.includes(item?.slug) ? 700 : 400}
+                        fontColor={selectedItems.includes(item?.slug) ? "brandLight" : "brandDark"}
                         style={styles.itemLabel}
                     >
                         {item?.label}

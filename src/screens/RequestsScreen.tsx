@@ -133,7 +133,7 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
                      <Txt fontWeight={700} fontSize={"xl"} fontColor={'textDefault'}>{item.deviceName}</Txt>
                      <View className='flex flex-row gap-x-1 mt-[2px]'>
                      {item.issues.map((issue, index) => (
-                        <View key={index} className={`rounded-[4px] ${issue.type === 'screen_replacement' ? 'bg-red-15' : 'bg-paleMint'}`}>
+                        <View key={`request-${index}`} className={`rounded-[4px] ${issue.type === 'screen_replacement' ? 'bg-red-15' : 'bg-paleMint'}`}>
                             <Txt className={`px-2 py-1`} fontWeight={400} fontSize={'sm'} fontColor={'neutral300'}>{issue.label}</Txt>
                         </View>
                      ))}

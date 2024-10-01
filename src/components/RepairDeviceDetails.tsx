@@ -1,12 +1,12 @@
-import React, { useContext, useRef } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { Request } from '../screens/RequestsScreen';
+import React, { useContext } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { SvgMobileShadow } from '../assets/images';
-import Txt from './Txt';
 import { ContextData } from '../providers/ContextProvider';
-import EditRepairDetailsForm from './EditRepairDetailsForm';
+import { Request } from '../screens/RequestsScreen';
+import Txt from './Txt';
+
 
 type RootStackParamList = {
     RequestsScreen: undefined;
@@ -23,7 +23,7 @@ const RepairDeviceDetails = () => {
     const route = useRoute<RepairDeviceDetailsRouteProp>();
     const { requestData } = route.params;
 
-    const issuesText = requestData.issues.map(issue => issue.label).join(', ');
+    const issuesText = requestData.issues.map((issue) => issue.label).join(', ');
 
     return (
         <View className='p-5 bg-white m-4 rounded-[10px]'>

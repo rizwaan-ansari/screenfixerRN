@@ -3,7 +3,6 @@ import { TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { REDMI_NOTE_6_PRO_IMG, SvgEdit } from '../assets/images'
 import { ContextData } from '../providers/ContextProvider'
-import CommentForm from './CommentForm'
 import Txt from './Txt'
 
 interface TechnicianCommentBoxProps {

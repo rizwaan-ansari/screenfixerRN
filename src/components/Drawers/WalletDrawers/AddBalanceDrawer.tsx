@@ -50,7 +50,7 @@ const AddBalanceDrawer = () => {
                 <View className='w-full py-2 flex flex-row flex-wrap'>
                     {BALANCE_OPTIONS.map((item) => {
                         return (
-                            <BalancePills key={item.id} item={item} />
+                            <BalancePills key={`balance-${item.id}`} item={item} />
                         );
                     })}
                 </View>

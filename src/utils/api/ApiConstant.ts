@@ -22,3 +22,4 @@ export const API_V1_DISCOUNT: string = API_V1_ENDPOINT + '/discount';
 export const API_V1_ADDRESS: string = API_V1_ENDPOINT + '/address';
 export const API_V1_ACCOUNT: string = API_V1_ENDPOINT + '/user/account';
 export const API_V1_REPAIR_REQUEST_INVOICE: string = API_V1_ENDPOINT + '/repair-request/invoice';
+export const API_V1_LEADS: string = API_V1_ENDPOINT + '/user/account';

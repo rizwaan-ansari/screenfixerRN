@@ -11,23 +11,17 @@ import { SvgAdd, SvgDelete } from '../assets/images';
 import { useDataContext } from '../hooks/useDataContext';
 import COLOR_PALLETE from '../utils/ColorConstant';
 import Button from './Button';
-import HorizontalSelect from './HorizontalSelect';
+import HorizontalSelect, { Option } from './HorizontalSelect';
 import Txt from './Txt';
 
-
-interface Quality {
-    id: number;
-    quality: string;
-}
-
-const QUALITY: Quality[] = [
+const QUALITY: Option[] = [
     {
-        id: 1,
-        quality: "Premium",
+        label: "Premium",
+        slug: "premium",
     },
     {
-        id: 2,
-        quality: "Original",
+        label: "Original",
+        slug: "original",
     },
 ]
 
@@ -36,8 +30,8 @@ const formSchema = z.object({
         price: z.string().min(1, "Price is required").regex(/^\d+(\.\d{1,2})?$/, "Invalid price format"),
         warranty: z.string().min(1, "Warranty is required").regex(/^\d+$/, "Warranty must be a number"),
         partUsed: z.string().min(1, "Part used is required"),
-        quantity: z.string().min(1, "Quantity is required").regex(/^\d+$/, "Quantity must be a number")
-
+        quantity: z.string().min(1, "Quantity is required").regex(/^\d+$/, "Quantity must be a number"),
+        quality: z.string().min(1, "Quality selection is required")
     }))
 })
 
@@ -49,14 +43,15 @@ const handleQualityPress = () => {
 }
 const IssuePricesForm = () => {
     const { contextData, setContextData } = useDataContext();
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, setValue, formState: { errors } } = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             issues: [{
                 price: '',
                 warranty: '',
                 partUsed: '',
-                quantity: ''
+                quantity: '',
+                quality: ''
             }]
         }
     });
@@ -71,7 +66,8 @@ const IssuePricesForm = () => {
             price: '',
             warranty: '',
             partUsed: '',
-            quantity: ''
+            quantity: '',
+            quality: ''
         })
     }
 
@@ -94,7 +90,7 @@ const IssuePricesForm = () => {
             <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"}>Issue and Prices</Txt>
             <View className='w-full border border-[#E2E2E2] mt-[15px]' />
             {fields.map((field, index) => (
-                <View key={index}>
+                <View key={`issueForm-${index}`}>
                     <TouchableOpacity onPress={handleIssuePress} className='pointer-events-auto'>
                         <TextInput
                             label={"Issue"}
@@ -115,9 +111,10 @@ const IssuePricesForm = () => {
                         <HorizontalSelect
                             contentContainerStyle={{ flexDirection: 'row' }}
                             multiple={false}
-                            options={QUALITY.map((item) => { return { label: item.quality, value: item.id } })}
-                        // onSelect={(items) => ()}
+                            options={QUALITY}
+                            onSelect={(item) => setValue(`issues.${index}.quality`, item)}
                         />
+                        {errors.issues?.[index]?.quality && <Txt className='pt-1 pl-1' fontColor={'textDanger'}>{errors.issues[index].quality.message}</Txt>}
                     </View>
                     <Controller
                         control={control}
@@ -140,7 +137,7 @@ const IssuePricesForm = () => {
                             />
                         )}
                     />
-                    {errors.issues?.[index]?.price && <Txt fontColor={"textDanger"}>{errors.issues[index].price.message}</Txt>}
+                    {errors.issues?.[index]?.price && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues[index].price.message}</Txt>}
                     <Controller
                         control={control}
                         name={`issues.${index}.warranty`}
@@ -162,7 +159,7 @@ const IssuePricesForm = () => {
                             />
                         )}
                     />
-                    {errors.issues?.[index]?.warranty && <Txt fontColor={"textDanger"}>{errors.issues?.[index]?.warranty.message}</Txt>}
+                    {errors.issues?.[index]?.warranty && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues?.[index]?.warranty.message}</Txt>}
                     <Controller
                         control={control}
                         name={`issues.${index}.partUsed`}
@@ -183,7 +180,7 @@ const IssuePricesForm = () => {
                             />
                         )}
                     />
-                    {errors.issues?.[index]?.partUsed && <Txt fontColor={"textDanger"}>{errors.issues?.[index]?.partUsed.message}</Txt>}
+                    {errors.issues?.[index]?.partUsed && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues?.[index]?.partUsed.message}</Txt>}
                     <View className='flex-row mt-[15px]'>
                         <View className={`${index > 0 ? 'w-4/5' : 'w-full'}`}>
                             <Controller
@@ -206,7 +203,7 @@ const IssuePricesForm = () => {
                                     />
                                 )}
                             />
-                            {errors.issues?.[index]?.quantity && <Txt fontColor={"textDanger"}>{errors.issues?.[index]?.quantity.message}</Txt>}
+                            {errors.issues?.[index]?.quantity && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues?.[index]?.quantity.message}</Txt>}
                         </View>
                         {index > 0 ?
                             <TouchableOpacity className={`mt-auto w-[50px] h-[50px] bg-neutral-550 justify-center items-center rounded-lg ml-[15px] border border-[#EBEBEB]`} onPress={() => deleteIssue(index)}>

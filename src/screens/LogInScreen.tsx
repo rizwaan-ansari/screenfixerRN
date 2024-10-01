@@ -68,7 +68,7 @@ const LogInScreen = ({ navigation }: Props) => {
                             )}
                         />
                         {errors.mobileNumber && <Txt className='pt-1' fontColor={"textDanger"}>{errors.mobileNumber?.message}</Txt>}
-                        <View className='mt-auto'>
+                        <View className='mt-auto pt-[15px]'>
                             <Button size={'xl'} weight={400} label={"Login"} onPress={handleSubmit(handlePress)} />
                         </View>
                     </View>
