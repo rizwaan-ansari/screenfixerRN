@@ -33,7 +33,7 @@ const RepairDeviceDetails = () => {
                     className='w-[52px] h-[67px] z-10'
                     resizeMode={FastImage.resizeMode.contain}
                 />
-                <View className='absolute top-[16%] left-[25%] w-[83px] h-[81px]'>
+                <View className='absolute top-[17%] left-[26%] w-[83px] h-[70px]'>
                     <SvgMobileShadow />
                 </View>
             </View>

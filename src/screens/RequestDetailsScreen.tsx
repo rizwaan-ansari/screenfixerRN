@@ -50,7 +50,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
             scrollToForm(technicianCommentBoxRef);
         }
     }, [contextData.editBeforeRepair]);
-    
+
     const DetailsHeader = () => {
         return (
             <View className='pb-4 flex-row items-center gap-[15px]'>
@@ -130,13 +130,13 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                     <View ref={technicianCommentBoxRef}>
                         {
                             contextData.editBeforeRepair ?
-                            <CommentForm title={'Edit Technician Comment Before'} />
-                            :
-                            <TechnicianCommentBox
-                                title={"Before Repair"}
-                                hasEditIcon={true}
-                                description={"The following was your device condition before repair"}
-                            />
+                                <CommentForm title={'Edit Technician Comment Before'} />
+                                :
+                                <TechnicianCommentBox
+                                    title={"Before Repair"}
+                                    hasEditIcon={true}
+                                    description={"The following was your device condition before repair"}
+                                />
                         }
                     </View>
                     <RepairAction />
