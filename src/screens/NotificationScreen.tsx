@@ -62,10 +62,12 @@ const NotificationScreen = ({ navigation }: { navigation: NavigationProp<any> })
     <SafeAreaView className='relative'>
       <View className='px-4 py-4 bg-white20'>
         <View className='flex-row items-center justify-center relative'>
-          <TouchableOpacity onPress={() => navigation.goBack()} className='w-[22px] h-[22px] absolute left-0 top-0 rounded-full border border-[#A5A5A5] flex justify-center items-center'>
-            <Txt>
-              <FeatherIcon name="chevron-left" className='w-[5px] h-2' color={"#A5A5A5"} />
-            </Txt>
+          <TouchableOpacity onPress={() => navigation.goBack()} className='w-[50px] h-[50px] absolute left-0 top-0'>
+            <View className='w-[25px] h-[25px] rounded-full border border-[#A5A5A5] flex justify-center items-center'>
+              <Txt>
+                <FeatherIcon name="chevron-left" className='w-[5px] h-2' color={"#A5A5A5"} />
+              </Txt>
+            </View>
           </TouchableOpacity>
           <Txt fontWeight={700} fontSize={"xl"} fontColor={"textDefault"}>Notifications</Txt>
         </View>

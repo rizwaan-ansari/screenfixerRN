@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationProp, useRoute } from '@react-navigation/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 import {
@@ -31,6 +31,8 @@ import EditRepairDetailsForm from '../components/EditRepairDetailsForm';
 import TechnicianCommentBox from '../components/TechnicianCommentBox';
 import CommentForm from '../components/CommentForm';
 import REPAIR_REQUEST from '../data/repair-request.json';
+import { useQuery } from '@tanstack/react-query';
+import { fetchSingleRepairRequest } from '../utils/api/ApiRequest';
 
 
 const repair_request = REPAIR_REQUEST.payload;
@@ -47,6 +49,18 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
     const editRepairDetailsFormRef = useRef<View>(null);
     const issuePriceFormRef = useRef<View>(null);
     const technicianCommentBoxRef = useRef<View>(null);
+    const route = useRoute();
+    const { requestData, uuid } = route.params as { requestData: any, uuid: string};
+
+    const { data, isLoading, isSuccess, isError } = useQuery({
+        queryKey: ['singleRepairRequestList'],
+        queryFn: () => fetchSingleRepairRequest(uuid),
+    })
+    
+    const item: any = data?.data.payload;
+    useEffect(() => {
+        setContextData({repairRequestItem: item })
+    }, [isSuccess, data])
 
     useEffect(() => {
         if (contextData.editIMEINumber) {

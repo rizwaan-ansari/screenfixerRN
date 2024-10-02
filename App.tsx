@@ -8,13 +8,15 @@ import { PaperProvider } from 'react-native-paper';
 import BottomTabBar, { TabParamList } from "./src/components/BottomTabBar";
 import './src/components/Drawers/sheets.tsx';
 import DataContextProvider from "./src/providers/ContextProvider.tsx";
-import DetailsScreen from "./src/screens/RequestDetailsScreen.tsx";
+import RequestDetailsScreen from "./src/screens/RequestDetailsScreen.tsx";
 import FindLeadsScreen from "./src/screens/FindLeadsScreen";
 import LogInScreen from "./src/screens/LogInScreen.tsx";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import RequestsScreen from "./src/screens/RequestsScreen";
 import WalletScreen from "./src/screens/WalletScreen";
 import NotificationScreen from "./src/screens/NotificationScreen.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from './src/providers/queryClient.tsx';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 const RequestStack = createNativeStackNavigator();
@@ -48,7 +50,7 @@ const RequestStackNavigator = () => {
     return (
         <RequestStack.Navigator screenOptions={{ headerShown: false }}>
             <RequestStack.Screen name="RequestScreen" component={RequestsScreen} />
-            <RequestStack.Screen name="DetailsScreen" component={DetailsScreen} />
+            <RequestStack.Screen name="RequestDetailsScreen" component={RequestDetailsScreen} />
         </RequestStack.Navigator>
     )
 }
@@ -78,15 +80,17 @@ const ProfileStackNavigator = () => {
 }
 function App(): React.JSX.Element {
     return (
-        <SheetProvider>
-            <PaperProvider>
-                <DataContextProvider>
-                    <NavigationContainer>
-                        <RootStactNavigator />
-                    </NavigationContainer>
-                </DataContextProvider>
-            </PaperProvider>
-        </SheetProvider>
+        <QueryClientProvider client={queryClient}>
+            <SheetProvider>
+                <PaperProvider>
+                    <DataContextProvider>
+                        <NavigationContainer>
+                            <RootStactNavigator />
+                        </NavigationContainer>
+                    </DataContextProvider>
+                </PaperProvider>
+            </SheetProvider>
+        </QueryClientProvider>
     );
 }
 

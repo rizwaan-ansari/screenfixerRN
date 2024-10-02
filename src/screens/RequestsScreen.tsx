@@ -6,6 +6,7 @@ import { Txt } from '../components';
 import Button from '../components/Button';
 import HeaderTabBar from '../components/HeaderTabBar';
 import { NavigationProp } from '@react-navigation/native';
+import { fetchRepairRequests } from '../utils/api/ApiRequest'
 
 import { 
     GALAXY_ZFOLD_IMG, 
@@ -13,6 +14,7 @@ import {
     REDMI_NOTE_6_PRO_IMG, 
     SvgCall 
 } from '../assets/images';
+import { useQuery } from '@tanstack/react-query';
 
 const DATA = [
     {
@@ -118,6 +120,19 @@ const handlePress = () => {
     
 }
 const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
+
+    const { data, isLoading, isError, error, isSuccess } = useQuery({
+        queryKey: ['repairRequestList'],
+        queryFn: fetchRepairRequests,
+      });
+      let repairRequestList:any;
+    //   if (isSuccess) {
+    //     repairRequestList = data;
+    //     console.log("************************************************");
+    //     console.log("Repair Request List:");
+    //     console.log(JSON.stringify(repairRequestList.data.payload, null, 4));
+    //     console.log("************************************************");
+    //   }
     const renderItem = (({item}: { item: Request}) => {
         return (
             <TouchableOpacity className="px-4 py-4 flex-row bg-white rounded-lg">
@@ -146,7 +161,7 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
                      <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>ID: {item.requestId}</Txt>
                      <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>Repair value: ₹{item.repairValue}</Txt>
                      <View className='flex-row pt-4'>
-                        <Button onPress={() => navigation.navigate("DetailsScreen", { requestData: item })} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
+                        <Button onPress={() => navigation.navigate("RequestDetailsScreen", { requestData: item, uuid: "c72ddcb6-ffe6-4f7a-a432-0a575d9577c3"})} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
                         <TouchableOpacity className='pl-[10px]'>
                             <SvgCall />
                         </TouchableOpacity>

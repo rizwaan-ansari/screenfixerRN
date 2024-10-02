@@ -6,30 +6,69 @@ import { SvgMobileShadow } from '../assets/images';
 import { ContextData } from '../providers/ContextProvider';
 import { Request } from '../screens/RequestsScreen';
 import Txt from './Txt';
+import { fetchSingleRepairRequest } from '../utils/api/ApiRequest';
+import { useQuery } from '@tanstack/react-query';
+import COLOR_PALETTE from '../utils/ColorConstant';
 
 
 type RootStackParamList = {
     RequestsScreen: undefined;
     DetailsScreen: {
         requestData: Request;
+        uuid: string;
     };
 };
 
 type RepairDeviceDetailsRouteProp = RouteProp<RootStackParamList, 'DetailsScreen'>;
 
+type status = "in-progress" | "technician-assigned" | "completed" | any;
+
+const STATUS_MAPPER: Record<status, { label: string, color: string }> = {
+    'in-progress': {
+        label: "Work-in-progress",
+        color: COLOR_PALETTE.TEXT_GREEN
+    },
+    'technician-assigned': {
+        label: "Technician Assigned",
+        color: COLOR_PALETTE.DARK_SLATE
+    },
+    'completed': {
+        label: "Completed",
+        color: COLOR_PALETTE.BRAND
+    }
+}
+const uuid2: string = "e0cc7a84-00c3-4b59-900e-de069d6e96b2";
+
 const RepairDeviceDetails = () => {
 
     const { contextData, setContextData } = useContext(ContextData);
     const route = useRoute<RepairDeviceDetailsRouteProp>();
-    const { requestData } = route.params;
+    const { requestData, uuid } = route.params;
+    const { data, isLoading, isError, error, isSuccess } = useQuery({
+        queryKey: ['singleRepairRequestList'],
+        queryFn: () => fetchSingleRepairRequest(uuid2),
+    });
+    //   const item:any = data?.data.payload;
+    const item: any = contextData.repairRequestItem;
+    console.log("***********************")
+    console.log(JSON.stringify(item, null, 4));
+    console.log("***********************")
 
-    const issuesText = requestData.issues.map((issue) => issue.label).join(', ');
-
+    const issuesText = item?.issues?.map((issue: any) => issue.default.description).join(', ');
+    if (isLoading) {
+        return (
+            <View>
+                <Txt>...Loading</Txt>
+            </View>
+        )
+    }
     return (
         <View className='p-5 bg-white m-4 rounded-[10px]'>
             <View className='relative mx-auto overflow-hidden w-[100px] rounded-[30px] h-[100px] bg-offWhite flex justify-center items-center'>
                 <FastImage
-                    source={requestData.image}
+                    source={{
+                        uri: `${item.device.picture.files_base_url}${item.device.picture.files.file}`
+                    }}
                     className='w-[52px] h-[67px] z-10'
                     resizeMode={FastImage.resizeMode.contain}
                 />
@@ -37,13 +76,13 @@ const RepairDeviceDetails = () => {
                     <SvgMobileShadow />
                 </View>
             </View>
-            <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"} className='mx-auto mt-[15px]'>{requestData.deviceName}</Txt>
-            <Txt fontSize={"base"} fontWeight={500} fontColor={"textGreen"} className='mx-auto mt-2'>{requestData.status}</Txt>
+            <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"} className='mx-auto mt-[15px]'>{item.device.name}</Txt>
+            <Txt fontSize={"base"} fontWeight={500} fontColor={"textGreen"} className='mx-auto mt-2'>{STATUS_MAPPER[item.status].label}</Txt>
             <View className='mt-6'>
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
                     Booking Id
                 </Txt>
-                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{requestData.requestId}</Txt>
+                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{item.id}</Txt>
             </View>
             <View className='mt-[15px]'>
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
@@ -55,19 +94,19 @@ const RepairDeviceDetails = () => {
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
                     Device Type
                 </Txt>
-                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{requestData.deviceType}</Txt>
+                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{item.device_type.name}</Txt>
             </View>
             <View className='mt-[15px]'>
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
                     Brand
                 </Txt>
-                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>---</Txt>
+                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{item.brand.name}</Txt>
             </View>
             <View className='mt-[15px]'>
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
                     Device
                 </Txt>
-                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{requestData.deviceName}</Txt>
+                <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{item.device.name}</Txt>
             </View>
             <View className='mt-[15px]'>
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>

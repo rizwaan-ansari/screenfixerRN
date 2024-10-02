@@ -1,5 +1,5 @@
 import * as API from './ApiConstant';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios'
 
 export const JSON_TO_URL_PARAMS = (obj: any) => {
     var str = '';
@@ -12,26 +12,30 @@ export const JSON_TO_URL_PARAMS = (obj: any) => {
     return str.length > 0 ? '?'+str : '';
 }
 
+const config = {
+    headers: { Authorization: `Bearer ${API.TECH_1_AUTH_TOKEN}` }
+};
+
 // const axios = _axios.create();
 
 export function fetchDevices(props: any) {
-    return axios.get(API.API_V1_DEVICE+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_DEVICE+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchIssues(props: any) {
-    return axios.get(API.API_V1_ISSUE+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_ISSUE+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchBrands(props: any) {
-    return axios.get(API.API_V1_BRAND+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_BRAND+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchDeviceTypes(props: any) {
-    return axios.get(API.API_V1_DEVICE_TYPE+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_DEVICE_TYPE+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchCities(props: any) {
-    return axios.get(API.API_V1_CITY+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_CITY+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function sendBookingRequest(FORM_DATA: any) {
@@ -51,23 +55,23 @@ export function sendContactMessage(FORM_DATA: any) {
 }
 
 export function fetchBannerSlides(props: any) {
-    return axios.get(API.API_V1_BANNER_SLIDE+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_BANNER_SLIDE+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchDeviceSeries(props: any) {
-    return axios.get(API.API_V1_DEVICE_SERIES+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_DEVICE_SERIES+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchRepairRequests(props: any) {
-    return axios.get(API.API_V1_REPAIR_REQUEST+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_REPAIR_REQUEST+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchAdditionalCharges(props: any) {
-    return axios.get(API.API_V1_ADDITIONAL_CHARGE+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_ADDITIONAL_CHARGE+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchSingleRepairRequest(uuid: string) {
-    return axios.get(API.API_V1_REPAIR_REQUEST_UUID+'/'+uuid);
+    return axios.get(API.API_V1_REPAIR_REQUEST_UUID+'/'+uuid, config);
 }
 
 export function updateRepairRequests(FORM_DATA: any) {
@@ -75,11 +79,11 @@ export function updateRepairRequests(FORM_DATA: any) {
 }
 
 export function fetchDiscounts(props: any) {
-    return axios.get(API.API_V1_DISCOUNT+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_DISCOUNT+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function fetchAddress(props: any) {
-    return axios.get(API.API_V1_ADDRESS+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_ADDRESS+JSON_TO_URL_PARAMS(props), config);
 }
 
 export function updateAddress(FORM_DATA: any) {
@@ -92,7 +96,7 @@ export function deleteAddress(uuid: string) {
     return axios.delete(API.API_V1_ADDRESS, {data: { uuid }});
 }
 export function fetchAccount(props: any) {
-    return axios.get(API.API_V1_ACCOUNT+JSON_TO_URL_PARAMS(props));
+    return axios.get(API.API_V1_ACCOUNT+JSON_TO_URL_PARAMS(props), config);
 }
 export function updateAccount(FORM_DATA: any) {
     return axios.put(API.API_V1_ACCOUNT, FORM_DATA);
