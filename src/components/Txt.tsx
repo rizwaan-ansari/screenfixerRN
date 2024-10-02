@@ -5,7 +5,7 @@ import COLOR from '../utils/ColorConstant'
 
 
 type fontSize =  "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl"
-type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textDark" | "textSuccess" | "gray65" | "offWhite" | "textDanger" | "textGreen" | "success16" | "white" | "white60" | "white700" | "neutral300" | "neutral400" | "neutral500" | "neutral700" | "neutral800" | "black" | "black40" | "black60" | "darkSlate"
+type fontColor =  "brand" | "brandDark" | "brandLight" | "textDefault" | "textDefault60" | "textDark" | "textSuccess" | "gray65" | "offWhite" | "textDanger" | "textGreen" | "success16" | "white" | "white60" | "white700" | "neutral300" | "neutral400" | "neutral500" | "neutral700" | "neutral800" | "black" | "black40" | "black60" | "darkSlate"
 type fontWeight =  300 | 400 | 500 | 700;
 type textAlign = "left" | "center" | "right";
 
@@ -55,6 +55,7 @@ const FONT_COLOR_MAPPER: Record<fontColor, string> = {
     'brandDark': COLOR.BRAND_DARK,
     'brandLight': COLOR.TEXT_BRAND_LIGHT,
     'textDefault': COLOR.TEXT_DEFAULT,
+    'textDefault60': COLOR.TEXT_DEFAULT60,
     'textDark': COLOR.TEXT_DARK,
     'textSuccess': COLOR.TEXT_SUCCESS,
     'textDanger': COLOR.TEXT_DANGER,

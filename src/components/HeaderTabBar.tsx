@@ -8,7 +8,6 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 type RootStackParamList = {
   Home: undefined;
   NotificationScreen: undefined;
-  // Add other screens here
 };
 
 const HeaderTabBar = () => {

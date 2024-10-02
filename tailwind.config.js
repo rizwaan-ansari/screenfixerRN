@@ -3,6 +3,9 @@ module.exports = {
   content: ["./App.{js,jsx,ts,tsx}","./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      backgroundImage: { 
+        'notificationGradient': 'linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 73%, rgba(255, 255, 255, 0) 100%)',
+      },
       colors: {
         brand: "#002E86",
         brandLight: {
@@ -25,6 +28,7 @@ module.exports = {
         offWhite: "#EEEEEE",
         candyPink: "#FE7AA1",
         white20: "#F5F5F5",
+        white60: "#F6F6F6",
         paleMint: "#D5E7E8",
         gray65: "#A5A5A5",
       }
