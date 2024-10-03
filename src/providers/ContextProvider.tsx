@@ -6,6 +6,8 @@ interface ContextData {
   editIMEINumber?: boolean;
   addImages?: string[] | null;
   editBeforeRepair?: boolean;
+  isLoading?: boolean;
+  isError?: boolean;
 }
 
 const ContextDataDefaultValues = {
@@ -14,6 +16,8 @@ const ContextDataDefaultValues = {
   editIMEINumber: false,
   addImages: [],
   editBeforeRepair: false,
+  isLoading: false,
+  isError: false,
 }
 
 export interface ContextValue {

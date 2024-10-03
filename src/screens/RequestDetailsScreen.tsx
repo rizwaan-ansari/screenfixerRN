@@ -53,14 +53,23 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
     const { requestData, uuid } = route.params as { requestData: any, uuid: string};
 
     const { data, isLoading, isSuccess, isError } = useQuery({
-        queryKey: ['singleRepairRequestList'],
+        queryKey: ['singleRepairRequestList', uuid],
         queryFn: () => fetchSingleRepairRequest(uuid),
+        enabled: !!uuid,
     })
+
+    if (isError) {
+        console.log("error")
+    }
     
     const item: any = data?.data.payload;
     useEffect(() => {
-        setContextData({repairRequestItem: item })
-    }, [isSuccess, data])
+        setContextData({
+            repairRequestItem: item ,
+            isLoading,
+            isError,
+        })
+    }, [isSuccess, data, isLoading, isError])
 
     useEffect(() => {
         if (contextData.editIMEINumber) {

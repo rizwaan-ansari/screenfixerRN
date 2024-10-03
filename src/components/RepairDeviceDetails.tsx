@@ -44,24 +44,27 @@ const RepairDeviceDetails = () => {
     const { contextData, setContextData } = useContext(ContextData);
     const route = useRoute<RepairDeviceDetailsRouteProp>();
     const { requestData, uuid } = route.params;
-    const { data, isLoading, isError, error, isSuccess } = useQuery({
-        queryKey: ['singleRepairRequestList'],
-        queryFn: () => fetchSingleRepairRequest(uuid2),
-    });
+    // const { data, isLoading, isError, error, isSuccess } = useQuery({
+    //     queryKey: ['singleRepairRequestList'],
+    //     queryFn: () => fetchSingleRepairRequest(uuid2),
+    // });
     //   const item:any = data?.data.payload;
     const item: any = contextData.repairRequestItem;
+    if (contextData.isLoading) {
+        console.log("Loading");
+    }
     console.log("***********************")
     console.log(JSON.stringify(item, null, 4));
     console.log("***********************")
 
     const issuesText = item?.issues?.map((issue: any) => issue.default.description).join(', ');
-    if (isLoading) {
-        return (
-            <View>
-                <Txt>...Loading</Txt>
-            </View>
-        )
-    }
+    // if (isLoading) {
+    //     return (
+    //         <View>
+    //             <Txt>...Loading</Txt>
+    //         </View>
+    //     )
+    // }
     return (
         <View className='p-5 bg-white m-4 rounded-[10px]'>
             <View className='relative mx-auto overflow-hidden w-[100px] rounded-[30px] h-[100px] bg-offWhite flex justify-center items-center'>

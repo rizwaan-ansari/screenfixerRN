@@ -24,26 +24,26 @@ const IssuePrices = ({ onPressUpdate }: IssuePricesProps) => {
             <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"}>Issue and Prices</Txt>
             <View className='w-full border border-[#E2E2E2] mt-[15px]' />
             <View className='-mt-[5px]'>
-                {ISSUES.map((issue, issueIndex) => (
+                {item?.issues.map((issue: any, issueIndex: number) => (
                     <View key={`issuePrice-${issueIndex}`} className='flex-row items-center gap-x-[15px] mt-5'>
                         <View className='w-[38px] h-[38px]'>
                             <FastImage
-                                source={BATTERY_IMG}
+                                source={{uri: `${issue.default.icon}`}}
                                 className='w-full h-full'
                             />
                         </View>
                         <View className='flex-row justify-between flex-1'>
                             <View>
                                 <Txt fontWeight={700} fontSize={"base"} fontColor={"darkSlate"}>{issue.default.description}</Txt>
-                                {issue?.default.prices.map((price, priceIndex) => (
+                                {issue?.default.prices.map((price: any, priceIndex: number) => (
                                     <View key={`quality-${priceIndex}`} className='flex-row pt-[5px] flex-wrap'>
                                         <Txt fontSize={"sm"} fontColor={"neutral300"}>{price.quality}, </Txt>
                                         <Txt fontSize={"sm"} fontColor={"neutral300"}>{price.warranty_in_months.toLocaleString()} months warranty</Txt>
                                     </View>
                                 ))}
                             </View>
-                            {issue?.default.prices.map((price, priceIndex) => (
-                                <Txt key={`price-${priceIndex}-${issueIndex}`} fontSize={"base"}>₹{price.price}</Txt>
+                            {issue?.default.prices.map((price: any, priceIndex: number) => (
+                                <Txt key={`price-${priceIndex}-${issueIndex}`} fontWeight={400} fontColor={"black"} fontSize={"base"}>₹{price.price}</Txt>
                             ))}
                         </View>
                     </View>
