@@ -72,7 +72,7 @@ const RepairAction = () => {
                 )}
             />
             {errors.comment && <Txt className='pt-1 pl-1' fontColor={'textDanger'}>{errors.comment.message}</Txt>}
-            <Button label={"Update"} marginTop={15} onPress={handleSubmit(onSubmit)} />
+            <Button borderRadius={8} label={"Update"} marginTop={15} onPress={handleSubmit(onSubmit)} />
         </View>
     );
 };

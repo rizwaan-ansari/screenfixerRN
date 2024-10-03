@@ -51,7 +51,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
     const route = useRoute();
     const { uuid } = route.params as { uuid: string };
 
-    const { data, isLoading, isError, error } = useQuery({
+    const { data, isLoading, isError, error, refetch } = useQuery({
         queryKey: ['singleRepairRequestList', uuid],
         queryFn: () => fetchSingleRepairRequest(uuid),
         enabled: !!uuid,
@@ -149,7 +149,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                     </View>
                     <View ref={editRepairDetailsFormRef}>
                         {contextData.editIMEINumber ?
-                            <EditRepairDetailsForm />
+                            <EditRepairDetailsForm refetch={refetch} />
                             :
                             <RepairDeviceDetails />
                         }
@@ -173,6 +173,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                                 :
                                 <TechnicianCommentBox
                                     title={"Before Repair"}
+                                    type={"before_repair_comment"}
                                     hasEditIcon={true}
                                     description={"The following was your device condition before repair"}
                                 />

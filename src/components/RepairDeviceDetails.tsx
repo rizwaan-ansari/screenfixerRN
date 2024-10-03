@@ -108,10 +108,14 @@ const RepairDeviceDetails = () => {
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
                     IMEI number
                 </Txt>
-                {/* <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>---</Txt> */}
-                <TouchableOpacity className='mt-2' onPress={() => { setContextData({ editIMEINumber: true }) }}>
+                {item?.imei_number === null ? 
+                <TouchableOpacity className='mt-2' onPress={() =>  setContextData(prevState => ({...prevState, editIMEINumber: true }))}>
                     <Txt fontSize={"base"} fontWeight-={500} fontColor={"textDanger"}>Add+</Txt>
                 </TouchableOpacity>
+                :
+                    <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{item?.imei_number}</Txt> 
+            }
+                {/* <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>---</Txt> */}
             </View>
         </View>
     );

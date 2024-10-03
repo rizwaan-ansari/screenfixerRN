@@ -11,6 +11,7 @@ module.exports = {
         brandLight: {
           "100": "#63C7EC",
           "200": "#009ADF",
+          "300": "#61CCF2",
         },
         neutral: {
           "400": "#888888",

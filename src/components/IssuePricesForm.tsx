@@ -224,8 +224,8 @@ const IssuePricesForm = () => {
                     )}
                 </View>
             ))}
-            <Button label={"Cancel"} marginTop={20} onPress={onPressCancel} variant={"info"} />
-            <Button label={"Save"} marginTop={15} onPress={handleSubmit(onSubmit)} />
+            <Button borderRadius={8} label={"Cancel"} marginTop={20} onPress={onPressCancel} variant={"info"} />
+            <Button borderRadius={8} label={"Save"} marginTop={15} onPress={handleSubmit(onSubmit)} />
         </View>
     )
 }
