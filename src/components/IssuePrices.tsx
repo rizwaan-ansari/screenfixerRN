@@ -10,6 +10,8 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchSingleRepairRequest } from '../utils/api/ApiRequest';
 import { useRoute } from '@react-navigation/native';
 import { ContextData } from '../providers/ContextProvider';
+import { SvgUri } from 'react-native-svg';
+
 
 interface IssuePricesProps {
     onPressUpdate: () => void;
@@ -33,10 +35,11 @@ const IssuePrices = ({ onPressUpdate }: IssuePricesProps) => {
                 {item?.issues.map((issue: any, issueIndex: number) => (
                     <View key={`issuePrice-${issueIndex}`} className='flex-row items-center gap-x-[15px] mt-5'>
                         <View className='w-[38px] h-[38px]'>
-                            <FastImage
-                                source={{uri: `${issue.default.icon}`}}
-                                className='w-full h-full'
-                            />
+                        <SvgUri
+                            width="100%"
+                            height="100%"
+                            uri={issue.default.icon}
+                        />
                         </View>
                         <View className='flex-row justify-between flex-1'>
                             <View>

@@ -77,7 +77,7 @@ const EditRepairDetailsForm = ({ refetch }: EditRepairDetailsProps) => {
             />
             {errors.imei_number && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.imei_number.message}</Txt>}
             <View className='w-full border border-[#E2E2E2] mt-[15px]' />
-            <Button marginTop={15} label={"Cancel"} variant={"info"} onPress={() => setContextData(prevState => ({ ...prevState, editIMEINumber: false }))} />
+            <Button marginTop={15} label={"Cancel"} variant={"info"} onPress={() => setContextData({  editIMEINumber: false })}/>
             <Button marginTop={15} label={"Update"} onPress={handleSubmit(onSubmit)} />
         </View>
     );

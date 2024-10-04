@@ -27,7 +27,7 @@ const RootStack = createNativeStackNavigator();
 
 function NavigationTabs(): React.JSX.Element {
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props:any) => <BottomTabBar {...props} />}>
+        <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={(props: any) => <BottomTabBar {...props} />}>
             <Tab.Screen initialParams={{ iconName: 'calender' }} name="Requests" component={RequestStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'search' }} name="Find Leads" component={LeadsStackNavigator} />
             <Tab.Screen initialParams={{ iconName: 'wallet' }} name="Wallet" component={WalletStackNavigator} />
@@ -81,15 +81,15 @@ const ProfileStackNavigator = () => {
 function App(): React.JSX.Element {
     return (
         <QueryClientProvider client={queryClient}>
-            <SheetProvider>
-                <PaperProvider>
-                    <DataContextProvider>
+            <DataContextProvider>
+                <SheetProvider>
+                    <PaperProvider>
                         <NavigationContainer>
                             <RootStactNavigator />
                         </NavigationContainer>
-                    </DataContextProvider>
-                </PaperProvider>
-            </SheetProvider>
+                    </PaperProvider>
+                </SheetProvider>
+            </DataContextProvider>
         </QueryClientProvider>
     );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
@@ -28,31 +28,53 @@ const QUALITY: Option[] = [
 const formSchema = z.object({
     issues: z.array(z.object({
         price: z.string().min(1, "Price is required").regex(/^\d+(\.\d{1,2})?$/, "Invalid price format"),
-        warranty: z.string().min(1, "Warranty is required").regex(/^\d+$/, "Warranty must be a number"),
-        partUsed: z.string().min(1, "Part used is required"),
+        warranty_in_months: z.string().min(1, "Warranty is required").regex(/^\d+$/, "Warranty must be a number"),
+        part_name: z.string().min(1, "Part used is required"),
+        issue_uuid: z.object({
+            id: z.string(),
+            label: z.string(),
+        }).optional().nullable().refine((issue) => { return !!issue; }, {
+            message: 'Please select the issue'
+        }),
         quantity: z.string().min(1, "Quantity is required").regex(/^\d+$/, "Quantity must be a number"),
-        quality: z.string().min(1, "Quality selection is required")
+        quality: z.string().min(1, "Quality selection is required"),
+        other_issue: z.string().optional().nullable()
     }))
 })
 
-const handleIssuePress = async () => {
-    await SheetManager.show("issue-list-drawer")
-}
+type FormData = z.infer<typeof formSchema>
+
 const handleQualityPress = () => {
     console.log("Hello")
 }
 const IssuePricesForm = () => {
     const { contextData, setContextData } = useDataContext();
-    const { control, handleSubmit, setValue, formState: { errors } } = useForm({
+    const item: any = contextData.repairRequestItem;
+    const { control, handleSubmit, setValue, getValues, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            issues: [{
-                price: '',
-                warranty: '',
-                partUsed: '',
-                quantity: '',
-                quality: ''
-            }]
+            issues: (item?.issues || []).length > 0 
+                ? (item?.issues || []).map((issueItem: any) => ({
+                    issue_uuid: {
+                        id: issueItem?.uuid || '',
+                        label: issueItem?.description || '',
+                    },
+                    quality: issueItem.issue?.quality || '',
+                    price: issueItem?.issue?.price ? String(issueItem?.issue?.price) : issueItem?.default?.price || '',
+                    warranty_in_months: issueItem?.issue?.warranty_in_months ? String(issueItem?.issue?.warranty_in_months) : '',
+                    part_name: issueItem?.issue?.part_name || '',
+                    quantity: issueItem?.issue?.quantity ? String(issueItem?.issue?.quantity) : '',
+                    other_issue: issueItem?.other_issue || null
+                }))
+                : [{
+                    issue_uuid: { id: '', label: '' },
+                    quality: '',
+                    price: '',
+                    warranty_in_months: '',
+                    part_name: '',
+                    quantity: '',
+                    other_issue: ''
+                }]
         }
     });
 
@@ -61,23 +83,43 @@ const IssuePricesForm = () => {
         name: "issues",
     })
 
+
     const addNewIssue = () => {
         append({
+            issue_uuid: { id: '', label: '' },
             price: '',
-            warranty: '',
-            partUsed: '',
+            warranty_in_months: '',
+            part_name: '',
             quantity: '',
-            quality: ''
+            quality: '',
+            other_issue: ''
         })
     }
-
+    const handleIssuePress = async (index: number) => {
+        const result = await SheetManager.show("issue-list-drawer", {
+            payload: { currentIssue: getValues(`issues.${index}.issue_uuid.id`) }
+        });
+        if (result && typeof result === 'object' && 'id' in result && 'label' in result) {
+            setValue(`issues.${index}.issue_uuid`, result);
+        }
+    };
     const deleteIssue = (index: number) => {
         if (fields.length > 1) {
             remove(index);
         }
     }
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: FormData) => {
+
+        try {
+            const FORM_DATA = {
+                uuid: item?.uuid,
+                quality: data.issues.map(issue => issue.quality),
+
+            }
+        } catch (error) {
+            
+        }
         console.log(data)
         setContextData({ editIssueDetails: false })
     }
@@ -91,10 +133,11 @@ const IssuePricesForm = () => {
             <View className='w-full border border-[#E2E2E2] mt-[15px]' />
             {fields.map((field, index) => (
                 <View key={`issueForm-${index}`}>
-                    <TouchableOpacity onPress={handleIssuePress} className='pointer-events-auto'>
+                    <TouchableOpacity onPress={() => handleIssuePress(index)} className='pointer-events-auto'>
                         <TextInput
                             label={"Issue"}
                             mode={"outlined"}
+                            value={field.issue_uuid.label || field.issue_uuid.id || "Select an issue"}
                             right={<TextInput.Icon icon={() => <AntDesign name="caretdown" size={10} color={COLOR_PALETTE.GRAY_65} />} />}
                             editable={false}
                             outlineColor={COLOR_PALETTE.OFF_WHITE_200}
@@ -114,7 +157,7 @@ const IssuePricesForm = () => {
                             options={QUALITY}
                             onSelect={(selectedItem) => setValue(`issues.${index}.quality`, String(selectedItem))}
                         />
-                        {errors.issues?.[index]?.quality && <Txt className='pt-1 pl-1' fontColor={'textDanger'}>{errors.issues[index].quality.message}</Txt>}
+                        {errors.issues?.[index]?.quality && <Txt className='pt-1 pl-1' fontColor={'textDanger'}>{errors.issues?.[index]?.quality?.message}</Txt>}
                     </View>
                     <Controller
                         control={control}
@@ -140,7 +183,7 @@ const IssuePricesForm = () => {
                     {errors.issues?.[index]?.price && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues[index].price.message}</Txt>}
                     <Controller
                         control={control}
-                        name={`issues.${index}.warranty`}
+                        name={`issues.${index}.warranty_in_months`}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <TextInput
                                 value={value}
@@ -155,14 +198,14 @@ const IssuePricesForm = () => {
                                 theme={{
                                     roundness: 8,
                                 }}
-                                error={!!errors.issues?.[index]?.warranty}
+                                error={!!errors.issues?.[index]?.warranty_in_months}
                             />
                         )}
                     />
-                    {errors.issues?.[index]?.warranty && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues?.[index]?.warranty.message}</Txt>}
+                    {errors.issues?.[index]?.warranty_in_months && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues?.[index]?.warranty_in_months.message}</Txt>}
                     <Controller
                         control={control}
-                        name={`issues.${index}.partUsed`}
+                        name={`issues.${index}.part_name`}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <TextInput
                                 value={value}
@@ -176,11 +219,11 @@ const IssuePricesForm = () => {
                                 theme={{
                                     roundness: 8,
                                 }}
-                                error={!!errors.issues?.[index]?.partUsed}
+                                error={!!errors.issues?.[index]?.part_name}
                             />
                         )}
                     />
-                    {errors.issues?.[index]?.partUsed && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues?.[index]?.partUsed.message}</Txt>}
+                    {errors.issues?.[index]?.part_name && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.issues?.[index]?.part_name.message}</Txt>}
                     <View className='flex-row mt-[15px]'>
                         <View className={`${index > 0 ? 'w-4/5' : 'w-full'}`}>
                             <Controller

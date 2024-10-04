@@ -8,6 +8,7 @@ import { Request } from '../screens/RequestsScreen';
 import COLOR_PALETTE from '../utils/ColorConstant';
 import Txt from './Txt';
 import moment from "moment";
+import { Alert } from 'react-native';
 
 
 type RootStackParamList = {
@@ -48,7 +49,7 @@ const RepairDeviceDetails = () => {
     }
     console.log("***********************")
     console.log(JSON.stringify(item, null, 4));
-    console.log("***********************")
+    console.log("**********************repairRequest")
 
     const formattedDate = moment(item?.technician_assigned_at).format('ddd, DD MMM YYYY, hh:mm A')
     const issuesText = item?.issues?.map((issue: any) => issue.default.description).join(', ');
@@ -105,16 +106,18 @@ const RepairDeviceDetails = () => {
                 <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{issuesText}</Txt>
             </View>
             <View className='mt-[15px]'>
-                <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
-                    IMEI number
-                </Txt>
+                <TouchableOpacity onPress={() => setContextData({ editIMEINumber: true })}>
+                    <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
+                        IMEI number
+                    </Txt>
+                </TouchableOpacity>
                 {item?.imei_number === null ? 
-                <TouchableOpacity className='mt-2' onPress={() =>  setContextData(prevState => ({...prevState, editIMEINumber: true }))}>
+                <TouchableOpacity className='mt-2' onPress={() =>  setContextData({editIMEINumber: true })}>
                     <Txt fontSize={"base"} fontWeight-={500} fontColor={"textDanger"}>Add+</Txt>
                 </TouchableOpacity>
                 :
                     <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>{item?.imei_number}</Txt> 
-            }
+                }
                 {/* <Txt className='mt-2' fontSize={"base"} fontWeight={500} fontColor={"textDefault"}>---</Txt> */}
             </View>
         </View>
