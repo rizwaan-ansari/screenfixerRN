@@ -156,7 +156,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                     </View>
                     <View ref={issuePriceFormRef}>
                         {contextData.editIssueDetails ?
-                            <IssuePricesForm />
+                            <IssuePricesForm refetch={refetch} />
                             :
                             <IssuePrices onPressUpdate={() => setContextData({ editIssueDetails: true })} />
                         }

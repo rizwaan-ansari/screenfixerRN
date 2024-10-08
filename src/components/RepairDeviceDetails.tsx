@@ -47,9 +47,9 @@ const RepairDeviceDetails = () => {
          console.log("Loading");
          return null;
     }
-    console.log("***********************")
-    console.log(JSON.stringify(item, null, 4));
-    console.log("**********************repairRequest")
+    // console.log("***********************")
+    // console.log(JSON.stringify(item, null, 4));
+    // console.log("**********************repairRequest")
 
     const formattedDate = moment(item?.technician_assigned_at).format('ddd, DD MMM YYYY, hh:mm A')
     const issuesText = item?.issues?.map((issue: any) => issue.default.description).join(', ');

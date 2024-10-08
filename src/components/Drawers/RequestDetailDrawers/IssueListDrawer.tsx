@@ -76,10 +76,14 @@ const IssueListDrawer = () => {
     }
 
     const handleAddPress = async () => {
+        const formattedIssue = {
+            id: selectedIssue.uuid,
+            label: selectedIssue.description
+        }
         await SheetManager.hide("issue-list-drawer", {
-            payload: selectedIssue.uuid
+            payload: formattedIssue
         })
-        // console.log("Hello",selectedIssue.uuid)
+        console.log("Hello",JSON.stringify(formattedIssue, null, 4))
     }
 
     useEffect(() => {

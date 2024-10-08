@@ -1,16 +1,10 @@
-import { View, Text } from 'react-native'
-import React, { useContext } from 'react'
-import Txt from './Txt'
-import FastImage from 'react-native-fast-image'
+import React, { useContext } from 'react';
+import { View } from 'react-native';
+import Txt from './Txt';
 
-import ISSUES from '../data/issues.json';
-import { BATTERY_IMG } from '../assets/images';
-import Button from './Button';
-import { useQuery } from '@tanstack/react-query';
-import { fetchSingleRepairRequest } from '../utils/api/ApiRequest';
-import { useRoute } from '@react-navigation/native';
-import { ContextData } from '../providers/ContextProvider';
 import { SvgUri } from 'react-native-svg';
+import { ContextData } from '../providers/ContextProvider';
+import Button from './Button';
 
 
 interface IssuePricesProps {
@@ -46,13 +40,15 @@ const IssuePrices = ({ onPressUpdate }: IssuePricesProps) => {
                                 <Txt fontWeight={700} fontSize={"base"} fontColor={"darkSlate"}>{issue.default.description}</Txt>
                                 {issue?.default.prices.map((price: any, priceIndex: number) => (
                                     <View key={`quality-${priceIndex}`} className='flex-row pt-[5px] flex-wrap'>
-                                        <Txt fontSize={"sm"} fontColor={"neutral300"}>{`${price.quality.charAt(0).toUpperCase() + price.quality.slice(1)},`} </Txt>
-                                        <Txt fontSize={"sm"} fontColor={"neutral300"}>{price.warranty_in_months.toLocaleString()} months warranty</Txt>
+                                        <Txt fontSize={"sm"} fontColor={"neutral300"}>{issue?.issue?.quality ? `${issue?.issue?.quality.charAt(0).toUpperCase() + issue?.issue?.quality.slice(1)}` 
+                                        : `${price.quality.charAt(0).toUpperCase() + price?.quality?.slice(1)}`} </Txt>
+                                        <Txt fontSize={"sm"} fontColor={"neutral300"}>{issue.issue.warranty_in_months ? issue?.issue?.warranty_in_months.toLocaleString() : price?.warranty_in_months.toLocaleString()} months warranty</Txt>
                                     </View>
                                 ))}
+                                    <Txt fontSize={"sm"} fontColor={"neutral300"}>{issue?.issue?.part_name} x {issue?.issue?.quantity}</Txt>
                             </View>
                             {issue?.default.prices.map((price: any, priceIndex: number) => (
-                                <Txt key={`price-${priceIndex}-${issueIndex}`} fontWeight={400} fontColor={"black"} fontSize={"base"}>{`₹${formatter.format(price.price)}`}</Txt>
+                                <Txt key={`price-${priceIndex}-${issueIndex}`} fontWeight={400} fontColor={"black"} fontSize={"base"}>{issue?.issue?.price ? `₹${formatter.format(issue?.issue?.price)}` : `₹${formatter.format(price?.price)}`}</Txt>
                             ))}
                         </View>
                     </View>

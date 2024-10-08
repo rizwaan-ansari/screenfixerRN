@@ -13,6 +13,7 @@ import COLOR_PALETTE from '../utils/ColorConstant';
 import Button from './Button';
 import HorizontalSelect, { Option } from './HorizontalSelect';
 import Txt from './Txt';
+import { updateRepairRequests } from '../utils/api/ApiRequest';
 
 const QUALITY: Option[] = [
     {
@@ -25,39 +26,40 @@ const QUALITY: Option[] = [
     },
 ]
 
+interface IssuePricesFormProps {
+    refetch: any;
+}
+
 const formSchema = z.object({
     issues: z.array(z.object({
-        price: z.string().min(1, "Price is required").regex(/^\d+(\.\d{1,2})?$/, "Invalid price format"),
-        warranty_in_months: z.string().min(1, "Warranty is required").regex(/^\d+$/, "Warranty must be a number"),
-        part_name: z.string().min(1, "Part used is required"),
         issue_uuid: z.object({
             id: z.string(),
             label: z.string(),
         }).optional().nullable().refine((issue) => { return !!issue; }, {
             message: 'Please select the issue'
         }),
-        quantity: z.string().min(1, "Quantity is required").regex(/^\d+$/, "Quantity must be a number"),
         quality: z.string().min(1, "Quality selection is required"),
+        price: z.string().min(1, "Price is required").regex(/^\d+(\.\d{1,2})?$/, "Invalid price format"),
+        warranty_in_months: z.string().min(1, "Warranty is required").regex(/^\d+$/, "Warranty must be a number"),
+        part_name: z.string().min(1, "Part used is required"),
+        quantity: z.string().min(1, "Quantity is required").regex(/^\d+$/, "Quantity must be a number"),
         other_issue: z.string().optional().nullable()
     }))
 })
 
 type FormData = z.infer<typeof formSchema>
-
-const handleQualityPress = () => {
-    console.log("Hello")
-}
-const IssuePricesForm = () => {
+const IssuePricesForm = ({ refetch }: IssuePricesFormProps) => {
     const { contextData, setContextData } = useDataContext();
     const item: any = contextData.repairRequestItem;
+    console.log(JSON.stringify(item, null, 4), "data")
     const { control, handleSubmit, setValue, getValues, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             issues: (item?.issues || []).length > 0 
                 ? (item?.issues || []).map((issueItem: any) => ({
                     issue_uuid: {
-                        id: issueItem?.uuid || '',
-                        label: issueItem?.description || '',
+                        id: issueItem?.default?.uuid || '',
+                        label: issueItem?.default?.description || '',
                     },
                     quality: issueItem.issue?.quality || '',
                     price: issueItem?.issue?.price ? String(issueItem?.issue?.price) : issueItem?.default?.price || '',
@@ -77,12 +79,12 @@ const IssuePricesForm = () => {
                 }]
         }
     });
-
+    
     const { fields, append, remove } = useFieldArray({
         control,
         name: "issues",
     })
-
+    
 
     const addNewIssue = () => {
         append({
@@ -101,6 +103,8 @@ const IssuePricesForm = () => {
         });
         if (result && typeof result === 'object' && 'id' in result && 'label' in result) {
             setValue(`issues.${index}.issue_uuid`, result);
+
+            await handleSubmit(() => {})();
         }
     };
     const deleteIssue = (index: number) => {
@@ -113,15 +117,25 @@ const IssuePricesForm = () => {
 
         try {
             const FORM_DATA = {
-                uuid: item?.uuid,
-                quality: data.issues.map(issue => issue.quality),
-
+                uuid: contextData.repairRequestItem.uuid,
+                issues: data.issues.map((issue) => ({
+                    issue_uuid: issue.issue_uuid?.id,
+                    quality: issue.quality,
+                    price: issue.price ? String(issue?.price) : item?.default?.price,
+                    warranty_in_months: issue.warranty_in_months,
+                    part_name: issue.part_name,
+                    quantity: issue.quantity
+                }))
             }
+            updateRepairRequests(FORM_DATA).then(() => {
+                setContextData({
+                    editIssueDetails: false
+                })
+                refetch();
+            })
         } catch (error) {
-            
+            console.log(error)
         }
-        console.log(data)
-        setContextData({ editIssueDetails: false })
     }
     const onPressCancel = () => {
         setContextData({ editIssueDetails: false })
@@ -137,7 +151,7 @@ const IssuePricesForm = () => {
                         <TextInput
                             label={"Issue"}
                             mode={"outlined"}
-                            value={field.issue_uuid.label || field.issue_uuid.id || "Select an issue"}
+                            value={getValues(`issues.${index}.issue_uuid.label`) || "Select an issue"}
                             right={<TextInput.Icon icon={() => <AntDesign name="caretdown" size={10} color={COLOR_PALETTE.GRAY_65} />} />}
                             editable={false}
                             outlineColor={COLOR_PALETTE.OFF_WHITE_200}
@@ -155,6 +169,7 @@ const IssuePricesForm = () => {
                             contentContainerStyle={{ flexDirection: 'row' }}
                             multiple={false}
                             options={QUALITY}
+                            value={getValues(`issues.${index}.quality`)}
                             onSelect={(selectedItem) => setValue(`issues.${index}.quality`, String(selectedItem))}
                         />
                         {errors.issues?.[index]?.quality && <Txt className='pt-1 pl-1' fontColor={'textDanger'}>{errors.issues?.[index]?.quality?.message}</Txt>}
