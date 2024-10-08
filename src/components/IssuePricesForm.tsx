@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
@@ -35,20 +35,22 @@ const formSchema = z.object({
         issue_uuid: z.object({
             id: z.string(),
             label: z.string(),
-        }).optional().nullable().refine((issue) => { return !!issue; }, {
-            message: 'Please select the issue'
-        }),
-        quality: z.string().min(1, "Quality selection is required"),
-        price: z.string().min(1, "Price is required").regex(/^\d+(\.\d{1,2})?$/, "Invalid price format"),
-        warranty_in_months: z.string().min(1, "Warranty is required").regex(/^\d+$/, "Warranty must be a number"),
-        part_name: z.string().min(1, "Part used is required"),
-        quantity: z.string().min(1, "Quantity is required").regex(/^\d+$/, "Quantity must be a number"),
+        }).optional().nullable(),
+        quality: z.string().optional(),
+        price: z.string({
+            required_error: "Please enter the price",
+            invalid_type_error: "Please enter the price",
+        }).regex(/^\d+(\.\d{1,2})?$/, { message: 'Price must be in a valid money format (e.g. 10.99)' }).optional(),
+        warranty_in_months: z.string().optional(),
+        part_name: z.string().optional(),
+        quantity: z.string().optional(),
         other_issue: z.string().optional().nullable()
     }))
-})
+});
 
 type FormData = z.infer<typeof formSchema>
 const IssuePricesForm = ({ refetch }: IssuePricesFormProps) => {
+    const [, forceUpdate] = useState({});
     const { contextData, setContextData } = useDataContext();
     const item: any = contextData.repairRequestItem;
     console.log(JSON.stringify(item, null, 4), "data")
@@ -102,9 +104,9 @@ const IssuePricesForm = ({ refetch }: IssuePricesFormProps) => {
             payload: { currentIssue: getValues(`issues.${index}.issue_uuid.id`) }
         });
         if (result && typeof result === 'object' && 'id' in result && 'label' in result) {
-            setValue(`issues.${index}.issue_uuid`, result);
+            setValue(`issues.${index}.issue_uuid`, result, {shouldValidate: false});
 
-            await handleSubmit(() => {})();
+            forceUpdate({});
         }
     };
     const deleteIssue = (index: number) => {
@@ -118,6 +120,7 @@ const IssuePricesForm = ({ refetch }: IssuePricesFormProps) => {
         try {
             const FORM_DATA = {
                 uuid: contextData.repairRequestItem.uuid,
+                update_prices: true,
                 issues: data.issues.map((issue) => ({
                     issue_uuid: issue.issue_uuid?.id,
                     quality: issue.quality,

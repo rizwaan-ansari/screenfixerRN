@@ -8,6 +8,7 @@ import HorizontalSelect, { Option } from './HorizontalSelect';
 import Txt from './Txt';
 import Button from './Button';
 import COLOR_PALETTE from '../utils/ColorConstant';
+import MediaUploader from './MediaUploader';
 
 const REPAIR_STATUS: Option[] = [
     { label: "Work-in-progress", slug: "work-in-progress" },
@@ -54,6 +55,10 @@ const RepairAction = () => {
                 }}
             />
             {errors.repairStatus && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.repairStatus.message}</Txt>}
+            <MediaUploader>
+                <View className='h-[200] mt-[15px] w-full bg-neutral-550 rounded-[10px]' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+                </View>
+            </MediaUploader>
             <Controller
                 control={control}
                 name={'comment'}
