@@ -154,7 +154,7 @@ const renderItem = ({ item }: { item: Lead }) => {
                 <Txt fontWeight={700} fontColor={'textSuccess'} fontSize={'xl'}>
                     ₹{item.leadPrice}
                 </Txt>
-                <Button paddingHorizontal={ms(40, 0.25)} paddingVertical={ms(10, 0.25)} weight={700} className="px-[40px] py-[10px]" size="base" label={"PURCHASE"} onPress={() => handlePress(item)} />
+                <Button borderRadius={4} paddingHorizontal={ms(40, 0.25)} paddingVertical={ms(10, 0.25)} weight={700} className="px-[40px] py-[10px]" size="base" label={"PURCHASE"} onPress={() => handlePress(item)} />
             </View>
         </TouchableOpacity>
     )

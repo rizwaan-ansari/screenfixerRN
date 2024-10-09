@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Linking, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
 
 import { Txt } from '../components';
@@ -85,6 +85,17 @@ const DATA = [
     }
 ];
 
+const makeCall = (url: any) => {
+    Linking.canOpenURL(url)
+        .then(((supported) => {
+            if (supported) {
+                Linking.openURL(url)
+            } else {
+                Alert.alert("Calling is not supported on this device")
+            }
+        }))
+}
+
 interface Issues {
     type: string,
     label: string
@@ -121,6 +132,8 @@ const handlePress = () => {
 }
 const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
 
+    const phoneNumber = "+918967458695"
+    const url = `tel:${phoneNumber}`
     const { data, isLoading, isError, error, isSuccess } = useQuery({
         queryKey: ['repairRequestList'],
         queryFn: fetchRepairRequests,
@@ -161,8 +174,8 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
                      <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>ID: {item.requestId}</Txt>
                      <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>Repair value: ₹{item.repairValue}</Txt>
                      <View className='flex-row pt-4'>
-                        <Button onPress={() => navigation.navigate("RequestDetailsScreen", { requestData: item, uuid: "c72ddcb6-ffe6-4f7a-a432-0a575d9577c3"})} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
-                        <TouchableOpacity className='pl-[10px]'>
+                        <Button borderRadius={4} onPress={() => navigation.navigate("RequestDetailsScreen", { requestData: item, uuid: "c72ddcb6-ffe6-4f7a-a432-0a575d9577c3"})} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
+                        <TouchableOpacity className='pl-[10px]' onPress={() => makeCall(url)}>
                             <SvgCall />
                         </TouchableOpacity>
                      </View>
