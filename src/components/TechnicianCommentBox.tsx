@@ -5,6 +5,8 @@ import { SvgEdit } from '../assets/images';
 import { ContextData } from '../providers/ContextProvider';
 import Txt from './Txt';
 import Lightbox from 'react-native-lightbox-v2';
+import Video from "react-native-video"
+import { z } from "zod";
 
 interface TechnicianCommentBoxProps {
     title: string;
@@ -13,17 +15,50 @@ interface TechnicianCommentBoxProps {
     hasEditIcon?: boolean;
 }
 
+const RepairActionSchema = z.object({
+    status: z.object({
+        id: z.string(),
+        labeel: z.string()
+    }).optional().nullable().refine((status) => { return !!status; }, {
+        message: 'Please select the status'
+    }),
+    files: z.array(
+        z.object({
+            type: z.string(),
+            mime_type: z.string(),
+            url: z.string(),
+            files: z.any()
+        })
+    ).min(1, { message: 'Please upload at least one image/video' })
+})
+
 const TechnicianCommentBox = ({ title, type, description, hasEditIcon }: TechnicianCommentBoxProps) => {
     const { contextData, setContextData } = useContext(ContextData);
     const item: any = contextData.repairRequestItem;
 
-    const renderImage = (imageUrl: string) => (
-        <View className='w-16 h-16 bg-black-10'>
-            <FastImage
-                source={{ uri: imageUrl }}
-                className='w-full h-full object-cover'
-            />
-        </View>
+    const isVideo = (url: string) => {
+        const videoExtensions = ['.mp4', '.mov', '.avi', '.wmv', '.flv', '.mkv'];
+        return videoExtensions.some(ext => url.toLowerCase().includes(ext));
+    };
+    const renderMedia = (imageUrl: string) => (
+        isVideo(imageUrl) ? (
+            <View className='w-full h-full'>
+                <Video
+                    source={{ uri: imageUrl }}
+                    resizeMode="contain"
+                    controls={true}
+                    repeat={true}
+                    className="w-full h-full object-contain"
+                />
+            </View>
+        ) : (
+            <View className='w-20 h-20'>
+                <FastImage
+                    source={{ uri: imageUrl }}
+                    className="w-full h-full object-contain"
+                />
+            </View>
+        )
     );
 
     return (
@@ -57,7 +92,7 @@ const TechnicianCommentBox = ({ title, type, description, hasEditIcon }: Technic
                                 {/*@ts-expect-error*/}
                                 <Lightbox
                                     style={{ width: 64, height: 64 }}
-                                    renderContent={() => renderImage(imageUrl)}
+                                    renderContent={() => renderMedia(imageUrl)}
                                 >
                                     <FastImage
                                         source={{ uri: imageUrl }}
@@ -80,7 +115,7 @@ const TechnicianCommentBox = ({ title, type, description, hasEditIcon }: Technic
                                 {/*@ts-expect-error*/}
                                 <Lightbox
                                     style={{ width: 64, height: 64 }}
-                                    renderContent={() => renderImage(imageUrl)}
+                                    renderContent={() => renderMedia(imageUrl)}
                                 >
                                     <FastImage
                                         source={{ uri: imageUrl }}

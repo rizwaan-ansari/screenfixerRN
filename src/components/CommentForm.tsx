@@ -1,17 +1,16 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useContext } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { TextInput } from 'react-native-paper';
+import { z } from 'zod';
 import { SvgCamera, SvgCross } from '../assets/images';
 import { ContextData } from '../providers/ContextProvider';
 import COLOR_PALETTE from '../utils/ColorConstant';
 import Button from './Button';
 import MediaUploader from './MediaUploader';
 import Txt from './Txt';
-import { z } from 'zod';
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Lightbox from 'react-native-lightbox-v2';
 
 interface CommentFormProps {
     type?: string;
