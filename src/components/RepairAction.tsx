@@ -1,5 +1,5 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useContext } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,6 +9,16 @@ import Txt from './Txt';
 import Button from './Button';
 import COLOR_PALETTE from '../utils/ColorConstant';
 import MediaUploader from './MediaUploader';
+import { SvgAdd, SvgCross, SvgUpload } from '../assets/images';
+import { ContextData } from '../providers/ContextProvider';
+import FastImage from 'react-native-fast-image';
+import { QueryObserverResult } from '@tanstack/react-query';
+
+
+type RefetchFunction = () => Promise<QueryObserverResult<any, unknown>>;
+interface RepairActionFormProps {
+    refetch: RefetchFunction;
+}
 
 const REPAIR_STATUS: Option[] = [
     { label: "Work-in-progress", slug: "work-in-progress" },
@@ -23,7 +33,8 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const RepairAction = () => {
+const RepairAction = ({ refetch }: RepairActionFormProps) => {
+    const { contextData, setContextData } = useContext(ContextData); 
     const { control, handleSubmit, setValue, clearErrors, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -36,6 +47,12 @@ const RepairAction = () => {
         console.log(data);
     };
 
+    const removeImage = (index: number) => {
+        const updatedImages = (contextData.addImages || []).filter((_, i) => i != index)
+        setContextData({
+            addImages: updatedImages
+        })
+    }
     return (
         <View className='p-5 bg-white mx-4 rounded-[10px] justify-center mt-5'>
             <Txt fontWeight={700} fontSize={'xl'}>Repair Action</Txt>
@@ -56,9 +73,25 @@ const RepairAction = () => {
             />
             {errors.repairStatus && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.repairStatus.message}</Txt>}
             <MediaUploader>
-                <View className='h-[200] mt-[15px] w-full bg-neutral-550 rounded-[10px]' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+                <View className='h-[200] mt-[15px] w-full bg-neutral-550 rounded-[10px] justify-center items-center' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+                    <SvgUpload />
+                    <Txt fontSize={"sm"} className='mt-[10px]'>Upload Image or Video</Txt>
                 </View>
             </MediaUploader>
+            <View className='mt-[15px] flex-row flex-wrap gap-x-2'>
+                {contextData?.addImages?.map((uri, index) => (
+                    <View key={`imageIndex-${index}`}>
+                        <FastImage 
+                            source={{uri: uri}}
+                            className='w-16 h-16 rounded-md'
+                            resizeMode={"cover"}
+                        />
+                        <TouchableOpacity className='absolute -top-2 -right-2' onPress={() => removeImage(index)}>
+                            <SvgCross />
+                        </TouchableOpacity>
+                    </View>
+                ))}
+            </View>
             <Controller
                 control={control}
                 name={'comment'}

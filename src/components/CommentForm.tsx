@@ -88,8 +88,8 @@ const CommentForm = ({ type, title }: CommentFormProps) => {
         {errors.comment && <Txt className='pt-1 pl-1' fontColor={'textDanger'}>{errors.comment.message}</Txt>}
         <View className='border border-[#E2E2E2] mt-[15px]' />
         <View className='flex-row mt-[15px]'>
-            <Button label={"Cancel"} flex={1} width={1/2} variant={'info'} onPress={() => setContextData({editBeforeRepair: false})} />
-            <Button label={"Update"} marginLeft={15} flex={1} width={1/2} onPress={handleSubmit(onSubmit)} />
+            <Button borderRadius={8} label={"Cancel"} flex={1} width={1/2} variant={'info'} onPress={() => setContextData({editBeforeRepair: false})} />
+            <Button borderRadius={8} label={"Update"} marginLeft={15} flex={1} width={1/2} onPress={handleSubmit(onSubmit)} />
         </View>
     </View>
   )

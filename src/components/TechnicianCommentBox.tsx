@@ -27,10 +27,13 @@ const TechnicianCommentBox = ({ title, type, description, hasEditIcon }: Technic
                 }
             </View>
             <Txt className='pt-[10px]' fontSize={"base"} fontColor={'black60'}>{description}</Txt>
-            <View className='w-full flex-row flex-wrap'>
+            {item?.before_repair_comment?.comment && (
+                <Txt fontSize={"sm"} fontColor={"neutral300"} className='pt-[10px]'>{item?.before_repair_comment.comment}</Txt>
+            )}
+            <View className='w-full flex-row flex-wrap gap-x-2'>
             {type === "before_repair_comment" ?
                 item?.before_repair_comment.files.map((image: any, imgIndex: number) => (
-                    <View key={`beforeImage--${imgIndex}`} className='h-16 w-16 mt-[15px] relative'>
+                    <View key={`beforeImage--${imgIndex}`} className='h-16 w-16 mt-[15px] relative bg-[#E2E2E2] rounded-md'>
                         <FastImage
                             source={{
                                 uri: `${item?.before_repair_comment.files_base_url}${image.files.file}`

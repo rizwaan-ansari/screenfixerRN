@@ -179,7 +179,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                                 />
                         }
                     </View>
-                    <RepairAction />
+                    <RepairAction refetch={refetch} />
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
