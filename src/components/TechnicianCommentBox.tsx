@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
-import { TouchableOpacity, View } from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { SvgEdit } from '../assets/images'
-import { ContextData } from '../providers/ContextProvider'
-import Txt from './Txt'
+import React, { useContext } from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import { SvgEdit } from '../assets/images';
+import { ContextData } from '../providers/ContextProvider';
+import Txt from './Txt';
+import Lightbox from 'react-native-lightbox-v2';
 
 interface TechnicianCommentBoxProps {
     title: string;
@@ -14,48 +15,90 @@ interface TechnicianCommentBoxProps {
 
 const TechnicianCommentBox = ({ title, type, description, hasEditIcon }: TechnicianCommentBoxProps) => {
     const { contextData, setContextData } = useContext(ContextData);
-    const item: any = contextData.repairRequestItem
+    const item: any = contextData.repairRequestItem;
+
+    const renderImage = (imageUrl: string) => (
+        <View className='w-16 h-16 bg-black-10'>
+            <FastImage
+                source={{ uri: imageUrl }}
+                className='w-full h-full object-cover'
+            />
+        </View>
+    );
+
     return (
         <View className='p-5 bg-white mx-4 rounded-[10px] justify-center mt-5'>
             <View className='flex-row justify-between'>
                 <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"}>{title}</Txt>
-                {
-                    hasEditIcon &&
-                    <TouchableOpacity className='w-5 h-5' onPress={() => setContextData({ editBeforeRepair: true })}>
+                {hasEditIcon && (
+                    <TouchableOpacity
+                        className='w-5 h-5'
+                        onPress={() => setContextData({ editBeforeRepair: true })}
+                    >
                         <SvgEdit />
                     </TouchableOpacity>
-                }
+                )}
             </View>
+
             <Txt className='pt-[10px]' fontSize={"base"} fontColor={'black60'}>{description}</Txt>
+
             {item?.before_repair_comment?.comment && (
-                <Txt fontSize={"sm"} fontColor={"neutral300"} className='pt-[10px]'>{item?.before_repair_comment.comment}</Txt>
+                <Txt fontSize={"sm"} fontColor={"neutral300"} className='pt-[10px]'>
+                    {item?.before_repair_comment.comment}
+                </Txt>
             )}
+
             <View className='w-full flex-row flex-wrap gap-x-2'>
-            {type === "before_repair_comment" ?
-                item?.before_repair_comment.files.map((image: any, imgIndex: number) => (
-                    <View key={`beforeImage--${imgIndex}`} className='h-16 w-16 mt-[15px] relative bg-[#E2E2E2] rounded-md'>
-                        <FastImage
-                            source={{
-                                uri: `${item?.before_repair_comment.files_base_url}${image.files.file}`
-                            }}
-                            className='w-full h-full rounded-md'
-                        />
-                    </View>
-                )) :
-                item?.after_repair_comment.files.map((image: any, imgIndex: number) => (
-                    <View key={`afterImage--${imgIndex}`} className='h-16 w-16 mt-[15px] relative'>
-                        <FastImage
-                            source={{
-                                uri: `${item?.after_repair_comment.files_base_url}${image.files.file}`
-                            }}
-                            className='w-full h-full rounded-md'
-                        />
-                    </View>
-                ))
-            }
+                {type === "before_repair_comment" ? (
+                    item?.before_repair_comment.files.map((image: any, imgIndex: number) => {
+                        const imageUrl = `${item?.before_repair_comment.files_base_url}${image.files.file}`;
+                        return (
+                            <View key={`beforeImage--${imgIndex}`} className='h-16 w-16 mt-[15px] relative bg-[#E2E2E2] rounded-md'>
+                                {/*@ts-expect-error*/}
+                                <Lightbox
+                                    style={{ width: 64, height: 64 }}
+                                    renderContent={() => renderImage(imageUrl)}
+                                >
+                                    <FastImage
+                                        source={{ uri: imageUrl }}
+                                        style={{
+                                            width: 64,
+                                            height: 64,
+                                            borderRadius: 6
+                                        }}
+                                        resizeMode={FastImage.resizeMode.contain}
+                                    />
+                                </Lightbox>
+                            </View>
+                        );
+                    })
+                ) : (
+                    item?.after_repair_comment.files.map((image: any, imgIndex: number) => {
+                        const imageUrl = `${item?.after_repair_comment.files_base_url}${image.files.file}`;
+                        return (
+                            <View key={`afterImage--${imgIndex}`} className='h-16 w-16 mt-[15px] relative bg-[#E2E2E2] rounded-md'>
+                                {/*@ts-expect-error*/}
+                                <Lightbox
+                                    style={{ width: 64, height: 64 }}
+                                    renderContent={() => renderImage(imageUrl)}
+                                >
+                                    <FastImage
+                                        source={{ uri: imageUrl }}
+                                        style={{
+                                            width: 64,
+                                            height: 64,
+                                            borderRadius: 6
+                                        }}
+                                        resizeMode={FastImage.resizeMode.cover}
+                                    />
+                                </Lightbox>
+                            </View>
+                        );
+                    })
+                )}
             </View>
         </View>
-    )
-}
+    );
+};
 
-export default TechnicianCommentBox
+export default TechnicianCommentBox;

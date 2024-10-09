@@ -11,6 +11,7 @@ import Txt from './Txt';
 import { z } from 'zod';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Lightbox from 'react-native-lightbox-v2';
 
 interface CommentFormProps {
     type?: string;
@@ -52,16 +53,16 @@ const CommentForm = ({ type, title }: CommentFormProps) => {
                         <SvgCamera />
                     </View>
                 </MediaUploader>
-                    {item?.before_repair_comment.files?.map((uri, index) => (
-                        <View key={`existingImage-${index}`} className='bg-[#E2E2E2] rounded-md mx-2 my-2'>
-                            <FastImage
-                                source={{ uri: `${item?.before_repair_comment?.files_base_url}${uri?.files?.file}` }}
-                                className='w-[60px] h-[60px] object-contain rounded-lg relative'
-                            />
-                            <TouchableOpacity className='absolute -top-2 -right-2' onPress={() => removeImage(index)}>
-                                <SvgCross />
-                            </TouchableOpacity>
-                        </View>
+                    {item?.before_repair_comment.files?.map((uri: any, index: any) => (
+                            <View key={`existingImage-${index}`} className='bg-[#E2E2E2] rounded-md mx-2 my-2'>
+                                    <FastImage
+                                        source={{ uri: `${item?.before_repair_comment?.files_base_url}${uri?.files?.file}` }}
+                                        className='w-[60px] h-[60px] object-contain rounded-lg relative'
+                                    />
+                                <TouchableOpacity className='absolute -top-2 -right-2' onPress={() => removeImage(index)}>
+                                    <SvgCross />
+                                </TouchableOpacity>
+                            </View>
                     ))}
                     {contextData.addImages?.map((uri, index) => (
                         <View key={`commentform-${index}`} className='bg-[#E2E2E2] rounded-md my-2'>
