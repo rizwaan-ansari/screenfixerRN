@@ -119,17 +119,20 @@ const CommentForm = ({ type, title, refetch }: CommentFormProps) => {
                         </MediaUploader>
                     )}
                 />
-                    {item?.before_repair_comment.files?.map((uri: any, index: any) => (
-                            <View key={`existingImage-${index}`} className='bg-[#E2E2E2] rounded-md mx-2 my-2'>
-                                    <FastImage
-                                        source={{ uri: `${item?.before_repair_comment?.files_base_url}${uri?.files?.file}` }}
-                                        className='w-[60px] h-[60px] object-contain rounded-lg relative'
-                                    />
-                                <TouchableOpacity className='absolute -top-2 -right-2' onPress={() => removeImage(index)}>
-                                    <SvgCross />
-                                </TouchableOpacity>
-                            </View>
-                    ))}
+                    {files.map((file:any, index:number) => (
+                    <View key={`file-${index}`} style={{ margin: 8 }}>
+                        <FastImage
+                            source={{ uri: file.url }}
+                            style={{ width: 60, height: 60, borderRadius: 10 }}
+                        />
+                        <TouchableOpacity 
+                            style={{ position: 'absolute', top: -10, right: -10 }} 
+                            onPress={() => removeImage(index)}
+                        >
+                            <SvgCross />
+                        </TouchableOpacity>
+                    </View>
+                ))}
                     {contextData.addImages?.map((uri, index) => (
                         <View key={`commentform-${index}`} className='bg-[#E2E2E2] rounded-md my-2'>
                             <FastImage
