@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react'
-import { Alert, TouchableOpacity } from 'react-native'
-import { Asset, CameraOptions, ImageLibraryOptions, launchCamera, launchImageLibrary } from 'react-native-image-picker'
-import { ContextData } from '../providers/ContextProvider'
+import React, { useState } from 'react';
+import { Alert, TouchableOpacity } from 'react-native';
+import { Asset, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 interface MediaItem {
     type: 'image' | 'video';
@@ -18,8 +17,7 @@ interface MediaUploaderProps {
     children?: React.ReactNode;
 }
 
-const MediaUploader: React.FC<MediaUploaderProps> = ({  onSelected, children }) => {
-    const { contextData, setContextData } = useContext(ContextData);
+const MediaUploader: React.FC<MediaUploaderProps> = ({ onSelected, children }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const showImagePickerOption = () => {
@@ -60,7 +58,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({  onSelected, children }) 
     };
     return (
         <TouchableOpacity onPress={showImagePickerOption}>
-            {children}
+                {children}
         </TouchableOpacity>
     )
 }

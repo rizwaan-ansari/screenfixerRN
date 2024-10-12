@@ -48,7 +48,7 @@ const TechnicianCommentBox = ({ title, type, description, hasEditIcon }: Technic
                     resizeMode="contain"
                     controls={true}
                     repeat={true}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                 />
             </View>
         ) : (
@@ -101,7 +101,7 @@ const TechnicianCommentBox = ({ title, type, description, hasEditIcon }: Technic
                                             height: 64,
                                             borderRadius: 6
                                         }}
-                                        resizeMode={FastImage.resizeMode.contain}
+                                        resizeMode={FastImage.resizeMode.cover}
                                     />
                                 </Lightbox>
                             </View>

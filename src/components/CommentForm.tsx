@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -12,7 +12,7 @@ import Button from './Button';
 import MediaUploader from './MediaUploader';
 import Txt from './Txt';
 import { fileUpload, updateRepairRequests } from '../utils/api/ApiRequest';
-
+import { Circle } from 'react-native-animated-spinkit';
 
 interface CommentFormProps {
     type?: 'before' | 'after';
@@ -29,12 +29,14 @@ const formSchema = z.object({
         thumbnail: z.string().optional(),
         files: z.any()
     }))
-})
-
+});
 
 const CommentForm = ({ type, title, refetch }: CommentFormProps) => {
     const { contextData, setContextData } = useContext(ContextData);
     const item: any = contextData?.repairRequestItem;
+
+    const [isUploading, setIsUploading] = useState(false);  // State to track upload
+
     const { control, handleSubmit, formState: { errors }, setValue, watch } = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -51,75 +53,82 @@ const CommentForm = ({ type, title, refetch }: CommentFormProps) => {
 
     const files = watch('files');
 
-    const onSubmit = (data: any) => {
+    const onSubmit = async (data: any) => {
         try {
             const FORM_DATA = {
                 uuid: item?.uuid,
                 [`${type}_repair_comment`]: {
                     comment: data.comment,
-                    files: data.files.map((file: any) => ({
-                        files: file.files,
-                        type: file.type,
-                        mime_type: file.mime_type
+                    files: (Array.isArray(data?.files) ? data?.files : []).map((item: any) => ({
+                        files: item?.files,
+                        type: item?.type,
+                        mime_type: item?.mime_type
                     }))
                 }
             };
-            
-            updateRepairRequests(FORM_DATA).then(() => {
-                setContextData({
-                    editBeforeRepair: false
-                });
-                refetch && refetch();
+            await updateRepairRequests(FORM_DATA);
+            setContextData({
+                editBeforeRepair: false
             });
+            refetch && refetch();
         } catch (error) {
             console.log("Error updating Comment", error);
         }
     };
 
-    
     const removeImage = (index: number) => {
-        setValue('files', files.filter((_:any, i:any) => i !== index));
+        setValue('files', files.filter((_: any, i: any) => i !== index));
     };
+
     return (
         <View className='p-5 bg-white mx-4 rounded-[10px] justify-center mt-5'>
             <Txt fontWeight={700} fontSize={'xl'}>{title}</Txt>
             <View className='border border-[#E2E2E2] mt-[15px]' />
             <View className='mt-[15px] flex-1 flex-row items-center flex-wrap -mx-2'>
-                <Controller 
-                    name="files"
-                    control={control}
-                    render={({ field: { onChange, value } }) => (
-                        <MediaUploader
-                            onSelected={({file, fileType, displayLoader}) => {
-                                displayLoader(true);
-                                fileUpload({
-                                    file,
-                                    onUploadSuccess({ payload }) {
-                                        displayLoader(false);
-                                        const newValue = {
-                                            type: fileType,
-                                            mime_type: payload?.mime_type || (fileType === 'video' ? 'video/mp4' : 'image/jpeg'),
-                                            url: `${payload?.files_base_url}${payload?.files?.file}`,
-                                            thumbnail: `${payload?.files_base_url}${payload?.files?.file}`,
-                                            files: payload.files
-                                        };
-                                        onChange([...value, newValue]);
-                                    },
-                                    onUploadError(error) {
-                                        displayLoader(false);
-                                        console.error('File upload failed:', error);
-                                        // You might want to show an error message to the user here
-                                    }
-                                });
-                            }}
-                        >
-                            <View style={{ width: 60, height: 60, borderRadius: 10, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)', justifyContent: 'center', alignItems: 'center', margin: 8 }}>
-                                <SvgCamera />
-                            </View>
-                        </MediaUploader>
-                    )}
-                />
-                    {files.map((file:any, index:number) => (
+                <View className='relative'>
+                    <Controller 
+                        name="files"
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                            <MediaUploader
+                                onSelected={({file, fileType, displayLoader}) => {
+                                    setIsUploading(true);
+                                    fileUpload({
+                                        file,
+                                        onUploadSuccess: ({ payload }) => {
+                                            setIsUploading(false); 
+                                            const newValue = {
+                                                type: fileType,
+                                                mime_type: payload?.mime_type || (fileType === 'video' ? 'video/mp4' : 'image/jpeg'),
+                                                url: `${payload?.base_url}${payload?.files?.file}`,
+                                                thumbnail: `${payload?.base_url}${payload?.files?.file}`,
+                                                files: payload.files
+                                            };
+                                            onChange(value ? [newValue, ...value] : [newValue]);
+                                        },
+                                        onUploadError: (error) => {
+                                            setIsUploading(false); 
+                                            console.error('File upload failed:', error);
+                                        },
+                                        onUploadComplete: () => {
+                                            console.log('Upload process completed');
+                                        }
+                                    });
+                                }}
+                            >
+                                <View style={{ width: 60, height: 60, borderRadius: 10, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)', justifyContent: 'center', alignItems: 'center', margin: 8 }}>
+                                    <SvgCamera />
+                                    {isUploading && (
+                                        <View className="absolute inset-0 bg-white/70 justify-center items-center">
+                                            <Circle size={30} color="#0000ff" />
+                                        </View>
+                                    )}
+                                </View>
+                            </MediaUploader>
+                        )}
+                    />
+                </View>
+                {files.map((file: any, index: number) => (
                     <View key={`file-${index}`} style={{ margin: 8 }}>
                         <FastImage
                             source={{ uri: file.url }}
@@ -133,17 +142,6 @@ const CommentForm = ({ type, title, refetch }: CommentFormProps) => {
                         </TouchableOpacity>
                     </View>
                 ))}
-                    {contextData.addImages?.map((uri, index) => (
-                        <View key={`commentform-${index}`} className='bg-[#E2E2E2] rounded-md my-2'>
-                            <FastImage
-                                source={{ uri: uri }}
-                                className='w-[60px] h-[60px] object-contain rounded-lg relative'
-                            />
-                            <TouchableOpacity className='absolute -top-2 -right-2' onPress={() => removeImage(index)}>
-                                <SvgCross />
-                            </TouchableOpacity>
-                        </View>
-                    ))}
             </View>
             <Controller
                 control={control}
@@ -159,9 +157,7 @@ const CommentForm = ({ type, title, refetch }: CommentFormProps) => {
                         activeOutlineColor={COLOR_PALETTE.TEXT_DEFAULT}
                         multiline={true}
                         className='bg-white20 mt-[15px] text-sm text-gray65 h-[80px]'
-                        theme={{
-                            roundness: 8,
-                        }}
+                        theme={{ roundness: 8 }}
                         error={!!errors.comment}
                     />
                 )}
@@ -173,7 +169,7 @@ const CommentForm = ({ type, title, refetch }: CommentFormProps) => {
                 <Button borderRadius={8} label={"Update"} marginLeft={15} flex={1} width={1 / 2} onPress={handleSubmit(onSubmit)} />
             </View>
         </View>
-    )
+    );
 }
 
-export default CommentForm
+export default CommentForm;

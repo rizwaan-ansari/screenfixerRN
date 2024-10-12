@@ -5,9 +5,10 @@ import axios, { AxiosResponse } from 'axios'
 
 type FileUpload = {
     file: Asset;
-    onUploadSuccess?: (data: any) => void;
-    onUploadError?: (data: any) => void;
-    onUploadComplete?: (data: any) => void;
+    onUploadSuccess?: (data?: any) => void;
+    onUploadError?: (data?: any) => void;
+    onUploadComplete?: (data?: any) => void;
+    url?: string;
 };
 
 export const JSON_TO_URL_PARAMS = (obj: any) => {
@@ -84,7 +85,7 @@ export function fetchSingleRepairRequest(uuid: string) {
 }
 
 export function updateRepairRequests(FORM_DATA: any) {
-    return axios.put(API.API_V1_REPAIR_REQUEST, FORM_DATA);
+    return axios.put(API.API_V1_REPAIR_REQUEST, FORM_DATA, config);
 }
 
 export function fetchDiscounts(props: any) {
@@ -96,10 +97,10 @@ export function fetchAddress(props: any) {
 }
 
 export function updateAddress(FORM_DATA: any) {
-    return axios.put(API.API_V1_ADDRESS, FORM_DATA);
+    return axios.put(API.API_V1_ADDRESS, FORM_DATA, config);
 }
 export function createAddress(FORM_DATA: any) {
-    return axios.post(API.API_V1_ADDRESS, FORM_DATA);
+    return axios.post(API.API_V1_ADDRESS, FORM_DATA, config);
 }
 export function deleteAddress(uuid: string) {
     return axios.delete(API.API_V1_ADDRESS, { data: { uuid } });
@@ -108,7 +109,7 @@ export function fetchAccount(props: any) {
     return axios.get(API.API_V1_ACCOUNT + JSON_TO_URL_PARAMS(props), config);
 }
 export function updateAccount(FORM_DATA: any) {
-    return axios.put(API.API_V1_ACCOUNT, FORM_DATA);
+    return axios.put(API.API_V1_ACCOUNT, FORM_DATA, config);
 }
 export function generateInvoiceUrl({ uuid }: { uuid: string }) {
     return API.API_V1_REPAIR_REQUEST_INVOICE + '?uuid=' + uuid;
@@ -131,7 +132,13 @@ export function verifyOtp({ contactNumber, verificationCode }: { contactNumber: 
 
 // export function fileUpload({ file, onUploadSuccess, onUploadError, onUploadComplete, url = API.API_V1_FILE_UPLOAD } : FileUpload) {
 //     const FORM_DATA = new FormData();
-//     FORM_DATA.append('file', file);  
+//     FORM_DATA.append('file', {
+//     uri: file.uri,
+//     type: file.type || 'image/jpeg',
+//     name: file.fileName || 'upload.jpg',
+//   } as any);
+//     console.error("image upload data------------------------");
+//     console.error(FORM_DATA);
 //     axios.post(url, FORM_DATA, config).then(function (response) {
 //         if ('file_uploaded' === response?.data?.response_code) {
 //             onUploadSuccess && onUploadSuccess(response?.data);
@@ -151,32 +158,36 @@ export function fileUpload({ file, onUploadSuccess, onUploadError, onUploadCompl
     const formData = new FormData();
     formData.append('file', {
         uri: file.uri,
-        type: file.type,
+        type: file.type || 'image/jpeg',
         name: file.fileName || 'upload.jpg',
-    });
+    } as any);
 
     const config = {
         headers: {
+            'Authorization': `Bearer ${API.TECH_1_AUTH_TOKEN}`,
             'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${API.TECH_1_AUTH_TOKEN}`
-        }
+        },
     };
+
+    console.log("Uploading file:", file);
 
     axios.post(API.API_V1_FILE_UPLOAD, formData, config)
         .then(response => {
+            console.log("Upload response:", response.data);
             if (response.data.response_code === 'file_uploaded') {
                 onUploadSuccess && onUploadSuccess(response.data);
             } else {
                 onUploadError && onUploadError(response.data);
             }
-            onUploadComplete && onUploadComplete(response.data);
-    }).catch(error => {
-        console.error('Upload error:', error);
-        if (error.code === 'ECONNABORTED') {
-            // Handle timeout error
-            console.log('Connection timed out');
-        }
-        onUploadError && onUploadError(error);
-        onUploadComplete && onUploadComplete(error);
-    });
+        })
+        .catch(error => {
+            console.error('Upload error:', error.response ? error.response.data : error.message);
+            if (error.code === 'ECONNABORTED') {
+                console.log('Connection timed out');
+            }
+            onUploadError && onUploadError(error);
+        })
+        .finally(() => {
+            onUploadComplete && onUploadComplete();
+        });
 }

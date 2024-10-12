@@ -73,7 +73,7 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
             />
             {errors.repairStatus && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.repairStatus.message}</Txt>}
             <MediaUploader>
-                <View className='h-[200] mt-[15px] w-full bg-neutral-550 rounded-[10px] justify-center items-center' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+                <View className='!h-[200] mt-[15px] !w-full bg-neutral-550 rounded-[10px] justify-center items-center' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
                     <SvgUpload />
                     <Txt fontSize={"sm"} className='mt-[10px]'>Upload Image or Video</Txt>
                 </View>

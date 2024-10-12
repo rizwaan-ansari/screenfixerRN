@@ -168,7 +168,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                     <View ref={technicianCommentBoxRef}>
                         {
                             contextData.editBeforeRepair ?
-                                <CommentForm refetch={refetch} title={'Edit Technician Comment Before'} />
+                                <CommentForm refetch={refetch} title={'Edit Technician Comment Before'} type='before' />
                                 :
                                 <TechnicianCommentBox
                                     title={"Before Repair"}
