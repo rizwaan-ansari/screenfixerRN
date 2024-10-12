@@ -1,5 +1,14 @@
+import { Alert } from 'react-native';
 import * as API from './ApiConstant';
 import axios, { AxiosResponse } from 'axios'
+
+type FileUpload = {
+    file: File,
+    onUploadSuccess?: (data: any) => void;
+    onUploadError?: (data: any) => void;
+    onUploadComplete?: (data: any) => void;
+    url?: string;
+}
 
 export const JSON_TO_URL_PARAMS = (obj: any) => {
     var str = '';
@@ -117,5 +126,24 @@ export function verifyOtp({ contactNumber, verificationCode } : { contactNumber:
         type: 'account_verification',
         mobile_number: contactNumber,
         verification_code: verificationCode
+    });
+}
+
+export function fileUpload({ file, onUploadSuccess, onUploadError, onUploadComplete, url = API.API_V1_FILE_UPLOAD } : FileUpload) {
+    const FORM_DATA = new FormData();
+    FORM_DATA.append('file', file);  
+    axios.post(url, FORM_DATA, config).then(function (response) {
+        if ('file_uploaded' === response?.data?.response_code) {
+            onUploadSuccess && onUploadSuccess(response?.data);
+        }
+        if ('file_uploaded' !== response?.data?.response_code) {
+            onUploadError && onUploadError(response?.data);
+        }
+        onUploadComplete && onUploadComplete(response?.data);
+    }).catch(function (error) {
+        const errorObj = JSON.parse(JSON.stringify(error));
+        if (errorObj.code == 'ECONNABORTED') {
+            Alert.alert('Connection timed out, please try again.');
+        }
     });
 }

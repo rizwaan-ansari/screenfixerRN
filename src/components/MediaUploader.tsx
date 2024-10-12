@@ -5,9 +5,11 @@ import { ContextData } from '../providers/ContextProvider'
 
 interface MediaUploaderProps {
     children?: React.ReactNode
+    onSelected?: (params: { file: File, displayLoader: (display: boolean) => void, fileType: 'image' | 'video' }) => void,
+    onRemoved?: (params: { index: string | number }) => void
 }
 
-const MediaUploader = ({ children }: MediaUploaderProps) => {
+const MediaUploader = ({ children, onSelected, onRemoved }: MediaUploaderProps) => {
     const { contextData, setContextData } = useContext(ContextData);
     const [isLoading, setIsLoading] = useState<boolean>(false)
 

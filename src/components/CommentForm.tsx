@@ -11,30 +11,54 @@ import COLOR_PALETTE from '../utils/ColorConstant';
 import Button from './Button';
 import MediaUploader from './MediaUploader';
 import Txt from './Txt';
+import { fileUpload, updateRepairRequests } from '../utils/api/ApiRequest';
+
 
 interface CommentFormProps {
     type?: string;
     title?: string;
+    refetch?: any;
 }
 
 const formSchema = z.object({
     comment: z.string().min(1, "Comment is required").max(200, "Comment cannot exceed 200 characters")
 })
 
-const onSubmit = (data: any) => {
-    console.log(data)
-}
 
-const CommentForm = ({ type, title }: CommentFormProps) => {
+const CommentForm = ({ type, title, refetch }: CommentFormProps) => {
     const { contextData, setContextData } = useContext(ContextData);
     const item: any = contextData?.repairRequestItem;
-    console.log(item?.file_upload_base_url)
+    console.log(JSON.stringify(item, null, 4), "hello")
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             comment: '',
+            files: [],
         }
     })
+
+    const onSubmit = (data: any) => {
+        try {
+            const newImage = contextData.addImages;
+            const FORM_DATA = {
+                ...data,
+                uuid: item?.uuid,
+                file: newImage
+            }
+            console.log(JSON.stringify(FORM_DATA, null, 4),"New");
+
+            updateRepairRequests({
+                ...FORM_DATA
+            }).then(() => {
+                setContextData({
+                    editBeforeRepair: false
+                })
+                refetch();
+            })
+        } catch (error) {
+            console.log("Error updating Comment");
+        }
+    }
 
     const removeImage = (index: number) => {
         const updatedImages = (contextData.addImages || []).filter((_, i) => i != index)
@@ -47,11 +71,31 @@ const CommentForm = ({ type, title }: CommentFormProps) => {
             <Txt fontWeight={700} fontSize={'xl'}>{title}</Txt>
             <View className='border border-[#E2E2E2] mt-[15px]' />
             <View className='mt-[15px] flex-1 flex-row items-center flex-wrap -mx-2'>
-                <MediaUploader>
-                    <View className='w-[60px] h-[60px] bg-white20 rounded-lg justify-center items-center mx-2' style={{ borderRadius: 10, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
-                        <SvgCamera />
-                    </View>
-                </MediaUploader>
+                <Controller 
+                    name={"files"}
+                    control={control}
+                    render={({ field: {onChange, value } }) => (
+                        <MediaUploader
+                            onSelected={({file, fileType}) => {
+                                fileUpload({
+                                    file,
+                                    onUploadSuccess({ payload }) {
+                                        const newValue = {
+                                            type: fileType,
+                                            mime_type: payload?.mime_type || ('video' === fileType ? 'video/mp4' : 'image/jpeg'),
+                                            url: `${payload?.files_base_url}${payload?.files?.file}`,
+                                            files: payload.files
+                                        }
+                                    }
+                                })
+                            }}
+                        >
+                            <View className='w-[60px] h-[60px] bg-white20 rounded-lg justify-center items-center mx-2' style={{ borderRadius: 10, borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+                                <SvgCamera />
+                            </View>
+                        </MediaUploader>
+                    )}
+                />
                     {item?.before_repair_comment.files?.map((uri: any, index: any) => (
                             <View key={`existingImage-${index}`} className='bg-[#E2E2E2] rounded-md mx-2 my-2'>
                                     <FastImage

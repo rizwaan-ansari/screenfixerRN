@@ -5,6 +5,7 @@ export const API_V1_ENDPOINT: string = API_BASE_URL+'/api/v1';
 export const TECH_1_AUTH_TOKEN: string = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3Mjc4NzUwNTUsImV4cCI6NDg4MzU3MDI1NSwicm9sZXMiOlsiUk9MRV9URUNITklDSUFOIl0sInVzZXJuYW1lIjoidGVjaDFAc2NyZWVuZml4ZXIuaW4ifQ.InVFYNUfhyCGIA5ad9XY8cCVh1Sg-wSTRGuc2q5Vg1s6LKsWCY2mOIaDUcniBPAmt7ErCEVJ6Qc9EiVhCjmu0L5Efh1pjaaj95VtJuJe6-dox560mEpAxYT4_95S4j25tVLnJarixPqqnGP6ngBZu_w4HQBYdNjSYBhcsptULoAKqgspw3LKLHml_w53lPSK9aKlPKDPi1p9uzBcf38hAOxxBPQ80LNMRkmfyPflpFQg-XmKt2KJNAGmjCsPFDmyj5ASy2Np5Qkj24tzUbH90h1liKiAUq1SAEND7D9JjGHGLiCGX_TlvjSuPiaf8fOHsEYhIqaBq7L6TAzEvr6Y2Q';
 
 // API Resources
+export const API_V1_FILE_UPLOAD: string = API_V1_ENDPOINT + '/file-upload';
 export const API_V1_AUTHENTICATE: string = API_V1_ENDPOINT + '/account/authenticate';
 export const API_V1_DEVICE_TYPE: string = API_V1_ENDPOINT + '/device-type';
 export const API_V1_BRAND: string = API_V1_ENDPOINT + '/brand';

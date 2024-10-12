@@ -1,3 +1,6 @@
+import { NavigationProp, useRoute } from '@react-navigation/native';
+import { useQuery } from '@tanstack/react-query';
+import moment from "moment";
 import React, { useContext, useEffect, useRef } from 'react';
 import {
     KeyboardAvoidingView,
@@ -6,13 +9,9 @@ import {
     ScrollView,
     Text,
     TouchableOpacity,
-    View,
-    ActivityIndicator
+    View
 } from 'react-native';
-import { NavigationProp, useRoute } from '@react-navigation/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { useQuery } from '@tanstack/react-query';
-import moment from "moment";
 
 import {
     CLOCK_IMG,
@@ -21,7 +20,9 @@ import {
     REPAIR_IMG
 } from '../assets/images';
 import { Txt } from '../components';
+import CommentForm from '../components/CommentForm';
 import CustomerInfo from '../components/CustomerInfo';
+import EditRepairDetailsForm from '../components/EditRepairDetailsForm';
 import HeaderTabBar from '../components/HeaderTabBar';
 import InfoCard from '../components/InfoCard';
 import IssuePrices from '../components/IssuePrices';
@@ -29,10 +30,8 @@ import IssuePricesForm from '../components/IssuePricesForm';
 import RepairAction from '../components/RepairAction';
 import RepairDeviceDetails from '../components/RepairDeviceDetails';
 import RepairTypeCard from '../components/RepairType';
-import { ContextData } from '../providers/ContextProvider';
-import EditRepairDetailsForm from '../components/EditRepairDetailsForm';
 import TechnicianCommentBox from '../components/TechnicianCommentBox';
-import CommentForm from '../components/CommentForm';
+import { ContextData } from '../providers/ContextProvider';
 import { fetchSingleRepairRequest } from '../utils/api/ApiRequest';
 
 type RepairType = "onsite" | "offsite" | "office-visit";
@@ -169,7 +168,7 @@ const RequestDetailsScreen = ({ navigation }: { navigation: NavigationProp<any> 
                     <View ref={technicianCommentBoxRef}>
                         {
                             contextData.editBeforeRepair ?
-                                <CommentForm title={'Edit Technician Comment Before'} />
+                                <CommentForm refetch={refetch} title={'Edit Technician Comment Before'} />
                                 :
                                 <TechnicianCommentBox
                                     title={"Before Repair"}
