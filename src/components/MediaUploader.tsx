@@ -3,13 +3,22 @@ import { Alert, TouchableOpacity } from 'react-native'
 import { Asset, CameraOptions, ImageLibraryOptions, launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import { ContextData } from '../providers/ContextProvider'
 
-interface MediaUploaderProps {
-    children?: React.ReactNode
-    onSelected?: (params: { file: File, displayLoader: (display: boolean) => void, fileType: 'image' | 'video' }) => void,
-    onRemoved?: (params: { index: string | number }) => void
+interface MediaItem {
+    type: 'image' | 'video';
+    mime_type: string;
+    url: string;
+    thumbnail?: string;
+    files?: any;
 }
 
-const MediaUploader = ({ children, onSelected, onRemoved }: MediaUploaderProps) => {
+interface MediaUploaderProps {
+    items?: MediaItem[];
+    onSelected?: (params: { file: Asset, displayLoader: (display: boolean) => void, fileType: 'image' | 'video' }) => void;
+    onRemoved?: (params: { index: number }) => void;
+    children?: React.ReactNode;
+}
+
+const MediaUploader: React.FC<MediaUploaderProps> = ({  onSelected, children }) => {
     const { contextData, setContextData } = useContext(ContextData);
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -18,75 +27,36 @@ const MediaUploader = ({ children, onSelected, onRemoved }: MediaUploaderProps) 
             "Select Image",
             "Choose an option",
             [
-                {
-                    text: "Take Photo",
-                    onPress: openCamera,
-                },
-                {
-                    text: "Choose from Gallery",
-                    onPress: openImagePicker,
-                },
-                {
-                    text: 'Cancel',
-                    style: 'cancel'
-                }
+                { text: "Take Photo", onPress: openCamera },
+                { text: "Choose from Gallery", onPress: openImagePicker },
+                { text: 'Cancel', style: 'cancel' }
             ]
-        )
-    }
+        );
+    };
 
     const openCamera = () => {
-        const options: CameraOptions = {
-            mediaType: 'photo',
-            saveToPhotos: true,
-            maxHeight: 2000,
-            maxWidth: 2000
-        }
+        launchCamera({ mediaType: 'photo', maxHeight: 2000, maxWidth: 2000 }, handleResponse);
+    };
 
-        launchCamera(options, response => {
-            setIsLoading(false);
-            if (response.didCancel) {
-                console.log("User cancelled camera");
-            } else if (response.errorCode) {
-                console.log('Camera Error: ', response.errorMessage);
-            } else if (response.assets && response.assets.length > 0) {
-                const newImages = response.assets
-                    .map((asset: Asset) => asset.uri)
-                    .filter((uri): uri is string => uri !== undefined)
-
-                setContextData({
-                    addImages: [...(contextData.addImages || []), ...newImages]
-                })
-            }
-        })
-    }
-
-    // Function to open the image picker
     const openImagePicker = () => {
-        const options: ImageLibraryOptions = {
-            mediaType: 'photo',
-            includeBase64: false,
-            selectionLimit: 0,
-            maxHeight: 2000,
-            maxWidth: 2000,
-        };
+        launchImageLibrary({ mediaType: 'photo', selectionLimit: 0, maxHeight: 2000, maxWidth: 2000 }, handleResponse);
+    };
 
-        launchImageLibrary(options, response => {
-            setIsLoading(false);
-            if (response.didCancel) {
-                console.log('User cancelled camera');
-            } else if (response.errorCode) {
-                console.log('Camera Error: ', response.errorMessage);
-            } else if (response.assets && response.assets.length > 0) {
-                const newImages = response.assets
-                    .map((asset: Asset) => asset.uri)
-                    .filter((uri): uri is string => uri !== undefined);
-
-                setContextData({
-                    addImages: [...(contextData.addImages || []), ...newImages]
-                })
-                console.log('Selected Image URIs:', newImages);
-            }
-        });
+    const handleResponse = (response: any) => {
+        if (response.didCancel) {
+            console.log("User cancelled image picker");
+        } else if (response.errorCode) {
+            console.log('ImagePicker Error: ', response.errorMessage);
+        } else if (response.assets && response.assets.length > 0) {
+            response.assets.forEach((asset: Asset) => {
+                const fileType = asset.type?.startsWith('image/') ? 'image' : 'video';
+                onSelected && onSelected({
+                    file: asset,
+                    displayLoader: setIsLoading,
+                    fileType: fileType
+                });
+            });
+        }
     };
     return (
         <TouchableOpacity onPress={showImagePickerOption}>
