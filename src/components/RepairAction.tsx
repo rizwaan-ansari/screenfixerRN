@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { z } from 'zod';
@@ -13,6 +13,7 @@ import { SvgAdd, SvgCross, SvgUpload } from '../assets/images';
 import { ContextData } from '../providers/ContextProvider';
 import FastImage from 'react-native-fast-image';
 import { QueryObserverResult } from '@tanstack/react-query';
+import { fileUpload, updateRepairRequests } from '../utils/api/ApiRequest';
 
 
 type RefetchFunction = () => Promise<QueryObserverResult<any, unknown>>;
@@ -27,24 +28,52 @@ const REPAIR_STATUS: Option[] = [
 ];
 
 const formSchema = z.object({
-    comment: z.string().min(1, "Comment is required").max(200, "Comment cannot exceed 200 characters"),
+    comment: z.string().max(200, "Comment cannot exceed 200 characters").optional(),
     repairStatus: z.string().min(1, "Repair status selection is required"),
+    files: z.array(z.object({
+        type: z.string(),
+        mime_type: z.string(),
+        url: z.string(),
+        thumbnail: z.string().optional(),
+        files: z.any()
+    }))
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 const RepairAction = ({ refetch }: RepairActionFormProps) => {
-    const { contextData, setContextData } = useContext(ContextData); 
-    const { control, handleSubmit, setValue, clearErrors, formState: { errors } } = useForm<FormData>({
+    const { contextData, setContextData } = useContext(ContextData);
+    const item: any = contextData.repairRequestItem;
+    const [isUploading, setIsUploading] = useState<boolean>(false);
+    const { control, handleSubmit, setValue, reset, watch, getValues, clearErrors, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             comment: '',
             repairStatus: '',
         }
     });
+    const files = watch('files')
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
+    const onSubmit = async (data: FormData) => {
+        try {
+            const FORM_DATA = {
+                uuid: item?.uuid,
+                [`before_repair_comment`]: {
+                    comment: data.comment,
+                    files: (Array.isArray(data?.files) ? data?.files : []).map((item: any) => ({
+                        files: item?.files,
+                        type: item?.type,
+                        mime_type: item?.mime_type
+                    }))
+                }
+            }
+            await updateRepairRequests({ ...FORM_DATA }).then(() => {
+                refetch();
+                reset();
+            })
+        } catch (error) {
+            console.log("Error updating repair action")
+        }
     };
 
     const removeImage = (index: number) => {
@@ -72,17 +101,48 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
                 }}
             />
             {errors.repairStatus && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.repairStatus.message}</Txt>}
-            <MediaUploader>
-                <View className='!h-[200] mt-[15px] !w-full bg-neutral-550 rounded-[10px] justify-center items-center' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
-                    <SvgUpload />
-                    <Txt fontSize={"sm"} className='mt-[10px]'>Upload Image or Video</Txt>
-                </View>
-            </MediaUploader>
+            <Controller
+                name={'files'}
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                    <MediaUploader
+                        onSelected={({ file, fileType, displayLoader }) => {
+                            setIsUploading(true);
+                            fileUpload({
+                                file,
+                                onUploadSuccess: ({ payload }) => {
+                                    setIsUploading(false);
+                                    const newValue = {
+                                        type: fileType,
+                                        mime_type: payload?.mime_type || (fileType === 'video' ? "video/mp4" : 'image/jpeg'),
+                                        url: `${payload?.base_url}${payload?.files?.file}`,
+                                        thumbnail: `${payload?.base_url}${payload?.files?.file}`,
+                                        files: payload.files,
+                                    };
+                                    onChange(value ? [newValue, ...value] : [newValue])
+                                },
+                                onUploadError: (error) => {
+                                    setIsUploading(false);
+                                    console.log('File Upload Failed', error);
+                                },
+                                onUploadComplete: () => {
+                                    console.log("Upload process completed")
+                                }
+                            })
+                        }}
+                    >
+                        <View className='!h-[200] mt-[15px] !w-full bg-neutral-550 rounded-[10px] justify-center items-center' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+                            <SvgUpload />
+                            <Txt fontSize={"sm"} className='mt-[10px]'>Upload Image or Video</Txt>
+                        </View>
+                    </MediaUploader>
+                )}
+            />
             <View className='mt-[15px] flex-row flex-wrap gap-x-2'>
-                {contextData?.addImages?.map((uri, index) => (
+                {files?.map((file, index) => (
                     <View key={`imageIndex-${index}`}>
-                        <FastImage 
-                            source={{uri: uri}}
+                        <FastImage
+                            source={{ uri: file.url }}
                             className='w-16 h-16 rounded-md'
                             resizeMode={"cover"}
                         />
