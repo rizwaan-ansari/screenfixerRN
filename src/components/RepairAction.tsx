@@ -14,6 +14,7 @@ import { ContextData } from '../providers/ContextProvider';
 import FastImage from 'react-native-fast-image';
 import { QueryObserverResult } from '@tanstack/react-query';
 import { fileUpload, updateRepairRequests } from '../utils/api/ApiRequest';
+import { Circle } from 'react-native-animated-spinkit';
 
 
 type RefetchFunction = () => Promise<QueryObserverResult<any, unknown>>;
@@ -77,11 +78,8 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
     };
 
     const removeImage = (index: number) => {
-        const updatedImages = (contextData.addImages || []).filter((_, i) => i != index)
-        setContextData({
-            addImages: updatedImages
-        })
-    }
+        setValue('files', files.filter((_: any, i: any) => i !== index));
+    };
     return (
         <View className='p-5 bg-white mx-4 rounded-[10px] justify-center mt-5'>
             <Txt fontWeight={700} fontSize={'xl'}>Repair Action</Txt>
@@ -131,9 +129,14 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
                             })
                         }}
                     >
-                        <View className='!h-[200] mt-[15px] !w-full bg-neutral-550 rounded-[10px] justify-center items-center' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+                        <View className='!h-[200] relative mt-[15px] !w-full bg-neutral-550 rounded-[10px] justify-center items-center' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
                             <SvgUpload />
-                            <Txt fontSize={"sm"} className='mt-[10px]'>Upload Image or Video</Txt>
+                            <Txt fontSize={"sm"} className={`mt-[10px] ${isUploading ? 'hidden' : 'flex'}`}>Upload Image or Video</Txt>
+                        {isUploading && (
+                            <View className="absolute rounded-[10px] top-0 left-0 bottom-0 right-0 inset-0 bg-black-160 justify-center items-center">
+                                <Circle size={50} color="#002E86" />
+                            </View>
+                        )}
                         </View>
                     </MediaUploader>
                 )}
