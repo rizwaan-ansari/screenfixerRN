@@ -5,6 +5,7 @@ import Txt from './Txt';
 import Button from './Button';
 import { ContextData } from '../providers/ContextProvider';
 import { SvgSquircle } from '../assets/images';
+import usePhoneCall from '../hooks/usePhoneCall';
 
 interface CustomerInfoProps {
     name: string;
@@ -14,7 +15,13 @@ interface CustomerInfoProps {
 
 const CustomerInfo: React.FC<CustomerInfoProps> = ({ name, address, profilePicture }) => {
   const {contextData, setContextData} = useContext(ContextData);
-
+  const { makePhoneCall } = usePhoneCall();
+  const phoneNumber = "+918967458695"
+  const url = `tel:${phoneNumber}`
+  
+  const makeCall = () => {
+    makePhoneCall(url);
+  }
   const item: any = contextData.repairRequestItem;
   return (
     <View className='p-4 bg-white mx-4 mt-4 rounded-[10px]'>
@@ -36,7 +43,7 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ name, address, profilePictu
             <Txt className='pt-2' fontSize={"base"} fontWeight={400} fontColor={'black'}>{address}</Txt>
         </View>
         <View className='mt-5'>
-            <Button borderRadius={5} icon={"call"} variant={"call"} size={"base"} label={"Call Customer"} paddingVertical={18} paddingHorizontal={110} />
+            <Button borderRadius={5} icon={"call"} variant={"call"} size={"base"} label={"Call Customer"} paddingVertical={18} paddingHorizontal={110} onPress={makeCall} />
         </View>
     </View>
   )

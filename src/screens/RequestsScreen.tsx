@@ -15,6 +15,7 @@ import {
     SvgCall 
 } from '../assets/images';
 import { useQuery } from '@tanstack/react-query';
+import usePhoneCall from '../hooks/usePhoneCall';
 
 const DATA = [
     {
@@ -85,17 +86,6 @@ const DATA = [
     }
 ];
 
-const makeCall = (url: any) => {
-    Linking.canOpenURL(url)
-        .then(((supported) => {
-            if (supported) {
-                Linking.openURL(url)
-            } else {
-                Alert.alert("Calling is not supported on this device")
-            }
-        }))
-}
-
 interface Issues {
     type: string,
     label: string
@@ -131,7 +121,7 @@ const handlePress = () => {
     
 }
 const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
-
+    const { makePhoneCall } = usePhoneCall();
     const phoneNumber = "+918967458695"
     const url = `tel:${phoneNumber}`
     const { data, isLoading, isError, error, isSuccess } = useQuery({
@@ -139,6 +129,9 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
         queryFn: fetchRepairRequests,
       });
       let repairRequestList:any;
+      const makeCall = () => {
+        makePhoneCall(url);
+      }
     //   if (isSuccess) {
     //     repairRequestList = data;
     //     console.log("************************************************");
@@ -175,7 +168,7 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
                      <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>Repair value: ₹{item.repairValue}</Txt>
                      <View className='flex-row pt-4'>
                         <Button borderRadius={4} onPress={() => navigation.navigate("RequestDetailsScreen", { requestData: item, uuid: "c72ddcb6-ffe6-4f7a-a432-0a575d9577c3"})} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
-                        <TouchableOpacity className='pl-[10px]' onPress={() => makeCall(url)}>
+                        <TouchableOpacity className='pl-[10px]' onPress={makeCall}>
                             <SvgCall />
                         </TouchableOpacity>
                      </View>
