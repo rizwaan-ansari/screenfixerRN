@@ -21,9 +21,9 @@ type RootStackParamList = {
 
 type RepairDeviceDetailsRouteProp = RouteProp<RootStackParamList, 'DetailsScreen'>;
 
-type status = "in-progress" | "technician-assigned" | "completed" | any;
+export type status = "in-progress" | "technician-assigned" | "completed" | any;
 
-const STATUS_MAPPER: Record<status, { label: string, color: string }> = {
+export const STATUS_MAPPER: Record<status, { label: string, color: string }> = {
     'in-progress': {
         label: "Work-in-progress",
         color: COLOR_PALETTE.TEXT_GREEN

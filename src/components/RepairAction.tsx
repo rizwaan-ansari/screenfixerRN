@@ -1,20 +1,20 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { QueryObserverResult } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { TouchableOpacity, View } from 'react-native';
+import { Circle } from 'react-native-animated-spinkit';
+import FastImage from 'react-native-fast-image';
 import { TextInput } from 'react-native-paper';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
-import HorizontalSelect, { Option } from './HorizontalSelect';
-import Txt from './Txt';
-import Button from './Button';
-import COLOR_PALETTE from '../utils/ColorConstant';
-import MediaUploader from './MediaUploader';
-import { SvgAdd, SvgCross, SvgUpload } from '../assets/images';
+import { SvgCross, SvgUpload } from '../assets/images';
 import { ContextData } from '../providers/ContextProvider';
-import FastImage from 'react-native-fast-image';
-import { QueryObserverResult } from '@tanstack/react-query';
 import { fileUpload, updateRepairRequests } from '../utils/api/ApiRequest';
-import { Circle } from 'react-native-animated-spinkit';
+import COLOR_PALETTE from '../utils/ColorConstant';
+import Button from './Button';
+import HorizontalSelect, { Option } from './HorizontalSelect';
+import MediaUploader from './MediaUploader';
+import Txt from './Txt';
 
 
 type RefetchFunction = () => Promise<QueryObserverResult<any, unknown>>;
@@ -23,14 +23,14 @@ interface RepairActionFormProps {
 }
 
 const REPAIR_STATUS: Option[] = [
-    { label: "Work-in-progress", slug: "work-in-progress" },
+    { label: "Work-in-progress", slug: "in-progress" },
     { label: "Offsite Repair", slug: "offsite-repair" },
     { label: "Completed", slug: "completed" },
 ];
 
 const formSchema = z.object({
     comment: z.string().max(200, "Comment cannot exceed 200 characters").optional(),
-    repairStatus: z.string().min(1, "Repair status selection is required"),
+    status: z.string().min(1, "Repair status selection is required"),
     files: z.array(z.object({
         type: z.string(),
         mime_type: z.string(),
@@ -50,7 +50,7 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             comment: '',
-            repairStatus: '',
+            status: '',
         }
     });
     const files = watch('files')
@@ -59,6 +59,7 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
         try {
             const FORM_DATA = {
                 uuid: item?.uuid,
+                status: data?.status,
                 [`before_repair_comment`]: {
                     comment: data.comment,
                     files: (Array.isArray(data?.files) ? data?.files : []).map((item: any) => ({
@@ -68,6 +69,7 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
                     }))
                 }
             }
+            console.log(JSON.stringify(FORM_DATA, null, 4))
             await updateRepairRequests({ ...FORM_DATA }).then(() => {
                 refetch();
                 reset();
@@ -90,15 +92,15 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
             <HorizontalSelect
                 contentContainerStyle={{ flexDirection: 'row', marginTop: 15 }}
                 multiple={false}
-                options={REPAIR_STATUS.filter(item => item.label !== "Completed")}
+                options={REPAIR_STATUS.filter(status => status.slug !== item?.status)}
                 onSelect={(selectedItem) => {
                     if (typeof selectedItem === 'string' || typeof selectedItem === 'number') {
-                        setValue('repairStatus', String(selectedItem));
-                        clearErrors("repairStatus");
+                        setValue('status', String(selectedItem));
+                        clearErrors("status");
                     }
                 }}
             />
-            {errors.repairStatus && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.repairStatus.message}</Txt>}
+            {errors.status && <Txt className='pl-1 pt-1' fontColor={"textDanger"}>{errors.status.message}</Txt>}
             <Controller
                 name={'files'}
                 control={control}
@@ -132,11 +134,11 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
                         <View className='!h-[200] relative mt-[15px] !w-full bg-neutral-550 rounded-[10px] justify-center items-center' style={{ borderWidth: 1, borderStyle: 'dashed', borderColor: 'rgba(0, 0, 0, 0.1)' }}>
                             <SvgUpload />
                             <Txt fontSize={"sm"} className={`mt-[10px] ${isUploading ? 'hidden' : 'flex'}`}>Upload Image or Video</Txt>
-                        {isUploading && (
-                            <View className="absolute rounded-[10px] top-0 left-0 bottom-0 right-0 inset-0 bg-black-160 justify-center items-center">
-                                <Circle size={50} color="#002E86" />
-                            </View>
-                        )}
+                            {isUploading && (
+                                <View className="absolute rounded-[10px] top-0 left-0 bottom-0 right-0 inset-0 bg-black-160 justify-center items-center">
+                                    <Circle size={50} color="#002E86" />
+                                </View>
+                            )}
                         </View>
                     </MediaUploader>
                 )}

@@ -35,50 +35,36 @@
         "name": "Bangalore"
     },
     "before_repair_comment": {
-        "comment": "list of images and video hjfj",
+        "comment": "",
         "files_base_url": "https://cosko.nyc3.cdn.digitaloceanspaces.com",
         "files": [
             {
                 "files": {
-                    "file": "/dev/2024/10/wuWcsBQG4JedHD6XY6B8GlaAdYoYOkjMXBvbJdN1hWM.jpg"
+                    "file": "/dev/2024/10/MLdgcd4A3QORJg3VY2WFwOZ3pyulKOUTrRvnu29R0X1Vr.jpg"
                 },
                 "type": "image",
                 "mime_type": "image/jpeg"
             },
             {
                 "files": {
-                    "file": "/dev/2024/10/cet4elYO1EF7Uxxomw4PB48QbqsU3rTxuBlzrUnjN8cNy2MRCjPHDNBTJASoGv5T.jpg"
+                    "file": "/dev/2024/10/02c99eEa0kIgBCTu4OjEFxrZZohPGD6NKrmLIfcAHbfJF.jpg"
                 },
                 "type": "image",
                 "mime_type": "image/jpeg"
             },
             {
                 "files": {
-                    "file": "/dev/2024/10/EF69t6eAs9o4TraaRB3PsNZy2RlbhyRX44paX4543z.mp4"
-                },
-                "type": "video",
-                "mime_type": "video/mp4"
-            },
-            {
-                "files": {
-                    "file": "/dev/2024/10/43u3HOo7bpKXJnYT74V6eYT2ZnX8pBQyCmE09MMPR2wDGpWScWxyeir.mov"
-                },
-                "type": "video",
-                "mime_type": "video/quicktime"
-            },
-            {
-                "files": {
-                    "file": "/dev/2024/10/XIcbi0DcbPXPFguz1tXuCgydVlv2wMsHV4bZxo0KNyP5MgpTCZOlVje2Xt.png"
+                    "file": "/dev/2024/10/0nI0eDBb1DSZaKMajsGnIk5f55uJtoXpoM2MbdiSwCWB37A.jpg"
                 },
                 "type": "image",
-                "mime_type": "image/png"
+                "mime_type": "image/jpeg"
             },
             {
                 "files": {
-                    "file": "/dev/2024/10/layEWRSOgmcCu5dUSnEcW5ZVJenAUhqVI7Qca5xPL6sG.png"
+                    "file": "/dev/2024/10/VUttfpXFXZkKXBOVb7b4leiWU6URWaJpwvvqOdzd.jpg"
                 },
                 "type": "image",
-                "mime_type": "image/png"
+                "mime_type": "image/jpeg"
             }
         ]
     },
@@ -161,71 +147,32 @@
                 "total_price": 15588,
                 "entity": "app:repair_request_issue"
             }
-        },
-        {
-            "default": {
-                "uuid": "ca15b760-2599-426d-a4d3-29e0c61e8271",
-                "onsite": false,
-                "offsite": true,
-                "description": "Front Glass Broken",
-                "price": "0.00",
-                "icon": "https://cosko.nyc3.cdn.digitaloceanspaces.com/assets/issue-icons/mobile_front_glass_broken.svg",
-                "entity": "app:issue",
-                "prices": [
-                    {
-                        "uuid": "494dff15-e153-4e88-8a2a-88f951b706e2",
-                        "quality": "premium",
-                        "warranty_in_months": 1,
-                        "price": "4199.00",
-                        "price_template_slug": "GH EDGE",
-                        "entity": "app:issue_price"
-                    }
-                ]
-            },
-            "issue": {
-                "uuid": "2b4bfe8e-cc40-43b5-904d-b76c4fdb380d",
-                "warranty_in_months": 1,
-                "quantity": 1,
-                "quality": "premium",
-                "part_name": "Screen Guard",
-                "price": 1234,
-                "price_after_discount": 1234,
-                "has_discount": false,
-                "discount_code": null,
-                "discount_amount": 0,
-                "price_including_quantity": 1234,
-                "discounted_price_including_quantity": 1234,
-                "price_excluding_gst": 1045.76,
-                "price_excluding_gst_including_quantity": 1045.76,
-                "total_price": 1234,
-                "entity": "app:repair_request_issue"
-            }
         }
     ],
-    "issue_price": 2533,
+    "issue_price": 1299,
     "total_discounted_price": 0,
     "discount_price": 0,
     "discount_code": null,
     "has_discount": false,
-    "subtotal_including_gst": 2533,
-    "subtotal_excluding_gst": 2146.61,
-    "discounted_subtotal_including_gst": 2533,
-    "additional_price": 537,
-    "total_price": 3070,
-    "total_price_after_discount": 3070,
+    "subtotal_including_gst": 1299,
+    "subtotal_excluding_gst": 1100.85,
+    "discounted_subtotal_including_gst": 1299,
+    "additional_price": 518.49,
+    "total_price": 1817.49,
+    "total_price_after_discount": 1817.49,
     "price_summary": {
         "subtotal": {
             "label": "Subtotal",
-            "price": 2146.61
+            "price": 1100.85
         },
         "gst": {
             "cgst": {
                 "label": "CGST 9%",
-                "price": "193.19"
+                "price": "99.08"
             },
             "sgst": {
                 "label": "SGST 9%",
-                "price": "193.19"
+                "price": "99.08"
             }
         },
         "additional_charges": [
@@ -239,18 +186,18 @@
             },
             {
                 "label": "Convenience Charges",
-                "price": 38
+                "price": 19.49
             }
         ],
         "total": {
             "label": "Total",
-            "price": 3070,
-            "price_after_discount": 3070
+            "price": 1817.49,
+            "price_after_discount": 1817.49
         }
     },
     "additional_charges": [
         {
-            "uuid": "a166517c-a50b-4e1a-a3c5-c92a2907ec34",
+            "uuid": "54a26d68-3b9c-40bb-b8e1-92f720aefbf6",
             "name": "Onsite Repair Charges",
             "price": 399,
             "ref": {
@@ -260,7 +207,7 @@
             }
         },
         {
-            "uuid": "bfe93f87-5655-42ae-8b19-7781e424b1b6",
+            "uuid": "dac251ca-43b7-4bd2-8352-1295b68c492a",
             "name": "Onsite Test",
             "price": 100,
             "ref": {
@@ -270,9 +217,9 @@
             }
         },
         {
-            "uuid": "2be2a940-9ff5-4738-9266-f20f3977f762",
+            "uuid": "7d590318-b04c-4b33-a180-a9bed8c0cd2a",
             "name": "Convenience Charges",
-            "price": 38,
+            "price": 19.49,
             "ref": {
                 "uuid": "50991f9b-be8d-4973-bd15-551b06e017db",
                 "applicable_for": "all-bookings",
@@ -294,7 +241,7 @@
     "customer_address": null,
     "imei_number": "6827464827462833",
     "gst_number": "4234234234234233",
-    "status": "in-progress",
+    "status": "offsite-repair",
     "service_date": null,
     "service_timeslot": null,
     "service_date_assigned": "2024-09-21T13:00:32+00:00",
