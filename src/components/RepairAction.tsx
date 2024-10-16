@@ -92,7 +92,13 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
             <HorizontalSelect
                 contentContainerStyle={{ flexDirection: 'row', marginTop: 15 }}
                 multiple={false}
-                options={REPAIR_STATUS.filter(status => status.slug !== item?.status)}
+                options={REPAIR_STATUS.filter(status => {
+                    if (status.slug === item?.status) return false;
+
+                    if (item?.status === "technician-assigned" && status.slug === "completed") return false;
+
+                    return true;
+                })}
                 onSelect={(selectedItem) => {
                     if (typeof selectedItem === 'string' || typeof selectedItem === 'number') {
                         setValue('status', String(selectedItem));
