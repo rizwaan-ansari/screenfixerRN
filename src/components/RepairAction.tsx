@@ -1,20 +1,23 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { QueryObserverResult } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { TouchableOpacity, View } from 'react-native';
-import { Circle } from 'react-native-animated-spinkit';
-import FastImage from 'react-native-fast-image';
-import { TextInput } from 'react-native-paper';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { QueryObserverResult } from '@tanstack/react-query';
 import { z } from 'zod';
+
+import { TouchableOpacity, View } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import FastImage from 'react-native-fast-image';
+import { Circle } from 'react-native-animated-spinkit';
+
 import { SvgCross, SvgUpload } from '../assets/images';
-import { ContextData } from '../providers/ContextProvider';
-import { fileUpload, updateRepairRequests } from '../utils/api/ApiRequest';
-import COLOR_PALETTE from '../utils/ColorConstant';
 import Button from './Button';
 import HorizontalSelect, { Option } from './HorizontalSelect';
 import MediaUploader from './MediaUploader';
 import Txt from './Txt';
+
+import { ContextData } from '../providers/ContextProvider';
+import { fileUpload, updateRepairRequests } from '../utils/api/ApiRequest';
+import COLOR_PALETTE from '../utils/ColorConstant';
 
 
 type RefetchFunction = () => Promise<QueryObserverResult<any, unknown>>;
