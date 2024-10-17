@@ -151,20 +151,22 @@ const RepairAction = ({ refetch }: RepairActionFormProps) => {
                     </MediaUploader>
                 )}
             />
-            <View className='mt-[15px] flex-row flex-wrap gap-x-2'>
-                {files?.map((file, index) => (
-                    <View key={`imageIndex-${index}`}>
-                        <FastImage
-                            source={{ uri: file.url }}
-                            className='w-16 h-16 rounded-md'
-                            resizeMode={"cover"}
-                        />
-                        <TouchableOpacity className='absolute -top-2 -right-2' onPress={() => removeImage(index)}>
-                            <SvgCross />
-                        </TouchableOpacity>
-                    </View>
-                ))}
-            </View>
+            {files &&
+                <View className='mt-[15px] flex-row flex-wrap gap-x-2'>
+                    {files?.map((file, index) => (
+                        <View key={`imageIndex-${index}`}>
+                            <FastImage
+                                source={{ uri: file.url }}
+                                className='w-16 h-16 rounded-md'
+                                resizeMode={"cover"}
+                            />
+                            <TouchableOpacity className='absolute -top-2 -right-2' onPress={() => removeImage(index)}>
+                                <SvgCross />
+                            </TouchableOpacity>
+                        </View>
+                    ))}
+                </View>
+            }
             <Controller
                 control={control}
                 name={'comment'}
