@@ -32,6 +32,10 @@ export const STATUS_MAPPER: Record<status, { label: string, color: string }> = {
         label: "Technician Assigned",
         color: COLOR_PALETTE.DARK_SLATE
     },
+    'offsite-repair': {
+        label: "Offsite Repair",
+        color: COLOR_PALETTE.BRAND_LIGHT,
+    },
     'completed': {
         label: "Completed",
         color: COLOR_PALETTE.BRAND
@@ -55,20 +59,26 @@ const RepairDeviceDetails = () => {
     const issuesText = item?.issues?.map((issue: any) => issue.default.description).join(', ');
     return (
         <View className='p-5 bg-white m-4 rounded-[10px]'>
-            <View className='relative mx-auto overflow-hidden w-[100px] rounded-[30px] h-[100px] bg-offWhite flex justify-center items-center'>
-                <FastImage
-                    source={{
-                        uri: `${item?.device.picture.files_base_url}${item?.device.picture.files.file}`
-                    }}
-                    className='w-[52px] h-[67px] z-10'
-                    resizeMode={FastImage.resizeMode.contain}
-                />
-                <View className='absolute top-[17%] left-[26%] w-[83px] h-[70px]'>
-                    <SvgMobileShadow />
+            <View className='justify-center items-center'>
+                <View className='relative mx-auto overflow-hidden w-[100px] rounded-[30px] h-[100px] bg-offWhite flex justify-center items-center'>
+                    <FastImage
+                        source={{
+                            uri: `${item?.device.picture.files_base_url}${item?.device.picture.files.file}`
+                        }}
+                        className='w-[52px] h-[67px] z-10'
+                        resizeMode={FastImage.resizeMode.contain}
+                    />
+                    <View className='absolute top-[17%] left-[26%] w-[83px] h-[70px]'>
+                        <SvgMobileShadow />
+                    </View>
                 </View>
+                <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"} className='mx-auto mt-[15px]'>{item?.device.name}</Txt>
+                <View className='relative'>
+                    <View className='h-[10px] w-[10px] rounded-full bg-green-500 inline-block absolute top-1/2 -translate-y-1/2'/>
+                    <Txt fontSize={"base"} fontWeight={500} fontColor={"textGreen"} className='mt-2 ml-2 pl-2'>{STATUS_MAPPER[item?.status]?.label}</Txt>
+                </View>
+
             </View>
-            <Txt fontWeight={700} fontSize={"xl"} fontColor={"brandDark"} className='mx-auto mt-[15px]'>{item?.device.name}</Txt>
-            <Txt fontSize={"base"} fontWeight={500} fontColor={"textGreen"} className='mx-auto mt-2'>{STATUS_MAPPER[item?.status]?.label}</Txt>
             <View className='mt-6'>
                 <Txt fontSize={"sm"} fontWeight={500} fontColor={'black40'}>
                     Booking Id
