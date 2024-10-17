@@ -19,7 +19,6 @@ import { ContextData } from '../providers/ContextProvider';
 import { fileUpload, updateRepairRequests } from '../utils/api/ApiRequest';
 import COLOR_PALETTE from '../utils/ColorConstant';
 
-
 type RefetchFunction = () => Promise<QueryObserverResult<any, unknown>>;
 interface RepairActionFormProps {
     refetch: RefetchFunction;
