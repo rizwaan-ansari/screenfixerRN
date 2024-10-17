@@ -124,6 +124,7 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
     const { makePhoneCall } = usePhoneCall();
     const phoneNumber = "+918967458695"
     const url = `tel:${phoneNumber}`
+    const cardColors = ["#FCE7E6", "#D5E7E8", "#E7D5E6", "#DEF1FF"];
     const { data, isLoading, isError, error, isSuccess } = useQuery({
         queryKey: ['repairRequestList'],
         queryFn: fetchRepairRequests,
