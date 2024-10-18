@@ -1,10 +1,11 @@
-import { View } from 'react-native'
-import React from 'react'
-import ActionSheet, { SheetManager } from 'react-native-actions-sheet'
-import Txt from '../../Txt'
-import { TextInput } from 'react-native-paper'
-import COLOR_PALETTE from '../../../utils/ColorConstant'
-import Button from '../../Button'
+import React from 'react';
+import { View } from 'react-native';
+import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
+import { TextInput } from 'react-native-paper';
+
+import COLOR_PALETTE from '../../../utils/ColorConstant';
+import Button from '../../Button';
+import Txt from '../../Txt';
 
 const handlePress = async () => {
     await SheetManager.hide("withdraw-request-drawer");

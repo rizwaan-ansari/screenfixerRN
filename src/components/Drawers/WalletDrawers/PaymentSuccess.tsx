@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import FastImage from 'react-native-fast-image'
-import { PAYMENT_SUCCESS_IMG } from '../../../assets/images'
-import ActionSheet, { SheetManager } from 'react-native-actions-sheet'
-import Txt from '../../Txt'
-import Button from '../../Button'
+import React from 'react';
+import { View } from 'react-native';
+import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
+import FastImage from 'react-native-fast-image';
+
+import { PAYMENT_SUCCESS_IMG } from '../../../assets/images';
+import Button from '../../Button';
+import Txt from '../../Txt';
 
 const handlePress = async () => {
     await SheetManager.hide("payment-success-drawer");

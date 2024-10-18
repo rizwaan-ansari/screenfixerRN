@@ -1,10 +1,11 @@
-import { View } from 'react-native'
-import React from 'react'
-import ActionSheet, { SheetManager } from 'react-native-actions-sheet'
-import FastImage from 'react-native-fast-image'
-import { WITHDRAW_SUCCESS_IMG } from '../../../assets/images'
-import Txt from '../../Txt'
-import Button from '../../Button'
+import React from 'react';
+import { View } from 'react-native';
+import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
+import FastImage from 'react-native-fast-image';
+
+import { WITHDRAW_SUCCESS_IMG } from '../../../assets/images';
+import Button from '../../Button';
+import Txt from '../../Txt';
 
 const handlePress = async () => {
     await SheetManager.hide("withdraw-success-drawer");

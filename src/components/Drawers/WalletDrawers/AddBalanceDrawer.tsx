@@ -1,11 +1,11 @@
-import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
+import React from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { View, Text, Alert, FlatList, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { RUPEE } from './../../../assets/images/index'
+import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
+
 import COLOR_PALETTE from '../../../utils/ColorConstant';
-import Txt from '../../Txt';
 import Button from '../../Button';
+import Txt from '../../Txt';
 
 const BALANCE_OPTIONS = [
     { id: 0, balance: 300 },
