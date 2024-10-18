@@ -19,7 +19,7 @@ const WithdrawalRequestSuccessDrawer = () => {
                 <Txt fontSize={'xl'} fontWeight={700} className='mt-[14px]' fontColor={'textDefault'}>Request successful</Txt>
                 <Txt fontColor={'neutral400'} fontSize={'base'} textAlign={'center'} className='max-w-[275px] tracking-tight mt-2'>Withdrawal request has been placed, you will recieve the amount in your account once processed</Txt>
                 <View className='w-full px-4 mt-3'>
-                    <Button onPress={handlePress} label={"OKAY"} />
+                    <Button borderRadius={4} onPress={handlePress} label={"OKAY"} />
                 </View>
             </View>
         </ActionSheet>

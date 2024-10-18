@@ -18,7 +18,7 @@ const BalanceSuccessDrawer = () => {
                 <Txt fontWeight={700} fontColor={'textDefault'} fontSize={'xl'} className='pt-7'>Added Successfully</Txt>
                 <Txt fontSize={'base'} className='max-w-[275px] mt-2' fontWeight={400} fontColor={'neutral400'} textAlign={'center'}>Please login or register to continue booking appointment with your doctor</Txt>
                 <View className='mt-3 w-full px-4'>
-                    <Button onPress={handlePress} label={'OKAY'} />
+                    <Button borderRadius={4} onPress={handlePress} label={'OKAY'} />
                 </View>
             </View>
         </ActionSheet>

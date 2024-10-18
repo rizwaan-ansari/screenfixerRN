@@ -19,7 +19,7 @@ const WithdrawSuccessDrawer = () => {
                 <Txt className='mt-[14px]' fontWeight={700} fontColor={'textDefault'} fontSize={'xl'}>Withdrawal successful</Txt>
                 <Txt fontSize={'base'} textAlign={'center'} className='max-w-[275px] mt-2 tracking-tighter' fontColor={'neutral400'}>Withdrawal request has been processed, amount has been transferred in your linked account</Txt>
                 <View className='w-full px-4 mt-3'>
-                    <Button onPress={handlePress} label={"OKAY"} />
+                    <Button borderRadius={4} onPress={handlePress} label={"OKAY"} />
                 </View>
             </View>
         </ActionSheet>
