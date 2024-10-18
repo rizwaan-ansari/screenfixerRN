@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Dimensions, ScrollView, TouchableOpacity, View } from 'react-native';
 import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import FastImage from 'react-native-fast-image';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import ISSUESLIST from '../../../data/issues-list.json';
+import { useQuery } from '@tanstack/react-query';
+
+import { ContextData } from '../../../providers/ContextProvider';
+import { fetchIssues } from '../../../utils/api/ApiRequest';
 import Button from '../../Button';
 import Txt from '../../Txt';
-import { useQuery } from '@tanstack/react-query';
-import { fetchIssues } from '../../../utils/api/ApiRequest';
-import { ContextData } from '../../../providers/ContextProvider';
 
 
 interface Issue {
