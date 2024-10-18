@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, FlatList, Linking, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
 
@@ -8,11 +8,11 @@ import HeaderTabBar from '../components/HeaderTabBar';
 import { NavigationProp } from '@react-navigation/native';
 import { fetchRepairRequests } from '../utils/api/ApiRequest'
 
-import { 
-    GALAXY_ZFOLD_IMG, 
-    ONE_PLUS_10T_IMG, 
-    REDMI_NOTE_6_PRO_IMG, 
-    SvgCall 
+import {
+    GALAXY_ZFOLD_IMG,
+    ONE_PLUS_10T_IMG,
+    REDMI_NOTE_6_PRO_IMG,
+    SvgCall
 } from '../assets/images';
 import { useQuery } from '@tanstack/react-query';
 import usePhoneCall from '../hooks/usePhoneCall';
@@ -33,7 +33,7 @@ const DATA = [
                 type: "speaker",
                 label: "Speaker"
             }
-        ], 
+        ],
         status: "Work-in-progress",
         requestId: "SF999",
         repairValue: "8500",
@@ -55,7 +55,7 @@ const DATA = [
                 type: "speaker",
                 label: "Speaker"
             }
-        ], 
+        ],
         status: "Assigned",
         requestId: "SF999",
         repairValue: "8500",
@@ -77,7 +77,7 @@ const DATA = [
                 type: "speaker",
                 label: "Speaker"
             }
-        ], 
+        ],
         status: "Work-in-progress",
         requestId: "SF999",
         repairValue: "8500",
@@ -118,21 +118,36 @@ const RequestScreenHeader = () => {
 }
 
 const handlePress = () => {
-    
+
 }
 const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const { makePhoneCall } = usePhoneCall();
+    const [shuffledColors, setShuffledColors] = useState<string[]>([]);
     const phoneNumber = "+918967458695"
     const url = `tel:${phoneNumber}`
     const cardColors = ["#FCE7E6", "#D5E7E8", "#E7D5E6", "#DEF1FF"];
     const { data, isLoading, isError, error, isSuccess } = useQuery({
         queryKey: ['repairRequestList'],
         queryFn: fetchRepairRequests,
-      });
-      let repairRequestList:any;
-      const makeCall = () => {
+    });
+    let repairRequestList: any;
+    const makeCall = () => {
         makePhoneCall(url);
-      }
+    }
+
+    const randomizeColors = () => {
+        let colors = [...cardColors];
+        for (let i = colors.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [colors[i], colors[j]] = [colors[j], colors[i]];
+        }
+        return colors;
+    };
+
+    useEffect(() => {
+        setShuffledColors(randomizeColors())
+    }, [])
+
     //   if (isSuccess) {
     //     repairRequestList = data;
     //     console.log("************************************************");
@@ -140,41 +155,41 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
     //     console.log(JSON.stringify(repairRequestList.data.payload, null, 4));
     //     console.log("************************************************");
     //   }
-    const renderItem = (({item}: { item: Request}) => {
+    const renderItem = (({ item }: { item: Request }) => {
         return (
             <TouchableOpacity className="px-4 py-4 flex-row bg-white rounded-lg">
-                 <View className='w-[72px] h-20 rounded-[3px] px-2 py-2 mr-4 bg-neutral-550'>
-                     <FastImage
-                         className="w-full h-full"
-                         source={item.image}
-                         resizeMode={FastImage.resizeMode.contain}
-                     />
-                 </View>
-                 <View className="pt-1">
-                     <Txt fontWeight={700} fontSize={"sm"} fontColor={'black40'} className="mb-[2]">{item.deviceType}</Txt>
-                     <Txt fontWeight={700} fontSize={"xl"} fontColor={'textDefault'}>{item.deviceName}</Txt>
-                     <View className='flex flex-row gap-x-1 mt-[2px]'>
-                     {item.issues.map((issue, index) => (
-                        <View key={`request-${index}`} className={`rounded-[4px] ${issue.type === 'screen_replacement' ? 'bg-red-15' : 'bg-paleMint'}`}>
-                            <Txt className={`px-2 py-1`} fontWeight={400} fontSize={'sm'} fontColor={'neutral300'}>{issue.label}</Txt>
-                        </View>
-                     ))}
-                     </View>
-                     <View className='flex-row pt-2'>
+                <View className='w-[72px] h-20 rounded-[3px] px-2 py-2 mr-4 bg-neutral-550'>
+                    <FastImage
+                        className="w-full h-full"
+                        source={item.image}
+                        resizeMode={FastImage.resizeMode.contain}
+                    />
+                </View>
+                <View className="pt-1">
+                    <Txt fontWeight={700} fontSize={"sm"} fontColor={'black40'} className="mb-[2]">{item.deviceType}</Txt>
+                    <Txt fontWeight={700} fontSize={"xl"} fontColor={'textDefault'}>{item.deviceName}</Txt>
+                    <View className='flex flex-row gap-x-1 mt-[2px]'>
+                        {item.issues.map((issue, index) => (
+                            <View key={`request-${index}`} className={`rounded-[4px]`} style={{ backgroundColor: shuffledColors[index % shuffledColors.length] }}>
+                                <Txt className={`px-2 py-1`} fontWeight={400} fontSize={'sm'} fontColor={'neutral300'}>{issue.label}</Txt>
+                            </View>
+                        ))}
+                    </View>
+                    <View className='flex-row pt-2'>
                         <Txt fontSize={'sm'} fontColor={'neutral300'} fontWeight={500}>Status: </Txt>
                         <Txt fontSize={'sm'} fontWeight={500} fontColor={'textGreen'}>{item.status}</Txt>
-                     </View>
-                     <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>{item.timeStamp}</Txt>
-                     <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>ID: {item.requestId}</Txt>
-                     <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>Repair value: ₹{item.repairValue}</Txt>
-                     <View className='flex-row pt-4'>
-                        <Button borderRadius={4} onPress={() => navigation.navigate("RequestDetailsScreen", { requestData: item, uuid: "c72ddcb6-ffe6-4f7a-a432-0a575d9577c3"})} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
+                    </View>
+                    <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>{item.timeStamp}</Txt>
+                    <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>ID: {item.requestId}</Txt>
+                    <Txt className='pt-2' fontSize={'sm'} fontWeight={500} fontColor={'black40'}>Repair value: ₹{item.repairValue}</Txt>
+                    <View className='flex-row pt-4'>
+                        <Button borderRadius={4} onPress={() => navigation.navigate("RequestDetailsScreen", { requestData: item, uuid: "c72ddcb6-ffe6-4f7a-a432-0a575d9577c3" })} paddingVertical={10} paddingHorizontal={54} label={"View Details"} size={'base'} weight={500} variant={'info'} />
                         <TouchableOpacity className='pl-[10px]' onPress={makeCall}>
                             <SvgCall />
                         </TouchableOpacity>
-                     </View>
-                 </View>
-             </TouchableOpacity>
+                    </View>
+                </View>
+            </TouchableOpacity>
         )
     })
     return (
@@ -186,7 +201,7 @@ const RequestsScreen = ({ navigation }: { navigation: NavigationProp<any> }) => 
                         ListHeaderComponent={<RequestScreenHeader />}
                         showsVerticalScrollIndicator={false}
                         data={DATA}
-                        ItemSeparatorComponent={() => <View style={{height: 12}} />}
+                        ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
                         keyExtractor={(item) => item.id.toString()}
                         renderItem={renderItem}
                     />
