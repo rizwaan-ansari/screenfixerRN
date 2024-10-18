@@ -26,7 +26,7 @@ const WithdrawalRequestDrawer = () => {
                     className='mt-3'
                 />
                 <View className='mt-3'>
-                    <Button onPress={handlePress} label={'SUBMIT REQUEST'} />
+                    <Button borderRadius={4} onPress={handlePress} label={'SUBMIT REQUEST'} />
                 </View>
             </View>
         </ActionSheet>

@@ -55,7 +55,7 @@ const AddBalanceDrawer = () => {
                     })}
                 </View>
                 <View className='mt-3'>
-                    <Button onPress={handlePress} label={"CONTINUE"} />
+                    <Button borderRadius={4} onPress={handlePress} label={"CONTINUE"} />
                 </View>
             </View>
         </ActionSheet>
