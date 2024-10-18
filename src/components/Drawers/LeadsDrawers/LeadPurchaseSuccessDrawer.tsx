@@ -1,10 +1,10 @@
-import { View, Text, Image } from 'react-native'
-import React from 'react'
-import ActionSheet, { SheetManager } from 'react-native-actions-sheet'
-import FastImage from 'react-native-fast-image'
-import { SvgSuccess } from '../../../assets/images'
-import Txt from '../../Txt'
-import Button from '../../Button'
+import React from 'react';
+import { View } from 'react-native';
+import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
+
+import { SvgSuccess } from '../../../assets/images';
+import Button from '../../Button';
+import Txt from '../../Txt';
 
 const handlePress = () => {
     SheetManager.hide('lead-purchase-success-drawer');

@@ -4,9 +4,9 @@ import { View } from 'react-native';
 import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
 import FastImage from 'react-native-fast-image';
 
+import { Lead } from '../../../screens/FindLeadsScreen';
 import Button from '../../Button';
 import Txt from '../../Txt';
-import { Lead } from '../../../screens/FindLeadsScreen';
 
 const handlePress = async () => {
   await SheetManager.hide('purchase-lead-drawer');
